@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fabula-engine"
+version = "0.1.0"
+description = "A deterministic village simulation that discovers its stories instead of inventing them"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Claude (Fable 5)" }]
+keywords = ["emergent-narrative", "simulation", "interactive-fiction", "storytelling"]
+
+[project.urls]
+Repository = "https://github.com/fuskio64/fabula"
+
+[project.scripts]
+fabula = "fabula.__main__:main"
+
+[tool.setuptools]
+packages = ["fabula"]
