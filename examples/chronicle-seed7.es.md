@@ -2,32 +2,34 @@
 
 En Riofrío vivían 10 almas, y este registro abarca 192 de sus días. Nada de lo que sigue es inventado; solo se miró, y se contó.
 
-18 veces alguien en Riofrío pasó hambre antes que pedir ayuda. El orgullo es otra clase de hambruna.
+15 veces alguien en Riofrío pasó hambre antes que pedir ayuda. El orgullo es otra clase de hambruna.
 
-## Yse y Ulric: un distanciamiento
+Al cerrarse el registro quedaban en Riofrío 15 favores sin devolver. Esas cuentas no las llevaba la aldea en libro alguno, y por eso no se perdió ninguna.
 
-A Yse, humilde y agarrada, la conocía todo el mundo. Ulric era agarrado e incansable.
+## Rafe y Liesl: una deuda impagada
 
-Todo empezó en invierno. Yse llamó con hambre a la puerta de Ulric y volvió con las manos vacías. No pasaron muchos días. Cuando a Yse se le vació la despensa, Ulric le llenó el cesto sin que nadie se lo pidiera. Llegó la primavera. Yse y Ulric discutieron donde todos podían oírlos, y la aldea fingió no escuchar. Y así siguió, estación tras estación, hasta que contar dejó de tener sentido.
+A Rafe, holgazán y reservado, lo conocía todo el mundo. Liesl era agarrada e incansable.
 
-Quedó entre ellos una paz incómoda, fina como el hielo de marzo.
-
-## Ulric y Mara: un asunto sin cerrar
-
-A Mara, parlanchina e incansable, la conocía todo el mundo.
-
-Todo empezó en invierno. Mara llamó con hambre a la puerta de Ulric y volvió con las manos vacías. Para entonces ya era el verano. Ulric y Mara discutieron donde todos podían oírlos, y la aldea fingió no escuchar. Llegó el invierno. Cuando a Mara se le vació la despensa, Ulric le llenó el cesto sin que nadie se lo pidiera. Volvió a pasar 2 veces más, como si los rencores llevaran su propio calendario.
+Todo empezó en primavera. Cuando a Rafe se le vació la despensa, Liesl le llenó el cesto sin que nadie se lo pidiera. Llegó el verano. Rafe llamó con hambre a la puerta de Liesl y volvió con las manos vacías. Llegó el otoño. El favor le pesaba a Rafe. Deber es cosa dura, y Rafe empezó a esquivarle la mirada a Liesl. Para entonces ya era la primavera. Rafe y Liesl discutieron donde todos podían oírlos, y la aldea fingió no escuchar. Volvió a pasar 3 veces más, como si los rencores llevaran su propio calendario.
 
 Quedó entre ellos una paz incómoda, fina como el hielo de marzo.
 
 ## Rafe y Mara: una amistad
 
-Rafe era holgazán y reservado.
+Mara era parlanchina e incansable.
 
-Todo empezó en primavera. Mara compartió el pan con Rafe en una mala racha, y no se olvidó. Y así siguió, estación tras estación; hay cosas que no necesitan que nadie las señale para continuar.
+Lo primero que se supo fue en primavera. Cuando a Rafe se le vació la despensa, Mara le llenó el cesto sin que nadie se lo pidiera. Llegó el invierno. Rafe no había olvidado aquel favor, y cuando la necesidad llamó a casa de Mara, lo devolvió sin decir una palabra. Y así siguió, estación tras estación; hay cosas que no necesitan que nadie las señale para continuar.
 
 Tuvieron suerte el uno con el otro, y lo sabían.
 
-Cuando el registro se cierra, Rafe y Mara eran lo más parecido a inseparables que hay en Riofrío; Rafe y Ulric seguían sin hablarse.
+## Aldous y Liesl: una deuda impagada
+
+Aldous era orgulloso y holgazán.
+
+Todo empezó en invierno. Liesl despidió a Aldous sin nada, y toda la aldea se sintió más fría. Poco después. Liesl compartió el pan con Aldous en una mala racha, y no se olvidó. Llegó el verano. Aldous nunca devolvió lo que Liesl le dio un día, y la deuda se agrió, como se agria la gratitud cuando se carga demasiado tiempo. Volvió a pasar 2 veces más, como si los rencores llevaran su propio calendario.
+
+Quedó entre ellos una paz incómoda, fina como el hielo de marzo.
+
+Cuando el registro se cierra, Yse y Mara eran lo más parecido a inseparables que hay en Riofrío; Rafe y Liesl seguían sin hablarse.
 
 *(semilla del mundo: 7 — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*

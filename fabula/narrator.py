@@ -11,7 +11,8 @@ import random
 from .model import TICKS_PER_SEASON, season_index, year_of
 from .names import VILLAGE_NAMES
 
-ARC_KINDS = {"GIFT", "REFUSAL", "OFFENSE", "QUARREL", "MEDIATION"}
+ARC_KINDS = {"GIFT", "REFUSAL", "OFFENSE", "QUARREL", "MEDIATION",
+             "REPAYMENT", "INGRATITUDE", "RESENTMENT"}
 
 TEXT = {
     "en": {
@@ -39,6 +40,12 @@ TEXT = {
                     "It came to hard words between {a} and {b}, in the open street."],
         "MEDIATION": ["{c} sat them both at one table and would not let either leave angry. Something loosened.",
                       "It took {c}, whom they both trusted, to make them speak again."],
+        "REPAYMENT": ["{a} had not forgotten the old kindness, and when want came to {b}'s house, it was returned without a word about it.",
+                      "The bread {b} once gave came back to {b}'s own door, and it was {a} who carried it."],
+        "INGRATITUDE": ["{a} had once filled {b}'s basket; when {a}'s own ran empty, {b}'s door stayed shut. The village keeps accounts no ledger ever sees, and that one was entered in every head in it.",
+                        "{b} owed {a} the kind of debt nobody writes down, and paid it with a closed door. Nobody said anything. Everybody counted it."],
+        "RESENTMENT": ["The favor sat heavy on {a}. It is a hard thing to owe, and {a} took to avoiding {b}'s eye.",
+                       "{a} had never returned what {b} once gave, and the owing curdled, the way gratitude does when it is carried too long."],
         "carried_by": " It was {c} who carried the tale.",
         "grown": " The tale had grown in the telling.",
         "repeat_one": "It happened once more after that.",
@@ -57,10 +64,12 @@ TEXT = {
         "title_feud": "{a} and {b}: a feud",
         "title_bond": "{a} and {b}: a friendship",
         "title_open": "{a} and {b}: an unfinished business",
+        "title_debt": "{a} and {b}: a debt unpaid",
         "chronicle_title": "The Chronicle of {village}",
         "prologue": ("{village} held {n} souls, and this record covers {days} days of them. "
                      "Nothing in it was invented; it was only watched, and told."),
         "pride_note": "{count} times, someone in {village} went hungry rather than ask for help. Pride is its own kind of famine.",
+        "debt_note": "When the record closes, {count} favors in {village} had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.",
         "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
                      "{c} and {d} still were not speaking."),
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
@@ -93,6 +102,12 @@ TEXT = {
                     "Entre {a} y {b} hubo palabras mayores, en mitad de la calle."],
         "MEDIATION": ["{c} los sentó a los dos a la misma mesa y no dejó que ninguno se levantara enfadado. Algo se aflojó.",
                       "Hizo falta {c}, de quien ambos se fiaban, para que volvieran a hablarse."],
+        "REPAYMENT": ["{a} no había olvidado aquel favor, y cuando la necesidad llamó a casa de {b}, lo devolvió sin decir una palabra.",
+                      "El pan que {b} dio un día volvió a su propia puerta, y fue {a} quien lo trajo."],
+        "INGRATITUDE": ["{a} le había llenado el cesto a {b} una vez; cuando el suyo quedó vacío, la puerta de {b} no se abrió. La aldea lleva cuentas que ningún libro ve, y esa quedó apuntada en todas las cabezas.",
+                        "{b} le debía a {a} una de esas deudas que nadie escribe, y la pagó con la puerta cerrada. Nadie dijo nada. Todos la contaron."],
+        "RESENTMENT": ["El favor le pesaba a {a}. Deber es cosa dura, y {a} empezó a esquivarle la mirada a {b}.",
+                       "{a} nunca devolvió lo que {b} le dio un día, y la deuda se agrió, como se agria la gratitud cuando se carga demasiado tiempo."],
         "carried_by": " Fue {c} quien trajo el cuento.",
         "grown": " El cuento había engordado por el camino.",
         "repeat_one": "Volvió a pasar una vez más.",
@@ -111,10 +126,12 @@ TEXT = {
         "title_feud": "{a} y {b}: una enemistad",
         "title_bond": "{a} y {b}: una amistad",
         "title_open": "{a} y {b}: un asunto sin cerrar",
+        "title_debt": "{a} y {b}: una deuda impagada",
         "chronicle_title": "Crónica de {village}",
         "prologue": ("En {village} vivían {n} almas, y este registro abarca {days} de sus días. "
                      "Nada de lo que sigue es inventado; solo se miró, y se contó."),
         "pride_note": "{count} veces alguien en {village} pasó hambre antes que pedir ayuda. El orgullo es otra clase de hambruna.",
+        "debt_note": "Al cerrarse el registro quedaban en {village} {count} favores sin devolver. Esas cuentas no las llevaba la aldea en libro alguno, y por eso no se perdió ninguna.",
         "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
                      "{c} y {d} seguían sin hablarse."),
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
@@ -169,6 +186,10 @@ class Narrator:
             score += 1.5
         if "GIFT" in kinds and ("QUARREL" in kinds or "OFFENSE" in kinds):
             score += 1.0
+        if "INGRATITUDE" in kinds:
+            score += 1.5  # a kindness betrayed is the oldest story there is
+        if "RESENTMENT" in kinds or "REPAYMENT" in kinds:
+            score += 1.0  # what a debt does to people, either way it goes
         return score
 
     # ------------------------------------------------------------------
@@ -244,6 +265,8 @@ class Narrator:
         kinds = {ev.kind for ev in events}
         if final > 0.2 and (first < -0.05 or "MEDIATION" in kinds or "QUARREL" in kinds):
             shape = "reconciliation"
+        elif final < -0.1 and kinds & {"INGRATITUDE", "RESENTMENT"} and "REPAYMENT" not in kinds:
+            shape = "debt"
         elif final < -0.3 and first > 0.05:
             shape = "estrangement"
         elif final < -0.3:
@@ -309,6 +332,10 @@ class Narrator:
         if pride_count >= 3:
             parts.append("")
             parts.append(self.t["pride_note"].format(count=pride_count, village=self.village))
+        debt_count = sum(len(c.debts) for c in w.chars)
+        if debt_count >= 3:
+            parts.append("")
+            parts.append(self.t["debt_note"].format(count=debt_count, village=self.village))
         parts.append("")
         arcs = self.arcs()
         for key, events in arcs:

@@ -28,16 +28,17 @@ python -m fabula --days 384 --people 14 -o chronicle.md
 
 ## What comes out
 
-> *It began in autumn. Ilde shared bread with Casper in a lean stretch, and it was not forgotten. Winter came. Ilde turned Casper away empty-handed, and the whole village felt colder for it. Spring came. Ilde and Casper quarreled where everyone could hear, and the village pretended not to listen. And so it went on, season after season, until counting lost its point.*
+> *It began in spring. When Rafe's stores ran low, Liesl filled the basket without being asked. Summer came. Rafe went hungry to Liesl's door and came back with nothing. Autumn came. The favor sat heavy on Rafe. It is a hard thing to owe, and Rafe took to avoiding Liesl's eye. By then it was spring. Rafe and Liesl quarreled where everyone could hear, and the village pretended not to listen. It happened 3 more times after that, as if grudges kept a calendar of their own.*
 >
-> *No one mended it. By the end they passed each other without a word.*
+> *An uneasy peace held between them, thin as spring ice.*
 
 Every sentence above traces back to a recorded event with a tick number. See [examples/](examples/) for full chronicles in English and Spanish.
 
 ## How it works
 
-- **`world.py`** — the simulation. Characters have four traits (diligence, generosity, pride, openness), a pantry, memories, and feelings about each other. Seasons change the harvest; winter is when villages find out who they are. There is no money and no accumulation motive: the economy is gifts, favors and reputation. Pride is modeled too — some people go hungry rather than ask, and the chronicle counts them.
-- **Gossip is the engine.** Characters retell their most vivid memories. A retelling can distort valence by ±30%, so a mild refusal can arrive as an outrage two mouths later. People take sides based on who they already loved. Most feuds in Fabula start with something that didn't happen the way everyone heard it.
+- **`world.py`** — the simulation. Characters have four traits (diligence, generosity, pride, openness), a pantry, memories, and feelings about each other. Seasons change the harvest; winter is when villages find out who they are. There is no money and no accumulation motive: the economy is gifts, favors and reputation — and grain spoils, so no one can hoard their way out of needing neighbors. Pride is modeled too — some people go hungry rather than ask, and the chronicle counts them.
+- **Debts of gratitude.** A gift creates a debt that hearts, not ledgers, keep. The humble carry it warmly and bring the favor back unasked, in bread or in labor; the proud feel it as a weight, and a debt carried too long can curdle into resentment — resentment rewrites the ledger, and a debtor who no longer feels he owes anything can meet his own benefactor's need with a closed door. The village judges ingratitude harshly, whoever's side it was on. Misfortune (rats in the grain, a fire) is what puts a creditor at a debtor's door out of season.
+- **Gossip is the engine.** Characters retell their most vivid memories. A retelling can distort valence by ±30%, so a mild refusal can arrive as an outrage two mouths later. People take sides based on who they already loved. Most feuds in Fabula start with something that didn't happen the way everyone heard it. Even private resentment leaks: a debtor grumbles, the grumble travels, and one day it reaches the benefactor's ears.
 - **`narrator.py`** — the teller. It scores each pair's shared history for *tellability* (emotional intensity, reversals of affinity, variety of scenes), picks the top arcs, and renders them with handwritten templates in English or Spanish. The narrator is deliberately dumb: all the intelligence is in choosing what to tell, none in making things up.
 
 ## Why it exists
@@ -49,7 +50,6 @@ This project was conceived and written by Claude (an AI, Fable 5), published wit
 
 ## Roadmap (things emerging next)
 
-- Debts of gratitude with memory (favors that are *owed*, and what unpaid debts do to people)
 - Deaths, arrivals, and how a village retells someone once they're gone
 - A `--json` flag exposing the raw fabula, so other narrators (yours) can tell the same world differently
 - More languages for the narrator

@@ -13,6 +13,7 @@ SEASON_YIELD = (1.15, 1.40, 1.20, 0.35)  # spring, summer, autumn, winter
 
 FOOD_NEED = 2.0      # below this a character looks for help
 FOOD_SURPLUS = 5.0   # above this a character can afford to give
+STORES_CAP = 12.0    # grain spoils: no one can hoard their way out of winter
 
 
 class World:
@@ -77,7 +78,9 @@ class World:
 
     def step(self):
         self.sys_harvest()
+        self.sys_misfortune()
         self.sys_need_and_gift()
+        self.sys_debts()
         self.sys_gossip()
         self.sys_quarrel()
         self.sys_mediation()
@@ -92,13 +95,27 @@ class World:
         yield_now = SEASON_YIELD[season_index(self.tick)]
         for c in self.chars:
             c.food += yield_now * (0.55 + 0.8 * c.diligence) * self.rng.uniform(0.7, 1.3)
-            c.food = max(0.0, c.food - 1.0)  # everyone eats
+            c.food = max(0.0, min(STORES_CAP, c.food) - 1.0)  # everyone eats; grain spoils
+
+    def sys_misfortune(self):
+        # rats in the grain, a fire, a bad back at harvest: ruin that
+        # strikes one house while the neighbors stand in plenty. This is
+        # what puts a creditor at a debtor's door out of season.
+        for c in self.chars:
+            if c.food > 2.0 and self.rng.random() < 0.004:
+                c.food *= 0.3
+                ev = self.emit("MISFORTUNE", (c.id,), -0.5)
+                self.remember(c, ev)
 
     def sys_need_and_gift(self):
         for c in self.chars:
             if c.food >= FOOD_NEED:
                 continue
-            donors = [d for d in self.chars if d.id != c.id and d.food > FOOD_SURPLUS]
+            # anyone with surplus might help; and the needy will knock on the
+            # door of someone who owes them even if that door is a modest one
+            donors = [d for d in self.chars if d.id != c.id
+                      and (d.food > FOOD_SURPLUS
+                           or (d.debt_to(c.id) > 0 and d.food > FOOD_NEED + 0.5))]
             if not donors:
                 continue
             if self.rng.random() < c.pride * 0.55:
@@ -109,24 +126,95 @@ class World:
                     ev = self.emit("HARDSHIP", (c.id,), -0.4, pride=True)
                     self.remember(c, ev)
                 continue
-            donor = max(donors, key=lambda d: c.feel(d.id) + self.rng.uniform(-0.1, 0.1))
-            willing = donor.generosity * 0.9 + donor.feel(c.id) * 0.5 + self.rng.uniform(-0.25, 0.25)
+            # the hungry go first to the doors where they are owed
+            donor = max(donors, key=lambda d: c.feel(d.id)
+                        + 0.35 * min(1.0, d.debt_to(c.id))
+                        + self.rng.uniform(-0.1, 0.1))
+            debt_held = donor.debts.get(c.id)
+            owed = donor.debt_to(c.id)
+            # a soured debt has no pull left: resentment rewrites the ledger
+            pull = 0.0 if (debt_held and debt_held.soured) else 0.45 * min(1.0, owed)
+            # giving from a thin pantry costs more courage than giving from a full one
+            strain = 0.3 * max(0.0, min(1.0, (FOOD_SURPLUS - donor.food) / 3.0))
+            willing = (donor.generosity * 0.9 + donor.feel(c.id) * 0.5
+                       + pull - strain + self.rng.uniform(-0.25, 0.25))
             if willing > 0.35:
-                amount = min(3.0, donor.food - 3.5)
+                amount = min(3.0, max(0.6, donor.food - 3.5))
                 donor.food -= amount
                 c.food += amount
-                ev = self.emit("GIFT", (donor.id, c.id), 0.6)
-                c.shift(donor.id, 0.15)
-                donor.shift(c.id, 0.08)
+                if owed > 0:
+                    ev = self.emit("REPAYMENT", (donor.id, c.id), 0.7,
+                                   carried=self.tick - donor.debts[c.id].since)
+                    del donor.debts[c.id]     # the weight lifts
+                    c.shift(donor.id, 0.2)
+                    donor.shift(c.id, 0.15)   # relief is a kind of warmth
+                else:
+                    ev = self.emit("GIFT", (donor.id, c.id), 0.6)
+                    c.shift(donor.id, 0.15)
+                    donor.shift(c.id, 0.08)
+                    c.owe(donor.id, self.tick)
                 self.remember(c, ev)
                 self.remember(donor, ev)
                 self.snapshot(ev, donor, c)
+            elif owed > 0:
+                # refusing one's own benefactor: the debt no one wrote down
+                ev = self.emit("INGRATITUDE", (c.id, donor.id), -0.9,
+                               carried=self.tick - donor.debts[c.id].since)
+                donor.debts[c.id].weight += 0.5  # now owed twice over
+                c.shift(donor.id, -0.45)
+                self.remember(c, ev)
+                self.remember(donor, ev, valence=-0.35)
+                self.snapshot(ev, c, donor)
             else:
                 ev = self.emit("REFUSAL", (c.id, donor.id), -0.7)
                 c.shift(donor.id, -0.3)
                 self.remember(c, ev)                 # the sting
                 self.remember(donor, ev, valence=-0.2)  # a twinge of guilt
                 self.snapshot(ev, c, donor)
+
+    def sys_debts(self):
+        """A favor carried too long starts to work on the one who owes it.
+
+        The humble grow warmer toward those who helped them; the proud
+        grow colder, because to owe is to be reminded of the day they
+        had to be helped. A debtor who comes into surplus may bring the
+        favor back unasked — pride hurries that along, since the proud
+        cannot stand to owe. But a debt that has already soured is never
+        volunteered back: resentment rewrites the ledger.
+        """
+        for c in self.chars:
+            for debt in list(c.debts.values()):
+                if self.tick - debt.since < TICKS_PER_SEASON:
+                    continue  # fresh debts sit lightly
+                creditor = self.char(debt.creditor)
+                urge = (c.generosity + 0.5 * c.pride
+                        + max(0.0, c.feel(creditor.id)))
+                if (not debt.soured and c.food > FOOD_NEED + 1.5
+                        and creditor.food < FOOD_SURPLUS
+                        and self.rng.random() < 0.05 * urge):
+                    # repaid in labor as often as in bread: a day's help is
+                    # worth more to the receiver than it costs the giver
+                    c.food -= 0.6
+                    creditor.food += 1.2
+                    ev = self.emit("REPAYMENT", (c.id, creditor.id), 0.7,
+                                   carried=self.tick - debt.since, unasked=True)
+                    del c.debts[creditor.id]
+                    c.shift(creditor.id, 0.15)
+                    creditor.shift(c.id, 0.2)
+                    self.remember(c, ev)
+                    self.remember(creditor, ev)
+                    self.snapshot(ev, c, creditor)
+                    continue
+                if c.pride > 0.6:
+                    c.shift(debt.creditor, -0.012 * c.pride)
+                    if not debt.soured and c.feel(debt.creditor) < -0.15:
+                        debt.soured = True
+                        ev = self.emit("RESENTMENT", (c.id, debt.creditor), -0.5,
+                                       carried=self.tick - debt.since)
+                        self.remember(c, ev)  # only the debtor knows, so far
+                        self.snapshot(ev, c, self.char(debt.creditor))
+                elif c.pride < 0.4:
+                    c.shift(debt.creditor, 0.004)
 
     def sys_gossip(self):
         for _ in range(max(1, len(self.chars) // 3)):
@@ -185,7 +273,9 @@ class World:
             listener.shift(m.actors[0], 0.08)  # good deeds travel
         elif heard < -0.3 and len(m.actors) > 1:
             wronged, wrongdoer = m.actors[0], m.actors[1]
-            if listener.feel(wronged) > 0.35:
+            if m.kind == "INGRATITUDE":
+                listener.shift(wrongdoer, -0.12)  # ingratitude has no partisans
+            elif listener.feel(wronged) > 0.35:
                 listener.shift(wrongdoer, -0.1)  # quietly taking sides
 
     def sys_quarrel(self):

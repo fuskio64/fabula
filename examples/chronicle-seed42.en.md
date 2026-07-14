@@ -2,29 +2,31 @@
 
 Cold Hollow held 10 souls, and this record covers 192 days of them. Nothing in it was invented; it was only watched, and told.
 
-17 times, someone in Cold Hollow went hungry rather than ask for help. Pride is its own kind of famine.
+12 times, someone in Cold Hollow went hungry rather than ask for help. Pride is its own kind of famine.
 
-## Ilde and Casper: an estrangement
+When the record closes, 11 favors in Cold Hollow had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.
 
-Ilde, tight-fisted and tireless, was known to everyone. Casper was open-handed and humble.
+## Yse and Wren: an unfinished business
 
-It began in autumn. Ilde shared bread with Casper in a lean stretch, and it was not forgotten. Winter came. Ilde turned Casper away empty-handed, and the whole village felt colder for it. Spring came. Ilde and Casper quarreled where everyone could hear, and the village pretended not to listen. And so it went on, season after season, until counting lost its point.
+Yse, talkative and idle, was known to everyone. Wren was tight-fisted and tireless.
 
-No one mended it. By the end they passed each other without a word.
+It began in winter. Wren shared bread with Yse in a lean stretch, and it was not forgotten. Spring came. Wren turned Yse away empty-handed, and the whole village felt colder for it. Winter came. The favor sat heavy on Yse. It is a hard thing to owe, and Yse took to avoiding Wren's eye. Soon afterwards. Word reached Wren that Yse had been speaking of the matter behind closed doors. It was Yse who carried the tale. Not many days passed. It came to hard words between Yse and Wren, in the open street. And it happened 3 more times, without anyone making a fuss of it; kindness keeps a calendar too.
 
-## Casper and Wren: a feud
-
-Wren, tight-fisted and tireless, was known to everyone.
-
-It began in winter. Casper went hungry to Wren's door and came back with nothing. By then it was spring. It came to hard words between Casper and Wren, in the open street. Summer came. Nissa sat them both at one table and would not let either leave angry. Something loosened. And so it went on, season after season, until counting lost its point.
-
-The peace that was made did not keep; some cracks want to stay open.
+An uneasy peace held between them, thin as spring ice.
 
 ## Yse and Nissa: a friendship
 
-Yse, talkative and idle, was known to everyone. Nissa was open-handed and tireless.
+Nissa, open-handed and tireless, was known to everyone.
 
-The first anyone knew of it was in winter. Nissa shared bread with Yse in a lean stretch, and it was not forgotten. And so it went on, season after season; some things do not need remarking to continue.
+It began in spring. When Yse's stores ran low, Nissa filled the basket without being asked. By then it was winter. Yse had not forgotten the old kindness, and when want came to Nissa's house, it was returned without a word about it. And so it went on, season after season; some things do not need remarking to continue.
+
+They were lucky in each other, and they knew it.
+
+## Casper and Nissa: a friendship
+
+Casper, open-handed and humble, was known to everyone.
+
+The first anyone knew of it was in summer. When Casper's stores ran low, Nissa filled the basket without being asked. By then it was winter. Casper had not forgotten the old kindness, and when want came to Nissa's house, it was returned without a word about it. And so it went on, season after season; some things do not need remarking to continue.
 
 They were lucky in each other, and they knew it.
 
