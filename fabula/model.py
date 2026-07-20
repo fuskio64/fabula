@@ -57,6 +57,9 @@ class Character:
     pride: float
     openness: float
     food: float = 6.0
+    alive: bool = True
+    died_at: int | None = None
+    starvation_streak: int = 0     # consecutive ticks below STARVATION_THRESHOLD
     memories: list = field(default_factory=list)
     affinity: dict = field(default_factory=dict)  # other id -> -1..1
     debts: dict = field(default_factory=dict)     # creditor id -> Debt

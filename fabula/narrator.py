@@ -66,10 +66,17 @@ TEXT = {
         "title_open": "{a} and {b}: an unfinished business",
         "title_debt": "{a} and {b}: a debt unpaid",
         "chronicle_title": "The Chronicle of {village}",
-        "prologue": ("{village} held {n} souls, and this record covers {days} days of them. "
+        "prologue": ("{village} held {n} souls at the opening of this record, "
+                     "and it covers {days} days of them. "
                      "Nothing in it was invented; it was only watched, and told."),
         "pride_note": "{count} times, someone in {village} went hungry rather than ask for help. Pride is its own kind of famine.",
         "debt_note": "When the record closes, {count} favors in {village} had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.",
+        "deaths_note_1": "One soul in {village} did not live through these years. A village carries its dead quietly, which is how the dead end up carrying the village.",
+        "deaths_note_n": "{count} souls in {village} did not live through these years. A village carries its dead quietly, which is how the dead end up carrying the village.",
+        "arrivals_note_1": "One stranger came to {village} in this time. The village is always uncertain what to make of someone with no history.",
+        "arrivals_note_n": "{count} strangers came to {village} in this time. The village is always uncertain what to make of someone with no history.",
+        "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
+        "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
         "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
                      "{c} and {d} still were not speaking."),
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
@@ -128,10 +135,17 @@ TEXT = {
         "title_open": "{a} y {b}: un asunto sin cerrar",
         "title_debt": "{a} y {b}: una deuda impagada",
         "chronicle_title": "Crónica de {village}",
-        "prologue": ("En {village} vivían {n} almas, y este registro abarca {days} de sus días. "
+        "prologue": ("En {village} vivían {n} almas al abrir este registro, "
+                     "y abarca {days} de sus días. "
                      "Nada de lo que sigue es inventado; solo se miró, y se contó."),
         "pride_note": "{count} veces alguien en {village} pasó hambre antes que pedir ayuda. El orgullo es otra clase de hambruna.",
         "debt_note": "Al cerrarse el registro quedaban en {village} {count} favores sin devolver. Esas cuentas no las llevaba la aldea en libro alguno, y por eso no se perdió ninguna.",
+        "deaths_note_1": "Una persona de {village} no sobrevivió a estos años. Una aldea lleva a sus muertos en silencio, que es la manera en que los muertos acaban cargando con la aldea.",
+        "deaths_note_n": "{count} personas de {village} no sobrevivieron a estos años. Una aldea lleva a sus muertos en silencio, que es la manera en que los muertos acaban cargando con la aldea.",
+        "arrivals_note_1": "Un forastero llegó a {village} en este tiempo. La aldea nunca sabe bien qué hacer con alguien que no tiene historia.",
+        "arrivals_note_n": "{count} forasteros llegaron a {village} en este tiempo. La aldea nunca sabe bien qué hacer con alguien que no tiene historia.",
+        "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
+        "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
         "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
                      "{c} y {d} seguían sin hablarse."),
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
@@ -254,6 +268,13 @@ class Narrator:
                 text += self.t["grown"]
         return text
 
+    def death_cause(self, cid: int) -> str | None:
+        """Return the cause of death for a character, or None if still living."""
+        for ev in self.world.events:
+            if ev.kind == "DEATH" and cid in ev.actors:
+                return ev.data.get("cause", "starvation")
+        return None
+
     # ------------------------------------------------------------------
     # assembling the chronicle
 
@@ -320,27 +341,49 @@ class Narrator:
         lines.append(" ".join(body))
         lines.append("")
         lines.append(self.closing(final, kinds))
+        # If one of the pair died, note it quietly after the closing.
+        for cid in sorted(key):
+            cause = self.death_cause(cid)
+            if cause is not None:
+                lines.append("")
+                lines.append(self.t[f"died_{cause}"].format(a=self.name(cid)))
         return "\n".join(lines)
 
     def chronicle(self):
         w = self.world
         parts = ["# " + self.t["chronicle_title"].format(village=self.village), ""]
         parts.append(self.t["prologue"].format(
-            village=self.village, n=len(w.chars), days=w.tick))
+            village=self.village, n=self.world.initial_people, days=w.tick))
+
         pride_count = sum(1 for ev in w.events
                           if ev.kind == "HARDSHIP" and ev.data.get("pride"))
         if pride_count >= 3:
             parts.append("")
             parts.append(self.t["pride_note"].format(count=pride_count, village=self.village))
+
         debt_count = sum(len(c.debts) for c in w.chars)
         if debt_count >= 3:
             parts.append("")
             parts.append(self.t["debt_note"].format(count=debt_count, village=self.village))
+
+        death_count = sum(1 for ev in w.events if ev.kind == "DEATH")
+        if death_count >= 1:
+            parts.append("")
+            key = "deaths_note_1" if death_count == 1 else "deaths_note_n"
+            parts.append(self.t[key].format(count=death_count, village=self.village))
+
+        arrival_count = sum(1 for ev in w.events if ev.kind == "ARRIVAL")
+        if arrival_count >= 1:
+            parts.append("")
+            key = "arrivals_note_1" if arrival_count == 1 else "arrivals_note_n"
+            parts.append(self.t[key].format(count=arrival_count, village=self.village))
+
         parts.append("")
         arcs = self.arcs()
         for key, events in arcs:
             parts.append(self.tell_arc(key, events))
             parts.append("")
+
         best, worst = self.extremes()
         if best and worst:
             parts.append(self.t["epilogue"].format(
@@ -348,6 +391,7 @@ class Narrator:
                 c=self.name(worst[0]), d=self.name(worst[1]),
                 village=self.village))
             parts.append("")
+
         parts.append(self.t["colophon"].format(seed=w.seed))
         parts.append("")
         return "\n".join(parts)
