@@ -108,6 +108,8 @@ class World:
         self.sys_growing_up()
         if (self.tick + 1) % TICKS_PER_SEASON == 0:
             self.sys_festival()
+            self.sys_lean_season()
+            self.sys_bounty()
             self.sys_arrivals()
         self.tick += 1
 
@@ -481,6 +483,48 @@ class World:
             listeners = [c for c in living if c.id != s.id]
             for listener in self.rng.sample(listeners, k=min(4, len(listeners))):
                 self.tell(s, listener, public=True)
+
+    def sys_lean_season(self):
+        """If most of the village is hungry at season's end, record the shared want."""
+        living = self.living
+        if len(living) < 3:
+            return
+        hungry = [c for c in living if c.food < FOOD_NEED]
+        if len(hungry) < max(2, len(living) * 0.50):
+            return
+        # Solidarity: generous, well-fed neighbors step in without being asked.
+        gave = 0
+        for donor in living:
+            if donor.food > FOOD_SURPLUS and donor.generosity > 0.58:
+                needy = [h for h in hungry if h.id != donor.id]
+                if needy:
+                    t = self.rng.choice(needy)
+                    amount = min(2.0, max(0.0, donor.food - FOOD_NEED - 0.5))
+                    if amount > 0.3:
+                        donor.food -= amount
+                        t.food += amount
+                        t.shift(donor.id, 0.12)
+                        donor.shift(t.id, 0.06)
+                        gave += 1
+        ev = self.emit("LEAN_SEASON", tuple(c.id for c in living), -0.5,
+                       hungry_count=len(hungry), had_solidarity=(gave > 0))
+        for c in living:
+            self.remember(c, ev)
+
+    def sys_bounty(self):
+        """If most of the village is well-fed at season's end, record the abundance."""
+        living = self.living
+        if len(living) < 3:
+            return
+        if any(ev.kind == "LEAN_SEASON" and ev.tick == self.tick for ev in self.events):
+            return
+        well_fed = [c for c in living if c.food >= FOOD_SURPLUS]
+        if len(well_fed) < max(2, len(living) * 0.60):
+            return
+        ev = self.emit("BOUNTY", tuple(c.id for c in living), 0.5,
+                       fed_count=len(well_fed))
+        for c in living:
+            self.remember(c, ev)
 
     def sys_arrivals(self):
         """At the end of each season, the village may draw a new face."""

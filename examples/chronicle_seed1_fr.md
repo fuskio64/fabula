@@ -8,11 +8,17 @@ Quand le récit se ferme, 7 faveurs à Vieille-Brûlée n'avaient pas encore ét
 
 2 liens se nouèrent à Vieille-Brûlée en ce temps. La plupart des choses durables commencent sans que le moment soit marqué.
 
+## Le village
+
+En hiver, la plupart de Vieille-Brûlée comptait ses réserves au jour le jour. Les fours étaient prudents et les enfants recevaient le meilleur de ce qui restait.
+
+Vieille-Brûlée passa le printemps sans manquer de rien. Ceux qui se souviennent des années de disette ne s'y habituent jamais.
+
 ## Linde et Bertram : une histoire
 
-Tout le monde connaissait Linde, fière et généreuse. Bertram était généreux et fainéant.
+Linde était fière et généreuse. Tout le monde connaissait Bertram, généreux et fainéant.
 
-On en entendit parler pour la première fois au printemps. Linde partagea son pain avec Bertram dans les mauvais temps, et Bertram ne l'oublia pas. Plusieurs saisons s'écoulèrent. Quand l'hiver arriva, l'affaire n'était pas close. Le pain que Linde avait donné revint à sa propre porte, porté par Bertram. Les jours qui suivirent furent courts. Ce qui avait grandi entre Linde et Bertram devint quelque chose d'assumé. Ils partagèrent pain et foyer après cela. Le pain revint 2 fois encore, sans cérémonie ; c'est ce qui en fait du pain.
+On en entendit parler pour la première fois au printemps. Quand les réserves de Bertram vinrent à manquer, Linde remplit le panier sans qu'on le lui demande. Quand l'hiver revint, rien n'avait été réglé. Bertram n'avait pas oublié l'ancienne gentillesse, et quand le besoin frappa chez Linde, il la rendit sans un mot. Peu après. Ce qui avait grandi entre Linde et Bertram devint quelque chose d'assumé. Ils partagèrent pain et foyer après cela. Le pain revint 2 fois encore, sans cérémonie ; c'est ce qui en fait du pain.
 
 Ils eurent de la chance l'un envers l'autre, et ils le savaient.
 
@@ -20,7 +26,7 @@ Ils eurent de la chance l'un envers l'autre, et ils le savaient.
 
 Tout le monde connaissait Aldous, bavard et généreux. Tout le monde connaissait Garen, infatigable et fier.
 
-On en entendit parler pour la première fois en hiver. Quand les réserves de Aldous vinrent à manquer, Garen remplit le panier sans qu'on le lui demande. Le printemps arriva. Aldous n'avait pas oublié l'ancienne gentillesse, et quand le besoin frappa chez Garen, il la rendit sans un mot. Peu après. Aldous et Garen se choisirent avant que la saison ne tourne. Le village le sut avant qu'ils en disent un mot. Le pain revint, sans un mot.
+Tout commença en hiver. Quand les réserves de Aldous vinrent à manquer, Garen remplit le panier sans qu'on le lui demande. Le printemps arriva. Le pain que Garen avait donné revint à sa propre porte, porté par Aldous. Les jours qui suivirent furent courts. Aldous et Garen se choisirent avant que la saison ne tourne. Le village le sut avant qu'ils en disent un mot. Le pain revint, sans un mot.
 
 Ils eurent de la chance l'un envers l'autre, et ils le savaient.
 

@@ -8,11 +8,17 @@ When the record closes, 7 favors in Copse End had still not been returned. The v
 
 2 bonds were made in Copse End in this time. Most lasting things begin without anyone marking the moment.
 
+## The Village
+
+That winter, most of Copse End counted its stores by the day. The ovens were careful and the children got the most of what was left.
+
+Copse End came through that spring with full stores. Those who remember the lean years never quite take it for granted.
+
 ## Linde and Bertram: a love
 
-Linde, proud and open-handed, was known to everyone. Bertram was open-handed and idle.
+Linde was proud and open-handed. Bertram, open-handed and idle, was known to everyone.
 
-The first anyone knew of it was in spring. Linde shared bread with Bertram in a lean stretch, and it was not forgotten. Some seasons passed. By the time winter came, the matter had not been resolved. The bread Linde once gave came back to Linde's own door, and it was Bertram who carried it. Not many days passed. What had grown between Linde and Bertram became something declared. They shared bread and hearth after that. The bread came 2 more times, without ceremony; that is what makes it bread.
+The first anyone knew of it was in spring. When Bertram's stores ran low, Linde filled the basket without being asked. When winter came again, the story had not ended. Bertram had not forgotten the old kindness, and when want came to Linde's house, it was returned without a word about it. Soon afterwards. What had grown between Linde and Bertram became something declared. They shared bread and hearth after that. The bread came 2 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 
@@ -20,7 +26,7 @@ They were lucky in each other, and they knew it.
 
 Aldous, talkative and open-handed, was known to everyone. Garen, tireless and proud, was known to everyone.
 
-The first anyone knew of it was in winter. When Aldous's stores ran low, Garen filled the basket without being asked. Spring came. Aldous had not forgotten the old kindness, and when want came to Garen's house, it was returned without a word about it. Soon afterwards. Aldous and Garen chose each other before the season turned. The village knew before either of them said a word about it. The bread came again, without a word about it.
+It began in winter. When Aldous's stores ran low, Garen filled the basket without being asked. Spring came. The bread Garen once gave came back to Garen's own door, and it was Aldous who carried it. Not many days passed. Aldous and Garen chose each other before the season turned. The village knew before either of them said a word about it. The bread came again, without a word about it.
 
 They were lucky in each other, and they knew it.
 

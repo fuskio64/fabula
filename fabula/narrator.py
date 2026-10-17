@@ -138,6 +138,21 @@ TEXT = {
             "{name}, who had been here longest and remembered what others had forgotten, was {adjs}.",
             "Everyone had come to {name} at least once. {name} was {adjs}.",
         ],
+        "village_section": "## The Village",
+        "LEAN_SEASON": [
+            "The {season} was a hungry one. More than half the houses in {village} had lean pantries, and no one pretended otherwise.",
+            "Want spread through {village} that {season} — not one house at a time, but all at once. That kind of lean is different.",
+            "That {season}, most of {village} counted its stores by the day. The ovens were careful and the children got the most of what was left.",
+        ],
+        "LEAN_SEASON_solidarity": [
+            " Those who still had something to spare gave without being asked. The village at its best looks like that.",
+            " A few generous souls emptied part of their own shelves into their neighbors'. Nobody mentioned it afterward.",
+        ],
+        "BOUNTY": [
+            "The {season} was generous. Most of {village} had more than enough, and surplus food finds its way out the door.",
+            "{village} came through that {season} with full stores. Those who remember the lean years never quite take it for granted.",
+            "That {season}, the village was well-fed and it showed — in longer evenings, in more visiting, in quarrels that did not quite start.",
+        ],
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
     },
     "es": {
@@ -272,6 +287,21 @@ TEXT = {
             "A {name}, que llevaba aquí más tiempo que nadie y recordaba lo que otros habían olvidado, lo conocía todo el mundo. Era {adjs}.",
             "{name}, {anciano} de la aldea, era {adjs}.",
         ],
+        "village_section": "## La aldea",
+        "LEAN_SEASON": [
+            "En {season} hubo hambre en {village}. Más de la mitad de las casas tenían la despensa escasa, y nadie fingía lo contrario.",
+            "La escasez llegó a {village} durante {season} de golpe, a todas las casas a la vez. Ese tipo de hambre es distinto.",
+            "Durante {season}, la mayor parte de {village} contaba sus reservas día a día. Los hornos ardían con cuidado y los niños se quedaban con lo mejor.",
+        ],
+        "LEAN_SEASON_solidarity": [
+            " Los que aún tenían algo de sobra lo dieron sin que nadie se lo pidiera. Así es la aldea en sus mejores momentos.",
+            " Algunos vaciaron parte de sus propias alacenas en las de sus vecinos. Nadie lo mencionó después.",
+        ],
+        "BOUNTY": [
+            "En {season} hubo abundancia en {village}. La mayor parte de las casas tenía más que suficiente, y el sobrante siempre encuentra la puerta.",
+            "{village} llegó a {season} con las despensas llenas. Los que recuerdan los años de hambre nunca lo dan por seguro.",
+            "Durante {season} la aldea estaba bien alimentada, y se notaba: noches más largas, más visitas, peleas que no llegaban a empezar.",
+        ],
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
     },
     "fr": {
@@ -398,6 +428,21 @@ TEXT = {
             "{name}, qui était là depuis le plus longtemps et se souvenait de ce que d'autres avaient oublié, était {adjs}.",
             "Tout le monde était venu trouver {name} au moins une fois. {name} était {adjs}.",
         ],
+        "village_section": "## Le village",
+        "LEAN_SEASON": [
+            "{village} traversa {season} dans la faim. Plus de la moitié des maisons avaient les garde-manger vides, et personne ne faisait semblant du contraire.",
+            "La disette frappa {village} {season_in} — pas maison par maison, mais d'un coup. Ce genre de faim est différent.",
+            "{season_in}, la plupart de {village} comptait ses réserves au jour le jour. Les fours étaient prudents et les enfants recevaient le meilleur de ce qui restait.",
+        ],
+        "LEAN_SEASON_solidarity": [
+            " Ceux qui avaient encore quelque chose donnèrent sans qu'on le leur demande. Le village à son meilleur ressemble à cela.",
+            " Quelques âmes généreuses vidèrent une partie de leurs étagères dans celles de leurs voisins. Personne n'en parla ensuite.",
+        ],
+        "BOUNTY": [
+            "{village} traversa {season} dans l'abondance. La plupart des maisons avaient plus que suffisant, et le surplus trouve toujours la porte.",
+            "{village} passa {season} sans manquer de rien. Ceux qui se souviennent des années de disette ne s'y habituent jamais.",
+            "{season_in}, le village était bien nourri et cela se voyait — des soirées plus longues, plus de visites, des querelles qui ne commençaient pas vraiment.",
+        ],
         "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
     "pt": {
@@ -523,6 +568,21 @@ TEXT = {
         "elder_intro": [
             "{name}, que estava aqui há mais tempo do que ninguém e se lembrava do que outros tinham esquecido, era {adjs}.",
             "Toda a aldeia tinha ido ter com {name} pelo menos uma vez. {name} era {adjs}.",
+        ],
+        "village_section": "## A aldeia",
+        "LEAN_SEASON": [
+            "{village} atravessou {season} na fome. Mais de metade das casas tinham as despensas vazias, e ninguém fingia o contrário.",
+            "A escassez chegou a {village} {season_in} de uma vez — não casa por casa, mas a todas ao mesmo tempo. Esse tipo de privação é diferente.",
+            "{season_in}, a maior parte de {village} contava as reservas dia a dia. Os fornos eram cuidadosos e as crianças ficavam com o melhor do que havia.",
+        ],
+        "LEAN_SEASON_solidarity": [
+            " Os que ainda tinham algo a dar deram sem que ninguém pedisse. A aldeia no seu melhor tem esse aspeto.",
+            " Alguns esvaziaram parte das suas prateleiras nas dos vizinhos. Ninguém falou nisso depois.",
+        ],
+        "BOUNTY": [
+            "{village} atravessou {season} na abundância. A maior parte das casas tinha mais do que suficiente, e o excedente sempre encontra a porta.",
+            "{village} passou {season} com as despensas cheias. Os que se lembram dos anos de fome nunca dão isso por garantido.",
+            "{season_in}, a aldeia estava bem alimentada e notava-se — noites mais longas, mais visitas, brigas que não chegavam a começar.",
         ],
         "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
     },
@@ -798,6 +858,42 @@ class Narrator:
     # ------------------------------------------------------------------
     # assembling the chronicle
 
+    def tell_village_moments(self) -> list[str]:
+        """Village-wide lean or abundant seasons rendered as a section."""
+        w = self.world
+        lean_events = [ev for ev in w.events if ev.kind == "LEAN_SEASON"]
+        bounty_events = [ev for ev in w.events if ev.kind == "BOUNTY"]
+        if not lean_events and not bounty_events:
+            return []
+        if "LEAN_SEASON" not in self.t and "BOUNTY" not in self.t:
+            return []
+        parts: list[str] = []
+        if "village_section" in self.t:
+            parts.append(self.t["village_section"].format(village=self.village))
+            parts.append("")
+        # Most severe lean season and, separately, the first bounty (at most one each)
+        selected = []
+        if lean_events and "LEAN_SEASON" in self.t:
+            worst = max(lean_events, key=lambda e: e.data.get("hungry_count", 0))
+            selected.append(worst)
+        if bounty_events and "BOUNTY" in self.t:
+            selected.append(bounty_events[0])
+        seasons_in_list = self.t.get("seasons_in", self.t["seasons"])
+        for ev in selected:
+            sname = self.season_name(ev.tick)
+            sname_in = seasons_in_list[season_index(ev.tick)]
+            if ev.kind == "LEAN_SEASON":
+                para = self.rng.choice(self.t["LEAN_SEASON"]).format(
+                    season=sname, season_in=sname_in, village=self.village)
+                if ev.data.get("had_solidarity") and "LEAN_SEASON_solidarity" in self.t:
+                    para += self.rng.choice(self.t["LEAN_SEASON_solidarity"])
+            else:
+                para = self.rng.choice(self.t["BOUNTY"]).format(
+                    season=sname, season_in=sname_in, village=self.village)
+            parts.append(para[0].upper() + para[1:] if para else para)
+            parts.append("")
+        return parts
+
     def arc_title(self, key, events):
         a_id, b_id = sorted(key)
         a, b = self.world.char(a_id), self.world.char(b_id)
@@ -956,6 +1052,9 @@ class Narrator:
                         year=worst_year, village=self.village))
 
         parts.append("")
+        village_moments = self.tell_village_moments()
+        if village_moments:
+            parts.extend(village_moments)
         arcs = self.arcs()
         for key, events in arcs:
             parts.append(self.tell_arc(key, events))

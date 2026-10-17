@@ -12,27 +12,33 @@ When the record closes, 11 favors in Cold Hollow had still not been returned. Th
 
 By the close of this record, Cold Hollow counted more souls than it had at the opening.
 
+## The Village
+
+The winter was a hungry one. More than half the houses in Cold Hollow had lean pantries, and no one pretended otherwise.
+
+Cold Hollow came through that summer with full stores. Those who remember the lean years never quite take it for granted.
+
 ## Orin and Wren: a debt unpaid
 
 Orin was proud and idle. Wren, proud and talkative, was known to everyone.
 
-It began in spring. Wren shared bread with Orin in a lean stretch, and it was not forgotten. A year went by. By spring nothing had been resolved. The favor sat heavy on Orin. It is a hard thing to owe, and Orin took to avoiding Wren's eye. Not many days passed. Someone let Wren know what Orin had been saying. It was Orin who carried the tale. Some seasons passed. By the time autumn came, the matter had not been resolved. Orin and Wren quarreled where everyone could hear, and the village pretended not to listen. They fought 2 more times. It never seemed to settle anything.
+It began in spring. When Orin's stores ran low, Wren filled the basket without being asked. A year went by. By spring nothing had been resolved. Orin had never returned what Wren once gave, and the owing curdled, the way gratitude does when it is carried too long. Not many days passed. Word reached Wren that Orin had been speaking of the matter behind closed doors. It was Orin who carried the tale. When autumn came again, the story had not ended. It came to hard words between Orin and Wren, in the open street. The bread came 2 more times, without ceremony; that is what makes it bread.
 
 No one mended it. By the end they passed each other without a word.
 
 ## Luma and Tomes: a love
 
-Luma, humble and talkative, was known to everyone. Tomes, tight-fisted and idle, was known to everyone.
+Luma was humble and talkative. Tomes was tight-fisted and idle.
 
-It began in autumn. When Tomes's stores ran low, Luma filled the basket without being asked. When spring came again, the story had not ended. Luma and Tomes chose each other before the season turned. The village knew before either of them said a word about it. By then it was winter. Miren was born. The village received them the way it always receives what arrives without asking. The bread came again, without a word about it.
+The first anyone knew of it was in autumn. When Tomes's stores ran low, Luma filled the basket without being asked. When spring came again, the story had not ended. What had grown between Luma and Tomes became something declared. They shared bread and hearth after that. Winter came. Miren was born. The village received them the way it always receives what arrives without asking. The bread came again, without a word about it.
 
 They were lucky in each other, and they knew it.
 
 ## Tam and Sable: a love
 
-Tam was talkative and tireless. Sable, humble and idle, was known to everyone.
+Tam was talkative and tireless. Sable was humble and idle.
 
-It began in spring. When Sable's stores ran low, Tam filled the basket without being asked. Not many days passed. What had grown between Tam and Sable became something declared. They shared bread and hearth after that. Summer came. A child — Arvid — came to them. There are things that arrive without ceremony and are felt for years. The bread came again, without a word about it.
+It began in spring. Tam shared bread with Sable in a lean stretch, and it was not forgotten. Not many days passed. Tam and Sable chose each other before the season turned. The village knew before either of them said a word about it. By then it was summer. Arvid was born. The village received them the way it always receives what arrives without asking. The bread came again, without a word about it.
 
 They were lucky in each other, and they knew it.
 
