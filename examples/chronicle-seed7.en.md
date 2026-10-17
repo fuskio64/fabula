@@ -2,38 +2,36 @@
 
 Thornby held 10 souls at the opening of this record, and it covers 192 days of them. Nothing in it was invented; it was only watched, and told.
 
-16 times, someone in Thornby went hungry rather than ask for help. Pride is its own kind of famine.
+6 times, someone in Thornby went hungry rather than ask for help. Pride is its own kind of famine.
 
-When the record closes, 10 favors in Thornby had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.
+When the record closes, 9 favors in Thornby had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.
 
-One soul in Thornby did not live through these years. A village carries its dead quietly, which is how the dead end up carrying the village.
+2 bonds were made in Thornby in this time. Most lasting things begin without anyone marking the moment.
 
-One stranger came to Thornby in this time. The village is always uncertain what to make of someone with no history.
+## Runa and Tilda: a debt unpaid
 
-## Rafe and Tomes: an unfinished business
+Runa, idle and reserved, was known to everyone. Tilda was open-handed and talkative.
 
-Rafe, idle and reserved, was known to everyone. Tomes was talkative and humble.
-
-It began in winter. When Rafe's stores ran low, Tomes filled the basket without being asked. Autumn came. The favor sat heavy on Rafe. It is a hard thing to owe, and Rafe took to avoiding Tomes's eye. Winter came. Tomes had once filled Rafe's basket; when Tomes's own ran empty, Rafe's door stayed shut. The village keeps accounts no ledger ever sees, and that one was entered in every head in it. Soon afterwards. Rafe and Tomes quarreled where everyone could hear, and the village pretended not to listen. Not many days passed. It took Aldous, whom they both trusted, to make them speak again. It happened 2 more times after that, as if grudges kept a calendar of their own.
-
-An uneasy peace held between them, thin as spring ice.
-
-## Rafe and Liesl: a debt unpaid
-
-Liesl was tight-fisted and tireless.
-
-It began in spring. When Rafe's stores ran low, Liesl filled the basket without being asked. Summer came. Rafe went hungry to Liesl's door and came back with nothing. By then it was autumn. Rafe had never returned what Liesl once gave, and the owing curdled, the way gratitude does when it is carried too long. By then it was spring. Rafe and Liesl quarreled where everyone could hear, and the village pretended not to listen. It happened 4 more times after that, as if grudges kept a calendar of their own.
+It began in summer. When Runa's stores ran low, Tilda filled the basket without being asked. Winter came. The favor sat heavy on Runa. It is a hard thing to owe, and Runa took to avoiding Tilda's eye. Summer came. Runa and Tilda quarreled where everyone could hear, and the village pretended not to listen. It happened 2 more times after that, as if grudges kept a calendar of their own.
 
 No one mended it. By the end they passed each other without a word.
 
-## Aldous and Liesl: a debt unpaid
+## Wulf and Sable: a love
 
-Aldous, proud and idle, was known to everyone.
+Wulf, idle and reserved, was known to everyone. Sable was talkative and tireless.
 
-The first anyone knew of it was in winter. Liesl turned Aldous away empty-handed, and the whole village felt colder for it. Soon afterwards. Liesl shared bread with Aldous in a lean stretch, and it was not forgotten. By then it was summer. Aldous had never returned what Liesl once gave, and the owing curdled, the way gratitude does when it is carried too long. Autumn came. It came to hard words between Aldous and Liesl, in the open street. It happened 3 more times after that, as if grudges kept a calendar of their own.
+It began in spring. Sable shared bread with Wulf in a lean stretch, and it was not forgotten. Winter came. Wulf had not forgotten the old kindness, and when want came to Sable's house, it was returned without a word about it. Not many days passed. Wulf and Sable chose each other before the season turned. The village knew before either of them said a word about it. And it happened 2 more times, without anyone making a fuss of it; kindness keeps a calendar too.
 
-No one mended it. By the end they passed each other without a word.
+They were lucky in each other, and they knew it.
 
-When the record ends, Bertram and Mara were as close as two people get in Thornby; Rafe and Liesl still were not speaking.
+## Orin and Tilda: a love
+
+Orin was reserved and humble.
+
+The first anyone knew of it was in winter. Tilda shared bread with Orin in a lean stretch, and it was not forgotten. Soon afterwards. Orin had not forgotten the old kindness, and when want came to Tilda's house, it was returned without a word about it. By then it was autumn. What had grown between Orin and Tilda became something declared. They shared bread and hearth after that.
+
+They were lucky in each other, and they knew it.
+
+When the record ends, Orin and Aldous were as close as two people get in Thornby; Runa and Tilda still were not speaking.
 
 *(world seed 7 — run it again and the same things will happen, in the same order, to the same people)*

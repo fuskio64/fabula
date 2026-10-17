@@ -60,6 +60,10 @@ class Character:
     alive: bool = True
     died_at: int | None = None
     starvation_streak: int = 0     # consecutive ticks below STARVATION_THRESHOLD
+    partner: int | None = None      # id of bonded partner, if any
+    parent_ids: tuple | None = None # (parent_a_id, parent_b_id) for born-in-world chars
+    childhood: bool = False         # not yet come of age; different food dynamics
+    born_at: int | None = None      # tick of birth, for the growing-up countdown
     memories: list = field(default_factory=list)
     affinity: dict = field(default_factory=dict)  # other id -> -1..1
     debts: dict = field(default_factory=dict)     # creditor id -> Debt

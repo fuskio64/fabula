@@ -12,7 +12,7 @@ from .model import TICKS_PER_SEASON, season_index, year_of
 from .names import VILLAGE_NAMES
 
 ARC_KINDS = {"GIFT", "REFUSAL", "OFFENSE", "QUARREL", "MEDIATION",
-             "REPAYMENT", "INGRATITUDE", "RESENTMENT"}
+             "REPAYMENT", "INGRATITUDE", "RESENTMENT", "BOND", "WIDOWING"}
 
 TEXT = {
     "en": {
@@ -46,6 +46,10 @@ TEXT = {
                         "{b} owed {a} the kind of debt nobody writes down, and paid it with a closed door. Nobody said anything. Everybody counted it."],
         "RESENTMENT": ["The favor sat heavy on {a}. It is a hard thing to owe, and {a} took to avoiding {b}'s eye.",
                        "{a} had never returned what {b} once gave, and the owing curdled, the way gratitude does when it is carried too long."],
+        "BOND": ["{a} and {b} chose each other before the season turned. The village knew before either of them said a word about it.",
+                 "What had grown between {a} and {b} became something declared. They shared bread and hearth after that."],
+        "WIDOWING": ["{a} outlived {b}. The village did not leave {a} alone with it, which is how grief is carried in a place like that.",
+                     "When {b} died, {a} lost more than a person loses when what remains is only loneliness."],
         "carried_by": " It was {c} who carried the tale.",
         "grown": " The tale had grown in the telling.",
         "repeat_one": "It happened once more after that.",
@@ -59,10 +63,12 @@ TEXT = {
         "close_uneasy": "An uneasy peace held between them, thin as spring ice.",
         "close_mended": "Whatever had been broken, they mended it better than new.",
         "close_warm": "They were lucky in each other, and they knew it.",
+        "close_widowed": "They had been lucky in each other. The ending was a sad one, but it was a sadness the village recognized.",
         "title_reconciliation": "{a} and {b}: a reconciliation",
         "title_estrangement": "{a} and {b}: an estrangement",
         "title_feud": "{a} and {b}: a feud",
         "title_bond": "{a} and {b}: a friendship",
+        "title_love": "{a} and {b}: a love",
         "title_open": "{a} and {b}: an unfinished business",
         "title_debt": "{a} and {b}: a debt unpaid",
         "chronicle_title": "The Chronicle of {village}",
@@ -75,6 +81,10 @@ TEXT = {
         "deaths_note_n": "{count} souls in {village} did not live through these years. A village carries its dead quietly, which is how the dead end up carrying the village.",
         "arrivals_note_1": "One stranger came to {village} in this time. The village is always uncertain what to make of someone with no history.",
         "arrivals_note_n": "{count} strangers came to {village} in this time. The village is always uncertain what to make of someone with no history.",
+        "bonds_note_1": "One bond was made in {village} in this time. Most lasting things begin without anyone marking the moment.",
+        "bonds_note_n": "{count} bonds were made in {village} in this time. Most lasting things begin without anyone marking the moment.",
+        "births_note_1": "One child was born in {village} in this time.",
+        "births_note_n": "{count} children were born in {village} in this time.",
         "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
         "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
         "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
@@ -115,6 +125,10 @@ TEXT = {
                         "{b} le debía a {a} una de esas deudas que nadie escribe, y la pagó con la puerta cerrada. Nadie dijo nada. Todos la contaron."],
         "RESENTMENT": ["El favor le pesaba a {a}. Deber es cosa dura, y {a} empezó a esquivarle la mirada a {b}.",
                        "{a} nunca devolvió lo que {b} le dio un día, y la deuda se agrió, como se agria la gratitud cuando se carga demasiado tiempo."],
+        "BOND": ["{a} y {b} se eligieron mutuamente antes de que cambiara la estación. La aldea lo supo antes de que ninguno de los dos dijera una palabra al respecto.",
+                 "Lo que había crecido entre {a} y {b} se convirtió en algo declarado. Compartieron pan y lumbre a partir de entonces."],
+        "WIDOWING": ["{a} sobrevivió a {b}. La aldea no dejó a {a} solo con ello, que es como se lleva el duelo en un lugar así.",
+                     "Cuando {b} murió, {a} perdió algo que va más allá de lo que se pierde cuando lo que queda es solo la soledad."],
         "carried_by": " Fue {c} quien trajo el cuento.",
         "grown": " El cuento había engordado por el camino.",
         "repeat_one": "Volvió a pasar una vez más.",
@@ -128,10 +142,12 @@ TEXT = {
         "close_uneasy": "Quedó entre ellos una paz incómoda, fina como el hielo de marzo.",
         "close_mended": "Lo que se había roto, lo remendaron mejor que nuevo.",
         "close_warm": "Tuvieron suerte el uno con el otro, y lo sabían.",
+        "close_widowed": "Habían tenido suerte el uno con el otro. El final fue triste, pero era una tristeza que la aldea reconocía.",
         "title_reconciliation": "{a} y {b}: una reconciliación",
         "title_estrangement": "{a} y {b}: un distanciamiento",
         "title_feud": "{a} y {b}: una enemistad",
         "title_bond": "{a} y {b}: una amistad",
+        "title_love": "{a} y {b}: un amor",
         "title_open": "{a} y {b}: un asunto sin cerrar",
         "title_debt": "{a} y {b}: una deuda impagada",
         "chronicle_title": "Crónica de {village}",
@@ -144,11 +160,92 @@ TEXT = {
         "deaths_note_n": "{count} personas de {village} no sobrevivieron a estos años. Una aldea lleva a sus muertos en silencio, que es la manera en que los muertos acaban cargando con la aldea.",
         "arrivals_note_1": "Un forastero llegó a {village} en este tiempo. La aldea nunca sabe bien qué hacer con alguien que no tiene historia.",
         "arrivals_note_n": "{count} forasteros llegaron a {village} en este tiempo. La aldea nunca sabe bien qué hacer con alguien que no tiene historia.",
+        "bonds_note_1": "Un vínculo se forjó en {village} en este tiempo. La mayoría de las cosas duraderas empiezan sin que nadie señale el momento.",
+        "bonds_note_n": "{count} vínculos se forjaron en {village} en este tiempo. La mayoría de las cosas duraderas empiezan sin que nadie señale el momento.",
+        "births_note_1": "Un niño nació en {village} en este tiempo.",
+        "births_note_n": "{count} niños nacieron en {village} en este tiempo.",
         "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
         "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
         "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
                      "{c} y {d} seguían sin hablarse."),
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
+    },
+    "fr": {
+        "seasons": ("le printemps", "l'été", "l'automne", "l'hiver"),
+        "seasons_in": ("au printemps", "en été", "en automne", "en hiver"),
+        "traits": {
+            "diligence": (("infatigable", "infatigable"), ("fainéant", "fainéante")),
+            "generosity": (("généreux", "généreuse"), ("avare", "avare")),
+            "pride": (("fier", "fière"), ("humble", "humble")),
+            "openness": (("bavard", "bavarde"), ("taciturne", "taciturne")),
+        },
+        "intro": ["{name} était {adjs}.",
+                  "Tout le monde connaissait {name}, {adjs}."],
+        "and": "et",
+        "opening": ["Tout commença {season}.",
+                    "On en entendit parler pour la première fois {season}."],
+        "later_season": ["{season} arriva.", "C'était déjà {season}."],
+        "soon_after": ["Les jours qui suivirent furent courts.", "Peu après."],
+        "GIFT": ["Quand les réserves de {b} vinrent à manquer, {a} remplit le panier sans qu'on le lui demande.",
+                 "{a} partagea son pain avec {b} dans les mauvais temps, et {b} ne l'oublia pas."],
+        "REFUSAL": ["{a} frappa à la porte de {b} le ventre creux et repartit les mains vides.",
+                    "{b} renvoya {a} sans rien, et tout le village en fut refroidi."],
+        "OFFENSE": ["Il parvint aux oreilles de {a} que {b} parlait de l'affaire derrière des portes closes.",
+                    "Quelqu'un se chargea de rapporter à {a} ce que {b} allait disant."],
+        "QUARREL": ["{a} et {b} se disputèrent là où tout le monde pouvait entendre, et le village fit semblant de ne pas écouter.",
+                    "Il y eut des mots durs entre {a} et {b}, en pleine rue."],
+        "MEDIATION": ["{c} les fit asseoir à la même table et ne laissa ni l'un ni l'autre repartir en colère. Quelque chose se dénoua.",
+                      "Il fallut {c}, en qui ils avaient tous deux confiance, pour qu'ils se parlent de nouveau."],
+        "REPAYMENT": ["{a} n'avait pas oublié l'ancienne gentillesse, et quand le besoin frappa chez {b}, il la rendit sans un mot.",
+                      "Le pain que {b} avait donné revint à sa propre porte, porté par {a}."],
+        "INGRATITUDE": ["{a} avait rempli le panier de {b} ; quand le sien se vida, la porte de {b} resta close. Le village tient des comptes qu'aucun registre ne voit, et celui-là fut inscrit dans toutes les mémoires.",
+                        "{b} devait à {a} le genre de dette que personne n'écrit, et la solda par une porte fermée. Personne ne dit rien. Tout le monde compta."],
+        "RESENTMENT": ["La faveur pesait à {a}. C'est chose difficile que de devoir, et {a} se mit à éviter le regard de {b}.",
+                       "{a} n'avait jamais rendu ce que {b} lui avait donné, et la dette s'aigrit, comme la gratitude s'aigrit quand on la porte trop longtemps."],
+        "BOND": ["{a} et {b} se choisirent avant que la saison ne tourne. Le village le sut avant qu'ils en disent un mot.",
+                 "Ce qui avait grandi entre {a} et {b} devint quelque chose d'assumé. Ils partagèrent pain et foyer après cela."],
+        "WIDOWING": ["{a} survécut à {b}. Le village ne laissa pas {a} seul avec cela, c'est ainsi qu'on porte le deuil en pareil endroit.",
+                     "Quand {b} mourut, {a} perdit quelque chose que l'on ne perd pas de la même façon que le reste."],
+        "carried_by": " C'est {c} qui porta le récit.",
+        "grown": " Le récit avait grossi en chemin.",
+        "repeat_one": "Cela se reproduisit une fois encore.",
+        "repeat_many": "Cela se reproduisit {n} fois encore, comme si les rancœurs tenaient leur propre calendrier.",
+        "repeat_good_one": "Et cela se reproduisit, discrètement, quand il le fallut.",
+        "repeat_good_many": "Et cela se reproduisit {n} fois encore, sans que personne en fasse grand cas ; la bonté aussi tient son calendrier.",
+        "repeat_endless": "Et ainsi de suite, saison après saison, jusqu'à ce que compter perde son sens.",
+        "repeat_good_endless": "Et ainsi de suite, saison après saison ; certaines choses n'ont pas besoin d'être remarquées pour continuer.",
+        "close_relapse": "La paix qui fut faite ne tint pas ; certaines fissures veulent rester ouvertes.",
+        "close_broken": "Personne ne raccommoda rien. À la fin, ils se croisaient sans un mot.",
+        "close_uneasy": "Une paix précaire s'installa entre eux, mince comme la glace de mars.",
+        "close_mended": "Ce qui s'était brisé, ils le recoussirent mieux qu'avant.",
+        "close_warm": "Ils eurent de la chance l'un envers l'autre, et ils le savaient.",
+        "close_widowed": "Ils avaient eu de la chance l'un envers l'autre. La fin fut triste, mais c'était une tristesse que le village reconnut.",
+        "title_reconciliation": "{a} et {b} : une réconciliation",
+        "title_estrangement": "{a} et {b} : un éloignement",
+        "title_feud": "{a} et {b} : une inimitié",
+        "title_bond": "{a} et {b} : une amitié",
+        "title_love": "{a} et {b} : une histoire",
+        "title_open": "{a} et {b} : une affaire non réglée",
+        "title_debt": "{a} et {b} : une dette impayée",
+        "chronicle_title": "Chronique de {village}",
+        "prologue": ("{village} comptait {n} âmes à l'ouverture de ce récit, "
+                     "et il couvre {days} jours de leur vie. "
+                     "Rien n'y est inventé ; on a seulement regardé, et raconté."),
+        "pride_note": "{count} fois, quelqu'un à {village} préféra souffrir de la faim plutôt que de demander de l'aide. L'orgueil est une autre forme de famine.",
+        "debt_note": "Quand le récit se ferme, {count} faveurs à {village} n'avaient pas encore été rendues. Le village ne les consignait dans aucun registre, c'est pourquoi aucune ne fut jamais perdue.",
+        "deaths_note_1": "Une âme à {village} ne survécut pas à ces années. Un village porte ses morts en silence, c'est ainsi que les morts finissent par porter le village.",
+        "deaths_note_n": "{count} âmes à {village} ne survécurent pas à ces années. Un village porte ses morts en silence, c'est ainsi que les morts finissent par porter le village.",
+        "arrivals_note_1": "Un étranger arriva à {village} en ce temps. Le village ne sait jamais trop quoi faire de quelqu'un qui n'a pas d'histoire.",
+        "arrivals_note_n": "{count} étrangers arrivèrent à {village} en ce temps. Le village ne sait jamais trop quoi faire de quelqu'un qui n'a pas d'histoire.",
+        "bonds_note_1": "Un lien se noua à {village} en ce temps. La plupart des choses durables commencent sans que le moment soit marqué.",
+        "bonds_note_n": "{count} liens se nouèrent à {village} en ce temps. La plupart des choses durables commencent sans que le moment soit marqué.",
+        "births_note_1": "Un enfant naquit à {village} en ce temps.",
+        "births_note_n": "{count} enfants naquirent à {village} en ce temps.",
+        "died_starvation": "{a} ne survécut pas à cette chronique. Un long hiver l'emporta avant la clôture du récit.",
+        "died_misfortune": "{a} ne survécut pas à cette chronique ; un coup soudain, quand il ne restait plus rien pour l'absorber.",
+        "epilogue": ("Quand le récit se ferme, {a} et {b} étaient aussi proches que deux personnes peuvent l'être à {village} ; "
+                     "{c} et {d} ne se parlaient toujours pas."),
+        "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
 }
 
@@ -177,9 +274,10 @@ class Narrator:
                 continue
             scored.append((self.drama(events), key, events))
         scored.sort(key=lambda item: -item[0])
+        max_arcs = max(3, self.world.tick // 96)
         chosen, appearances = [], {}
         for score, key, events in scored:
-            if score < 1.0 or len(chosen) == 3:
+            if score < 1.0 or len(chosen) == max_arcs:
                 break
             if any(appearances.get(cid, 0) >= 2 for cid in key):
                 continue  # no one gets to star in every story
@@ -204,6 +302,10 @@ class Narrator:
             score += 1.5  # a kindness betrayed is the oldest story there is
         if "RESENTMENT" in kinds or "REPAYMENT" in kinds:
             score += 1.0  # what a debt does to people, either way it goes
+        if "BOND" in kinds:
+            score += 2.5  # a bond formed is inherently dramatic
+        if "WIDOWING" in kinds:
+            score += 3.0  # love and loss: the oldest arc
         return score
 
     # ------------------------------------------------------------------
@@ -284,7 +386,9 @@ class Narrator:
         first = sum(events[0].data.get("affinity", (0, 0))) / 2
         final = (a.feel(b.id) + b.feel(a.id)) / 2
         kinds = {ev.kind for ev in events}
-        if final > 0.2 and (first < -0.05 or "MEDIATION" in kinds or "QUARREL" in kinds):
+        if "BOND" in kinds:
+            shape = "love"
+        elif final > 0.2 and (first < -0.05 or "MEDIATION" in kinds or "QUARREL" in kinds):
             shape = "reconciliation"
         elif final < -0.1 and kinds & {"INGRATITUDE", "RESENTMENT"} and "REPAYMENT" not in kinds:
             shape = "debt"
@@ -299,6 +403,10 @@ class Narrator:
         return self.t["title_" + shape].format(a=a.name, b=b.name), final, kinds
 
     def closing(self, final, kinds):
+        if "BOND" in kinds and "WIDOWING" in kinds:
+            return self.t["close_widowed"]
+        if "BOND" in kinds:
+            return self.t["close_warm"]
         if final < -0.35:
             if "MEDIATION" in kinds:
                 return self.t["close_relapse"]
@@ -378,6 +486,18 @@ class Narrator:
             key = "arrivals_note_1" if arrival_count == 1 else "arrivals_note_n"
             parts.append(self.t[key].format(count=arrival_count, village=self.village))
 
+        bond_count = sum(1 for ev in w.events if ev.kind == "BOND")
+        if bond_count >= 1:
+            parts.append("")
+            key = "bonds_note_1" if bond_count == 1 else "bonds_note_n"
+            parts.append(self.t[key].format(count=bond_count, village=self.village))
+
+        birth_count = sum(1 for ev in w.events if ev.kind == "BIRTH")
+        if birth_count >= 1:
+            parts.append("")
+            key = "births_note_1" if birth_count == 1 else "births_note_n"
+            parts.append(self.t[key].format(count=birth_count, village=self.village))
+
         parts.append("")
         arcs = self.arcs()
         for key, events in arcs:
@@ -399,8 +519,8 @@ class Narrator:
     def extremes(self):
         best = worst = None
         best_v, worst_v = -10.0, 10.0
-        for a in self.world.chars:
-            for b in self.world.chars:
+        for a in self.world.living:
+            for b in self.world.living:
                 if b.id <= a.id:
                     continue
                 mutual = a.feel(b.id) + b.feel(a.id)

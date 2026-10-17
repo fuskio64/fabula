@@ -15,9 +15,15 @@ FOOD_NEED = 2.0      # below this a character looks for help
 FOOD_SURPLUS = 5.0   # above this a character can afford to give
 STORES_CAP = 12.0    # grain spoils: no one can hoard their way out of winter
 
-# Starvation: 14 consecutive ticks below this threshold means death.
+# Starvation: 48 consecutive ticks below this threshold means death.
 STARVATION_THRESHOLD = 0.5
 STARVATION_TICKS = 48
+
+# Bonds: mutual affinity floor that triggers household formation.
+BOND_THRESHOLD = 0.62
+
+# Childhood: ticks from birth until a character comes of age (3 seasons).
+CHILDHOOD_TICKS = 72
 
 
 class World:
@@ -94,6 +100,9 @@ class World:
         self.sys_gossip()
         self.sys_quarrel()
         self.sys_mediation()
+        self.sys_bonds()
+        self.sys_births()
+        self.sys_growing_up()
         if (self.tick + 1) % TICKS_PER_SEASON == 0:
             self.sys_festival()
             self.sys_arrivals()
@@ -105,8 +114,31 @@ class World:
     def sys_harvest(self):
         yield_now = SEASON_YIELD[season_index(self.tick)]
         for c in self.living:
-            c.food += yield_now * (0.55 + 0.8 * c.diligence) * self.rng.uniform(0.7, 1.3)
-            c.food = max(0.0, min(STORES_CAP, c.food) - 1.0)  # everyone eats; grain spoils
+            if c.childhood:
+                # children contribute and eat less
+                c.food += yield_now * 0.3 * (0.3 + 0.5 * c.diligence) * self.rng.uniform(0.7, 1.3)
+                c.food = max(0.0, min(STORES_CAP, c.food) - 0.5)
+            else:
+                c.food += yield_now * (0.55 + 0.8 * c.diligence) * self.rng.uniform(0.7, 1.3)
+                c.food = max(0.0, min(STORES_CAP, c.food) - 1.0)
+        # bonded households pool their stores, children included
+        seen: set = set()
+        for c in self.living:
+            if c.partner is None or c.id in seen:
+                continue
+            partner = self.chars[c.partner]
+            if not partner.alive:
+                continue
+            household = [c, partner] + [
+                ch for ch in self.living
+                if ch.childhood and ch.parent_ids is not None
+                and set(ch.parent_ids) == {c.id, partner.id}
+            ]
+            avg = sum(ch.food for ch in household) / len(household)
+            for ch in household:
+                ch.food = avg
+            seen.add(c.id)
+            seen.add(c.partner)
 
     def sys_misfortune(self):
         # Rats in the grain, a fire, a bad back at harvest: ruin that
@@ -364,6 +396,63 @@ class World:
                     self.remember(w, ev)
                     self.snapshot(ev, a, b)
 
+    def sys_bonds(self):
+        """When two people have grown close enough, for long enough, they join households."""
+        living = self.living
+        for a in living:
+            for b in living:
+                if b.id <= a.id:
+                    continue
+                if a.partner is not None or b.partner is not None:
+                    continue
+                if (a.feel(b.id) >= BOND_THRESHOLD and b.feel(a.id) >= BOND_THRESHOLD
+                        and self.rng.random() < 0.02):
+                    a.partner = b.id
+                    b.partner = a.id
+                    # debts between partners dissolve when they become one household
+                    a.debts.pop(b.id, None)
+                    b.debts.pop(a.id, None)
+                    ev = self.emit("BOND", (a.id, b.id), 0.9)
+                    self.remember(a, ev)
+                    self.remember(b, ev)
+                    self.snapshot(ev, a, b)
+                    for w in living:
+                        if w.id not in (a.id, b.id):
+                            w.shift(a.id, 0.04)
+                            w.shift(b.id, 0.04)
+
+    def sys_births(self):
+        """A bonded pair, well-fed, may welcome a child into the village."""
+        for c in self.living:
+            if c.partner is None or c.id > c.partner:
+                continue  # process each pair once (lower id drives the check)
+            partner = self.chars[c.partner]
+            if not partner.alive:
+                continue
+            if c.food < FOOD_SURPLUS or partner.food < FOOD_SURPLUS:
+                continue
+            has_child = any(
+                ch.alive and ch.parent_ids is not None
+                and set(ch.parent_ids) == {c.id, partner.id}
+                for ch in self.chars
+            )
+            if has_child:
+                continue
+            if self.rng.random() < 0.008:
+                self._birth(c, partner)
+
+    def sys_growing_up(self):
+        for c in self.living:
+            if c.childhood and c.born_at is not None:
+                if self.tick - c.born_at >= CHILDHOOD_TICKS:
+                    c.childhood = False
+                    ev = self.emit("COMING_OF_AGE", (c.id,), 0.5)
+                    self.remember(c, ev)
+                    if c.parent_ids:
+                        for pid in c.parent_ids:
+                            if pid < len(self.chars) and self.chars[pid].alive:
+                                self.chars[pid].shift(c.id, 0.1)
+
     def sys_festival(self):
         living = self.living
         self.emit("FESTIVAL", tuple(c.id for c in living), 0.3,
@@ -383,7 +472,7 @@ class World:
             self._arrive()
 
     # ------------------------------------------------------------------
-    # deaths and arrivals
+    # deaths, arrivals, births
 
     def _kill(self, c: Character, cause: str):
         if not c.alive:
@@ -392,6 +481,18 @@ class World:
         c.died_at = self.tick
         ev = self.emit("DEATH", (c.id,), -1.0, cause=cause)
         self.remember(c, ev)
+        # Partner grief: the village closes around the bereaved.
+        if c.partner is not None:
+            survivor = self.chars[c.partner]
+            if survivor.alive:
+                ev_w = self.emit("WIDOWING", (survivor.id, c.id), -0.85)
+                self.remember(survivor, ev_w)
+                self.snapshot(ev_w, survivor, c)
+                for other in self.living:
+                    if other.id != survivor.id:
+                        other.shift(survivor.id, 0.06)
+            survivor.partner = None
+        c.partner = None
         # Debts die with the person on both sides.
         # A creditor who outlives their debtor feels a strange unresolved
         # lightness — the debt is gone, but by the wrong door.
@@ -427,3 +528,40 @@ class World:
         self.chars.append(newcomer)
         ev = self.emit("ARRIVAL", (new_id,), 0.2)
         self.remember(newcomer, ev)
+
+    def _birth(self, a: Character, b: Character):
+        from .names import FIRST_NAMES
+        used = {ch.name for ch in self.chars}
+        pool = [(n, g) for n, g in FIRST_NAMES if n not in used]
+        if not pool:
+            pool = list(FIRST_NAMES)
+        name, gender = self.rng.choice(pool)
+        new_id = len(self.chars)
+
+        def blend(x, y):
+            return max(0.0, min(1.0, (x + y) / 2 + self.rng.gauss(0, 0.12)))
+
+        child = Character(
+            id=new_id, name=name, gender=gender,
+            diligence=blend(a.diligence, b.diligence),
+            generosity=blend(a.generosity, b.generosity),
+            pride=blend(a.pride, b.pride),
+            openness=blend(a.openness, b.openness),
+            food=1.5,
+            childhood=True,
+            born_at=self.tick,
+            parent_ids=(a.id, b.id),
+        )
+        child.affinity[a.id] = 0.8
+        child.affinity[b.id] = 0.8
+        for ch in self.living:
+            if ch.id not in (a.id, b.id):
+                child.affinity[ch.id] = self.rng.uniform(0.0, 0.2)
+                ch.affinity[new_id] = self.rng.uniform(0.0, 0.15)
+        a.affinity[new_id] = 0.85
+        b.affinity[new_id] = 0.85
+        self.chars.append(child)
+        ev = self.emit("BIRTH", (new_id, a.id, b.id), 0.8)
+        self.remember(child, ev)
+        self.remember(a, ev)
+        self.remember(b, ev)
