@@ -85,6 +85,10 @@ TEXT = {
         "bonds_note_n": "{count} bonds were made in {village} in this time. Most lasting things begin without anyone marking the moment.",
         "births_note_1": "One child was born in {village} in this time.",
         "births_note_n": "{count} children were born in {village} in this time.",
+        "growth_note": "By the close of this record, {village} counted more souls than it had at the opening.",
+        "famine_note": "Year {year} was a year of hunger in {village}.",
+        "birth_intro": ["{name}, who grew up here, was {adjs}.",
+                        "{name} had been raised in {village} and was {adjs}."],
         "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
         "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
         "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
@@ -164,6 +168,12 @@ TEXT = {
         "bonds_note_n": "{count} vínculos se forjaron en {village} en este tiempo. La mayoría de las cosas duraderas empiezan sin que nadie señale el momento.",
         "births_note_1": "Un niño nació en {village} en este tiempo.",
         "births_note_n": "{count} niños nacieron en {village} en este tiempo.",
+        "growth_note": "Al cerrar el registro, {village} contaba más almas que al abrirse.",
+        "famine_note": "El año {year} fue un año de hambre en {village}.",
+        "birth_intro": ["{name}, {nacido} en {village}, era {adjs}.",
+                        "{name} se había criado en {village} y era {adjs}."],
+        "birth_intro_m": ["{name}, nacido en {village}, era {adjs}.",
+                          "{name} se había criado en {village} y era {adjs}."],
         "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
         "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
         "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
@@ -241,6 +251,10 @@ TEXT = {
         "bonds_note_n": "{count} liens se nouèrent à {village} en ce temps. La plupart des choses durables commencent sans que le moment soit marqué.",
         "births_note_1": "Un enfant naquit à {village} en ce temps.",
         "births_note_n": "{count} enfants naquirent à {village} en ce temps.",
+        "growth_note": "À la clôture de ce récit, {village} comptait plus d'âmes qu'à son ouverture.",
+        "famine_note": "L'an {year} fut une année de famine à {village}.",
+        "birth_intro": ["{name}, {ne} à {village}, était {adjs}.",
+                        "Tout le monde à {village} connaissait {name}, {adjs}, depuis l'enfance."],
         "died_starvation": "{a} ne survécut pas à cette chronique. Un long hiver l'emporta avant la clôture du récit.",
         "died_misfortune": "{a} ne survécut pas à cette chronique ; un coup soudain, quand il ne restait plus rien pour l'absorber.",
         "epilogue": ("Quand le récit se ferme, {a} et {b} étaient aussi proches que deux personnes peuvent l'être à {village} ; "
@@ -318,6 +332,10 @@ TEXT = {
         "bonds_note_n": "{count} laços formaram-se em {village} neste tempo. A maioria das coisas duradouras começa sem que o momento seja assinalado.",
         "births_note_1": "Uma criança nasceu em {village} neste tempo.",
         "births_note_n": "{count} crianças nasceram em {village} neste tempo.",
+        "growth_note": "Quando o registo fechou, {village} tinha mais almas do que quando se abriu.",
+        "famine_note": "O ano {year} foi um ano de fome em {village}.",
+        "birth_intro": ["{name}, {nascido} em {village}, era {adjs}.",
+                        "{name} tinha crescido em {village} e era {adjs}."],
         "died_starvation": "{a} não sobreviveu a esta crónica. Um longo inverno levou-{lo} antes que o relato fechasse.",
         "died_misfortune": "{a} não sobreviveu a esta crónica; um golpe súbito, quando já não havia nada com que resistir.",
         "epilogue": ("Quando o registo fecha, {a} e {b} eram tão próximos quanto duas pessoas podem ser em {village}; "
@@ -425,9 +443,25 @@ class Narrator:
         # Spanish/Portuguese vowel harmony: "e" before e/i/hi
         if self.lang in ("es", "pt") and (adj2[:1] in ("e", "i") or adj2[:2] == "hi"):
             conj = "e"
+        adjs = f"{adj1} {conj} {adj2}"
+        if char.parent_ids is not None and "birth_intro" in self.t:
+            fields: dict = {"name": char.name, "adjs": adjs, "village": self.village}
+            if self.lang == "es":
+                fields["nacido"] = self._gform(char.id, "nacido", "nacida")
+                key = ("birth_intro_m" if char.gender == "m" and "birth_intro_m" in self.t
+                       else "birth_intro")
+            elif self.lang == "fr":
+                fields["ne"] = self._gform(char.id, "né", "née")
+                key = "birth_intro"
+            elif self.lang == "pt":
+                fields["nascido"] = self._gform(char.id, "nascido", "nascida")
+                key = "birth_intro"
+            else:
+                key = "birth_intro"
+            return self.rng.choice(self.t[key]).format(**fields)
         key = "intro_m" if (self.lang == "es" and char.gender == "m"
                             and "intro_m" in self.t) else "intro"
-        return self.pick(key, name=char.name, adjs=f"{adj1} {conj} {adj2}")
+        return self.pick(key, name=char.name, adjs=adjs)
 
     def connector(self, prev, ev):
         if prev is None:
@@ -597,6 +631,26 @@ class Narrator:
             parts.append("")
             key = "births_note_1" if birth_count == 1 else "births_note_n"
             parts.append(self.t[key].format(count=birth_count, village=self.village))
+
+        if birth_count >= 1 and len(w.living) > w.initial_people and "growth_note" in self.t:
+            parts.append("")
+            parts.append(self.t["growth_note"].format(village=self.village))
+
+        if "famine_note" in self.t:
+            from collections import Counter
+            year_stress: Counter = Counter()
+            for ev in w.events:
+                if ev.kind == "HARDSHIP":
+                    year_stress[year_of(ev.tick)] += 1
+                elif ev.kind == "DEATH" and ev.data.get("cause") == "starvation":
+                    year_stress[year_of(ev.tick)] += 3
+            if len(year_stress) >= 2:
+                worst_year, worst_count = year_stress.most_common(1)[0]
+                avg = sum(year_stress.values()) / len(year_stress)
+                if worst_count >= 4 and worst_count > avg * 1.8:
+                    parts.append("")
+                    parts.append(self.t["famine_note"].format(
+                        year=worst_year, village=self.village))
 
         parts.append("")
         arcs = self.arcs()
