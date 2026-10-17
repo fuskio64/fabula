@@ -127,7 +127,7 @@ TEXT = {
                        "{a} nunca devolvió lo que {b} le dio un día, y la deuda se agrió, como se agria la gratitud cuando se carga demasiado tiempo."],
         "BOND": ["{a} y {b} se eligieron mutuamente antes de que cambiara la estación. La aldea lo supo antes de que ninguno de los dos dijera una palabra al respecto.",
                  "Lo que había crecido entre {a} y {b} se convirtió en algo declarado. Compartieron pan y lumbre a partir de entonces."],
-        "WIDOWING": ["{a} sobrevivió a {b}. La aldea no dejó a {a} solo con ello, que es como se lleva el duelo en un lugar así.",
+        "WIDOWING": ["{a} sobrevivió a {b}. La aldea no dejó a {a} {solo} con ello, que es como se lleva el duelo en un lugar así.",
                      "Cuando {b} murió, {a} perdió algo que va más allá de lo que se pierde cuando lo que queda es solo la soledad."],
         "carried_by": " Fue {c} quien trajo el cuento.",
         "grown": " El cuento había engordado por el camino.",
@@ -204,7 +204,7 @@ TEXT = {
                        "{a} n'avait jamais rendu ce que {b} lui avait donné, et la dette s'aigrit, comme la gratitude s'aigrit quand on la porte trop longtemps."],
         "BOND": ["{a} et {b} se choisirent avant que la saison ne tourne. Le village le sut avant qu'ils en disent un mot.",
                  "Ce qui avait grandi entre {a} et {b} devint quelque chose d'assumé. Ils partagèrent pain et foyer après cela."],
-        "WIDOWING": ["{a} survécut à {b}. Le village ne laissa pas {a} seul avec cela, c'est ainsi qu'on porte le deuil en pareil endroit.",
+        "WIDOWING": ["{a} survécut à {b}. Le village ne laissa pas {a} {seul} avec cela, c'est ainsi qu'on porte le deuil en pareil endroit.",
                      "Quand {b} mourut, {a} perdit quelque chose que l'on ne perd pas de la même façon que le reste."],
         "carried_by": " C'est {c} qui porta le récit.",
         "grown": " Le récit avait grossi en chemin.",
@@ -247,6 +247,83 @@ TEXT = {
                      "{c} et {d} ne se parlaient toujours pas."),
         "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
+    "pt": {
+        "seasons": ("a primavera", "o verão", "o outono", "o inverno"),
+        "seasons_in": ("na primavera", "no verão", "no outono", "no inverno"),
+        "traits": {
+            "diligence": (("incansável", "incansável"), ("preguiçoso", "preguiçosa")),
+            "generosity": (("generoso", "generosa"), ("avarento", "avarenta")),
+            "pride": (("orgulhoso", "orgulhosa"), ("humilde", "humilde")),
+            "openness": (("falador", "faladora"), ("reservado", "reservada")),
+        },
+        "intro": ["{name} era {adjs}.",
+                  "Toda a aldeia conhecia {name}, {adjs}."],
+        "and": "e",
+        "opening": ["Tudo começou {season}.",
+                    "A primeira notícia foi {season}."],
+        "later_season": ["{season} chegou.", "Já era {season}."],
+        "soon_after": ["Não passaram muitos dias.", "Pouco depois."],
+        "GIFT": ["Quando as reservas de {b} escassearam, {a} encheu o cesto sem que ninguém pedisse.",
+                 "{a} partilhou o pão com {b} numa fase difícil, e não foi esquecido."],
+        "REFUSAL": ["{a} foi à porta de {b} com fome e voltou de mãos vazias.",
+                    "{b} mandou {a} embora sem nada, e toda a aldeia ficou mais fria por isso."],
+        "OFFENSE": ["Chegou aos ouvidos de {a} que {b} andava a falar do assunto a portas fechadas.",
+                    "Alguém tratou de contar a {a} o que {b} ia dizendo."],
+        "QUARREL": ["{a} e {b} discutiram onde todos podiam ouvir, e a aldeia fingiu não escutar.",
+                    "Entre {a} e {b} houve palavras graves, em plena rua."],
+        "MEDIATION": ["{c} sentou-os à mesma mesa e não deixou nenhum sair zangado. Algo se desatou.",
+                      "Precisou de {c}, em quem ambos confiavam, para que voltassem a falar-se."],
+        "REPAYMENT": ["{a} não tinha esquecido o favor antigo, e quando a necessidade bateu à porta de {b}, devolveu-o sem dizer uma palavra.",
+                      "O pão que {b} uma vez deu voltou à sua própria porta, e foi {a} quem o trouxe."],
+        "INGRATITUDE": ["{a} enchera o cesto de {b} uma vez; quando o seu ficou vazio, a porta de {b} não se abriu. A aldeia guarda contas que nenhum livro vê, e essa ficou registada em todas as cabeças.",
+                        "{b} devia a {a} o tipo de dívida que ninguém escreve, e saldou-a com uma porta fechada. Ninguém disse nada. Toda a gente contou."],
+        "RESENTMENT": ["O favor pesava a {a}. É coisa difícil dever, e {a} começou a evitar o olhar de {b}.",
+                       "{a} nunca tinha devolvido o que {b} lhe dera, e a dívida azedou, como a gratidão azeda quando se carrega demasiado tempo."],
+        "BOND": ["{a} e {b} escolheram-se um ao outro antes que a estação mudasse. A aldeia soube antes de qualquer um deles dizer uma palavra.",
+                 "O que crescera entre {a} e {b} tornou-se algo assumido. Partilharam pão e lar a partir daí."],
+        "WIDOWING": ["{a} sobreviveu a {b}. A aldeia não deixou {a} {sozinho} com isso, que é assim que o luto se carrega num lugar como este.",
+                     "Quando {b} morreu, {a} perdeu algo que não se perde da mesma forma que o resto."],
+        "carried_by": " Foi {c} quem trouxe a história.",
+        "grown": " A história cresceu pelo caminho.",
+        "repeat_one": "Voltou a acontecer uma vez.",
+        "repeat_many": "Voltou a acontecer {n} vezes, como se os rancores tivessem o seu próprio calendário.",
+        "repeat_good_one": "E voltou a acontecer, em silêncio, quando foi preciso.",
+        "repeat_good_many": "E voltou a acontecer {n} vezes, sem alarde; a bondade também tem o seu calendário.",
+        "repeat_endless": "E assim continuou, estação após estação, até o contar perder sentido.",
+        "repeat_good_endless": "E assim continuou, estação após estação; há coisas que não precisam de ser assinaladas para continuar.",
+        "close_relapse": "A paz que se fez não durou; há fissuras que querem ficar abertas.",
+        "close_broken": "Ninguém arranjou nada. No fim, cruzavam-se sem uma palavra.",
+        "close_uneasy": "Ficou entre eles uma paz incómoda, fina como o gelo de março.",
+        "close_mended": "O que se quebrara, consertaram-no melhor do que era.",
+        "close_warm": "Tiveram sorte um com o outro, e sabiam-no.",
+        "close_widowed": "Tinham tido sorte um com o outro. O fim foi triste, mas era uma tristeza que a aldeia reconhecia.",
+        "title_reconciliation": "{a} e {b}: uma reconciliação",
+        "title_estrangement": "{a} e {b}: um afastamento",
+        "title_feud": "{a} e {b}: uma rivalidade",
+        "title_bond": "{a} e {b}: uma amizade",
+        "title_love": "{a} e {b}: um amor",
+        "title_open": "{a} e {b}: um assunto por resolver",
+        "title_debt": "{a} e {b}: uma dívida por saldar",
+        "chronicle_title": "Crónica de {village}",
+        "prologue": ("{village} tinha {n} almas quando este registo se abriu, "
+                     "e abrange {days} dos seus dias. "
+                     "Nada do que aqui está foi inventado; apenas se olhou, e contou."),
+        "pride_note": "{count} vezes alguém em {village} passou fome antes de pedir ajuda. O orgulho é outra forma de fome.",
+        "debt_note": "Quando o registo fecha, {count} favores em {village} ainda não tinham sido devolvidos. A aldeia não guardava essas contas em livro algum, por isso nenhuma se perdeu.",
+        "deaths_note_1": "Uma alma em {village} não sobreviveu a estes anos. Uma aldeia carrega os seus mortos em silêncio, que é como os mortos acabam por carregar a aldeia.",
+        "deaths_note_n": "{count} almas em {village} não sobreviveram a estes anos. Uma aldeia carrega os seus mortos em silêncio, que é como os mortos acabam por carregar a aldeia.",
+        "arrivals_note_1": "Um estranho chegou a {village} neste tempo. A aldeia nunca sabe bem o que fazer com alguém que não tem história.",
+        "arrivals_note_n": "{count} estranhos chegaram a {village} neste tempo. A aldeia nunca sabe bem o que fazer com alguém que não tem história.",
+        "bonds_note_1": "Um laço formou-se em {village} neste tempo. A maioria das coisas duradouras começa sem que o momento seja assinalado.",
+        "bonds_note_n": "{count} laços formaram-se em {village} neste tempo. A maioria das coisas duradouras começa sem que o momento seja assinalado.",
+        "births_note_1": "Uma criança nasceu em {village} neste tempo.",
+        "births_note_n": "{count} crianças nasceram em {village} neste tempo.",
+        "died_starvation": "{a} não sobreviveu a esta crónica. Um longo inverno levou-{lo} antes que o relato fechasse.",
+        "died_misfortune": "{a} não sobreviveu a esta crónica; um golpe súbito, quando já não havia nada com que resistir.",
+        "epilogue": ("Quando o registo fecha, {a} e {b} eram tão próximos quanto duas pessoas podem ser em {village}; "
+                     "{c} e {d} ainda não se falavam."),
+        "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
+    },
 }
 
 
@@ -258,6 +335,10 @@ class Narrator:
         self.rng = random.Random(seed ^ 0xFAB)
         self.village = self.rng.choice(VILLAGE_NAMES[lang])
         self._introduced: set = set()
+
+    def _gform(self, cid: int, m: str, f: str) -> str:
+        """Return the masculine or feminine form of a word for this character."""
+        return m if self.world.char(cid).gender == "m" else f
 
     # ------------------------------------------------------------------
     # picking what deserves telling
@@ -341,7 +422,8 @@ class Narrator:
         self._introduced.add(char.id)
         adj1, adj2 = self.adjectives(char)
         conj = self.t["and"]
-        if self.lang == "es" and (adj2[:1] == "i" or adj2[:2] == "hi"):
+        # Spanish/Portuguese vowel harmony: "e" before e/i/hi
+        if self.lang in ("es", "pt") and (adj2[:1] in ("e", "i") or adj2[:2] == "hi"):
             conj = "e"
         key = "intro_m" if (self.lang == "es" and char.gender == "m"
                             and "intro_m" in self.t) else "intro"
@@ -362,6 +444,14 @@ class Narrator:
         fields = {"a": self.name(a), "b": self.name(b)}
         if ev.kind == "MEDIATION":
             fields["c"] = self.name(ev.data["mediator"])
+        if ev.kind == "WIDOWING":
+            # gender-agreeing words for the survivor ({a})
+            if self.lang == "es":
+                fields["solo"] = self._gform(a, "solo", "sola")
+            elif self.lang == "fr":
+                fields["seul"] = self._gform(a, "seul", "seule")
+            elif self.lang == "pt":
+                fields["sozinho"] = self._gform(a, "sozinho", "sozinha")
         text = self.pick(ev.kind, **fields)
         if ev.kind == "OFFENSE":
             if ev.data.get("via") is not None:
@@ -376,6 +466,16 @@ class Narrator:
             if ev.kind == "DEATH" and cid in ev.actors:
                 return ev.data.get("cause", "starvation")
         return None
+
+    def death_note(self, cid: int) -> str | None:
+        """Render the death postscript for a character, or None if still living."""
+        cause = self.death_cause(cid)
+        if cause is None:
+            return None
+        fields: dict = {"a": self.name(cid)}
+        if self.lang == "pt":
+            fields["lo"] = self._gform(cid, "o", "a")
+        return self.t[f"died_{cause}"].format(**fields)
 
     # ------------------------------------------------------------------
     # assembling the chronicle
@@ -451,10 +551,10 @@ class Narrator:
         lines.append(self.closing(final, kinds))
         # If one of the pair died, note it quietly after the closing.
         for cid in sorted(key):
-            cause = self.death_cause(cid)
-            if cause is not None:
+            note = self.death_note(cid)
+            if note is not None:
                 lines.append("")
-                lines.append(self.t[f"died_{cause}"].format(a=self.name(cid)))
+                lines.append(note)
         return "\n".join(lines)
 
     def chronicle(self):

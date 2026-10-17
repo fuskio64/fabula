@@ -31,4 +31,9 @@ VILLAGE_NAMES = {
         "Bois-le-Roi", "Grises-Eaux", "Roncemailles", "Val-des-Âmes",
         "Mortefontaine", "La Chape", "Chastel-Novat", "Vieille-Brûlée",
     ],
+    "pt": [
+        "Valongo", "Fontelas", "Sernancelhe", "Manteigas",
+        "Folgosinho", "Monsanto", "Alpedrinha", "Soutelo",
+        "Vilar de Mouros", "Rio de Mouro", "Freixo", "Agualva",
+    ],
 }

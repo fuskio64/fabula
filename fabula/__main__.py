@@ -16,7 +16,7 @@ def main(argv=None):
                         help="days to simulate (a season is 24 days)")
     parser.add_argument("--people", type=int, default=10,
                         help="souls in the village")
-    parser.add_argument("--lang", choices=("en", "es", "fr"), default="en",
+    parser.add_argument("--lang", choices=("en", "es", "fr", "pt"), default="en",
                         help="language of the chronicle")
     parser.add_argument("--json", action="store_true",
                         help="output raw event log as JSON instead of a narrative chronicle")
