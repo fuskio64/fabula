@@ -8,11 +8,12 @@ line of the chronicle traces back to a recorded event.
 from .world import World
 from .narrator import Narrator
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 
-def chronicle(seed: int = 0, days: int = 192, people: int = 10, lang: str = "en") -> str:
+def chronicle(seed: int = 0, days: int = 192, people: int = 10, lang: str = "en",
+              narrator_seed: int | None = None) -> str:
     """Simulate a village and return its chronicle as Markdown."""
     world = World(seed=seed, people=people)
     world.run(days)
-    return Narrator(world, lang=lang, seed=seed).chronicle()
+    return Narrator(world, lang=lang, seed=seed, narrator_seed=narrator_seed).chronicle()

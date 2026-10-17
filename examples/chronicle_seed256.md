@@ -30,7 +30,7 @@ They were lucky in each other, and they knew it.
 
 Tomes was reserved and tireless. Coll, humble and open-handed, was known to everyone.
 
-The first anyone knew of it was in spring. Coll went hungry to Tomes's door and came back with nothing. Soon afterwards. It came to hard words between Tomes and Coll, in the open street. When winter came again, the story had not ended. When Coll's stores ran low, Tomes filled the basket without being asked. Generosity is not always a matter of character. The door stayed shut 3 more times. The village counted each one.
+The first anyone knew of it was in spring. Coll went hungry to Tomes's door and came back with nothing. Soon afterwards. It came to hard words between Tomes and Coll, in the open street. Another winter settled in. The cold version of everything returned. When Coll's stores ran low, Tomes filled the basket without being asked. Generosity is not always a matter of character. The door stayed shut 3 more times. The village counted each one.
 
 An uneasy peace held between them, thin as spring ice.
 

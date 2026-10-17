@@ -34,13 +34,13 @@ The first anyone knew of it was in autumn. When Tomes's stores ran low, Luma fil
 
 They were lucky in each other, and they knew it.
 
-## Tam and Sable: a love
+## Leif and Joren: a friendship
 
-Tam was talkative and tireless. Sable was humble and idle.
+Leif was idle and tight-fisted. Joren was talkative and tight-fisted.
 
-It began in spring. Tam shared bread with Sable in a lean stretch, and it was not forgotten. Not many days passed. Tam and Sable chose each other before the season turned. The village knew before either of them said a word about it. By then it was summer. Arvid was born. The village received them the way it always receives what arrives without asking. The bread came again, without a word about it.
+It began in spring. Joren shared bread with Leif in a lean stretch, and it was not forgotten. Summer came. Leif had not forgotten the old kindness, and when want came to Joren's house, it was returned without a word about it. By then it was autumn. Joren turned Leif away empty-handed, and the whole village felt colder for it. The bread came 6 more times, without ceremony; that is what makes it bread.
 
-They were lucky in each other, and they knew it.
+Whatever had been broken, they mended it better than new.
 
 In the end, Leif and Joren were still finding reasons to cross each other's paths in Cold Hollow. Orin and Wren were still finding reasons not to.
 

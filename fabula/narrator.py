@@ -138,6 +138,60 @@ TEXT = {
             "{name}, who had been here longest and remembered what others had forgotten, was {adjs}.",
             "Everyone had come to {name} at least once. {name} was {adjs}.",
         ],
+        "QUARREL_private": [
+            "{a} and {b} had it out where no one could hear. By morning the village knew anyway.",
+            "Whatever passed between {a} and {b} passed without witnesses. Private fights have a way of lasting longer.",
+        ],
+        "winter_later": [
+            "Winter came back, and with it the old matter came back too.",
+            "Another winter settled in. The cold version of everything returned.",
+        ],
+        "dead_section": "## After",
+        "legacy_generous": [
+            "{name} was the most open-handed soul {village} had. The village was colder for the absence.",
+            "{name} had never turned anyone away empty-handed. That kind of person is not replaced; they are noticed as gone.",
+        ],
+        "legacy_proud": [
+            "{name} went with accounts settled. The proud do not like leaving debts behind.",
+            "{name} had kept everything balanced to the last. A complicated kind of person to lose.",
+        ],
+        "legacy_diligent": [
+            "{name} had worked harder than anyone. What {name} kept running was invisible until it stopped.",
+            "The fields {name} tended were the best-kept in {village}. That kind of knowledge does not write itself down.",
+        ],
+        "legacy_mediator": [
+            "{name} had sat more quarreling neighbors at the same table than anyone. The village felt the absence the way a room feels it when its peacemaker is gone.",
+            "People had gone to {name} with things they could not say elsewhere. After, there was no one quite like that.",
+        ],
+        "legacy_bonded": [
+            "{name} had made a life with {partner} in {village}. That bond became part of the village's story too.",
+            "What {name} built here — the years, the bond with {partner} — outlasted them. It tends to.",
+        ],
+        "legacy_newcomer": [
+            "{name} arrived without a history in {village} and left with one. That is what belonging looks like.",
+            "{name} came from outside and became part of the place anyway. The village carries that kind quietly.",
+        ],
+        "legacy_quiet": [
+            "{name} did not leave a loud mark. The quiet ones rarely do, but the place shifts when they go.",
+            "{name} was part of the background that makes a place feel inhabited. The silence afterward was specific.",
+        ],
+        "arrival_arc_title": "{name}: a stranger",
+        "arrival_intro": [
+            "{name} arrived in {season}. {village} had not been expecting anyone.",
+            "{name} came to {village} in {season}, without a history anyone here knew.",
+        ],
+        "arrival_settled": [
+            "By the end of this record, {name} was part of {village} the way a stone is part of a wall — quietly, but there.",
+            "{name} had arrived knowing no one and left a member of {village}, in whatever way that word applies.",
+        ],
+        "arrival_cold": [
+            "{name} remained something the village had not quite resolved by the time this record closes.",
+            "The village and {name} reached a kind of armed truce: present together, never entirely easy.",
+        ],
+        "arrival_died": [
+            "{name} did not stay long enough to become fully known. The village noted the loss the way it notes all brief things.",
+            "{name} arrived and did not outlive these years. Some stories begin and end before the telling finds them.",
+        ],
         "village_section": "## The Village",
         "LEAN_SEASON": [
             "The {season} was a hungry one. More than half the houses in {village} had lean pantries, and no one pretended otherwise.",
@@ -287,6 +341,60 @@ TEXT = {
             "A {name}, que llevaba aquí más tiempo que nadie y recordaba lo que otros habían olvidado, lo conocía todo el mundo. Era {adjs}.",
             "{name}, {anciano} de la aldea, era {adjs}.",
         ],
+        "QUARREL_private": [
+            "{a} y {b} lo resolvieron sin testigos. Para la mañana la aldea ya lo sabía de todos modos.",
+            "Lo que pasó entre {a} y {b} pasó sin que nadie lo viera. Las peleas privadas suelen durar más.",
+        ],
+        "winter_later": [
+            "Volvió el invierno, y con él volvió el asunto sin resolver.",
+            "Llegó otro invierno. La versión más fría de todo regresó con él.",
+        ],
+        "dead_section": "## Después",
+        "legacy_generous": [
+            "{name} fue el alma más desprendida que conoció {village}. La aldea notó el frío que dejó.",
+            "{name} nunca despachó a nadie con las manos vacías. Esa clase de persona no se sustituye; se echa de menos.",
+        ],
+        "legacy_proud": [
+            "{name} se marchó con las cuentas saldadas. Hay gente que no tolera dejar deudas.",
+            "{name} lo había mantenido todo en equilibrio hasta el final. Una pérdida complicada.",
+        ],
+        "legacy_diligent": [
+            "{name} había trabajado más que nadie. Lo que {name} mantenía en pie pasaba invisible hasta que se detuvo.",
+            "Los campos que labraba {name} eran los mejor cuidados de {village}. Ese saber no se escribe.",
+        ],
+        "legacy_mediator": [
+            "{name} había sentado a la misma mesa a más vecinos enfrentados que nadie. La aldea sintió la falta como se siente la de quien sabe callar las peleas.",
+            "La gente acudía a {name} con cosas que no podía decir en otra parte. Después no quedó nadie igual.",
+        ],
+        "legacy_bonded": [
+            "{name} había construido una vida con {partner} en {village}. Ese vínculo quedó en la memoria de la aldea.",
+            "Lo que {name} levantó aquí — los años, lo compartido con {partner} — lo sobrevivió. Suele ocurrir.",
+        ],
+        "legacy_newcomer": [
+            "{name} llegó a {village} sin historia y se marchó con una. Así es como se ve el pertenecer.",
+            "{name} vino de fuera y acabó siendo parte del lugar. La aldea carga ese tipo de presencia en silencio.",
+        ],
+        "legacy_quiet": [
+            "{name} no dejó una huella ruidosa. Los silenciosos rara vez la dejan, pero el lugar cambia cuando se van.",
+            "{name} era parte del ruido de fondo que hace que un lugar parezca habitado. El silencio que dejó fue preciso.",
+        ],
+        "arrival_arc_title": "{name}: una llegada",
+        "arrival_intro": [
+            "{name} llegó en {season}. {village} no esperaba a nadie.",
+            "{name} llegó a {village} en {season}, sin historia que nadie aquí conociera.",
+        ],
+        "arrival_settled": [
+            "Al cerrarse el registro, {name} era parte de {village} como una piedra es parte de un muro: sin ruido, pero con peso.",
+            "{name} había llegado sin conocer a nadie y se fue siendo parte de {village}. La aldea se hace así.",
+        ],
+        "arrival_cold": [
+            "Al cerrarse el registro, {village} y {name} aún no habían llegado a entenderse del todo.",
+            "Hubo entre {name} y la aldea una distancia que no llegó a cerrarse.",
+        ],
+        "arrival_died": [
+            "{name} no llegó a ser conocido del todo. La aldea anotó la pérdida como anota todas las cosas breves.",
+            "{name} llegó y no sobrevivió estos años. Hay historias que empiezan y terminan antes de que el relato las encuentre.",
+        ],
         "village_section": "## La aldea",
         "LEAN_SEASON": [
             "En {season} hubo hambre en {village}. Más de la mitad de las casas tenían la despensa escasa, y nadie fingía lo contrario.",
@@ -427,6 +535,60 @@ TEXT = {
         "elder_intro": [
             "{name}, qui était là depuis le plus longtemps et se souvenait de ce que d'autres avaient oublié, était {adjs}.",
             "Tout le monde était venu trouver {name} au moins une fois. {name} était {adjs}.",
+        ],
+        "QUARREL_private": [
+            "{a} et {b} réglèrent leur compte sans témoin. Le lendemain, tout le village était au courant.",
+            "Ce qui se passa entre {a} et {b} se passa sans que personne ne le voie. Les disputes privées ont tendance à durer plus longtemps.",
+        ],
+        "winter_later": [
+            "L'hiver revint, et l'ancienne affaire revint avec lui.",
+            "Un autre hiver s'installa. La version froide de toutes choses revint aussi.",
+        ],
+        "dead_section": "## Après",
+        "legacy_generous": [
+            "{name} fut l'âme la plus généreuse que {village} ait connue. Le village se trouva plus froid après.",
+            "{name} n'avait jamais renvoyé personne les mains vides. Ce genre de personne ne se remplace pas ; on la remarque surtout par son absence.",
+        ],
+        "legacy_proud": [
+            "{name} repartit les comptes soldés. Les fiers ne supportent pas de laisser des dettes.",
+            "{name} avait tout maintenu en équilibre jusqu'au bout. Une perte compliquée.",
+        ],
+        "legacy_diligent": [
+            "{name} avait travaillé plus dur que n'importe qui. Ce que {name} faisait tourner passait inaperçu jusqu'à ce que ça s'arrête.",
+            "Les champs que {name} entretenait étaient les mieux tenus de {village}. Ce genre de savoir ne s'écrit pas.",
+        ],
+        "legacy_mediator": [
+            "{name} avait assis plus de voisins en dispute à la même table que n'importe qui. Le village ressentit l'absence comme on ressent celle d'un pacificateur.",
+            "Les gens venaient trouver {name} avec des choses qu'ils ne pouvaient pas dire ailleurs. Après, il n'y avait plus personne tout à fait comme ça.",
+        ],
+        "legacy_bonded": [
+            "{name} avait construit une vie avec {partner} à {village}. Ce lien devint une partie de l'histoire du village.",
+            "Ce que {name} avait bâti ici — les années, le lien avec {partner} — lui survécut. C'est souvent ainsi.",
+        ],
+        "legacy_newcomer": [
+            "{name} était arrivé à {village} sans passé et en repartit avec un. C'est à cela que ressemble l'appartenance.",
+            "{name} vint d'ailleurs et devint partie du lieu quand même. Le village porte ce genre de personne discrètement.",
+        ],
+        "legacy_quiet": [
+            "{name} ne laissa pas une empreinte bruyante. Les discrets le font rarement, mais le lieu change quand ils partent.",
+            "{name} faisait partie du fond sonore qui rend un endroit habité. Le silence qui suivit fut précis.",
+        ],
+        "arrival_arc_title": "{name}: une arrivée",
+        "arrival_intro": [
+            "{name} arriva {season_in}. {village} n'attendait personne.",
+            "{name} vint à {village} {season_in}, sans passé que quiconque ici connaisse.",
+        ],
+        "arrival_settled": [
+            "À la clôture de ce récit, {name} faisait partie de {village} comme une pierre fait partie d'un mur — sans bruit, mais là.",
+            "Sans passé au départ, {name} en avait un à la fin. C'est ainsi que les villages absorbent les étrangers.",
+        ],
+        "arrival_cold": [
+            "{name} restait quelque chose que le village n'avait pas tout à fait résolu à la clôture de ce récit.",
+            "Il y eut entre {name} et le village une distance qui ne se ferma pas vraiment.",
+        ],
+        "arrival_died": [
+            "{name} ne resta pas assez longtemps pour être pleinement connu. Le village nota la perte comme il note toutes les choses brèves.",
+            "{name} arriva et ne survécut pas à ces années. Certaines histoires commencent et se terminent avant que le récit les trouve.",
         ],
         "village_section": "## Le village",
         "LEAN_SEASON": [
@@ -569,6 +731,60 @@ TEXT = {
             "{name}, que estava aqui há mais tempo do que ninguém e se lembrava do que outros tinham esquecido, era {adjs}.",
             "Toda a aldeia tinha ido ter com {name} pelo menos uma vez. {name} era {adjs}.",
         ],
+        "QUARREL_private": [
+            "{a} e {b} resolveram o assunto sem testemunhas. De manhã, a aldeia já sabia de qualquer modo.",
+            "O que se passou entre {a} e {b} aconteceu sem que ninguém visse. As brigas privadas tendem a durar mais.",
+        ],
+        "winter_later": [
+            "O inverno voltou, e com ele voltou o assunto por resolver.",
+            "Chegou outro inverno. A versão fria de tudo o resto voltou também.",
+        ],
+        "dead_section": "## Depois",
+        "legacy_generous": [
+            "{name} foi a alma mais generosa que {village} conheceu. A aldeia ficou mais fria com a ausência.",
+            "{name} nunca dispensou ninguém de mãos vazias. Esse tipo de pessoa não se substitui; nota-se a falta.",
+        ],
+        "legacy_proud": [
+            "{name} partiu com as contas saldadas. Há quem não tolere deixar dívidas para trás.",
+            "{name} manteve tudo equilibrado até ao fim. Uma perda complicada.",
+        ],
+        "legacy_diligent": [
+            "{name} trabalhou mais do que ninguém. O que {name} mantinha a funcionar passava despercebido até parar.",
+            "Os campos que {name} cuidava eram os mais bem tratados de {village}. Esse saber não se escreve.",
+        ],
+        "legacy_mediator": [
+            "{name} tinha sentado mais vizinhos em conflito à mesma mesa do que ninguém. A aldeia sentiu a falta como se sente a falta de quem sabe acabar com as discussões.",
+            "As pessoas iam ter com {name} com coisas que não podiam dizer em mais lado nenhum. Depois não ficou ninguém igual.",
+        ],
+        "legacy_bonded": [
+            "{name} tinha construído uma vida com {partner} em {village}. Esse laço tornou-se parte da história da aldeia.",
+            "O que {name} construiu aqui — os anos, o laço com {partner} — sobreviveu-lhe. Costuma acontecer.",
+        ],
+        "legacy_newcomer": [
+            "{name} chegou a {village} sem história e foi-se com uma. É assim que o pertencer tem aspeto.",
+            "{name} veio de fora e tornou-se parte do lugar mesmo assim. A aldeia carrega esse tipo de presença em silêncio.",
+        ],
+        "legacy_quiet": [
+            "{name} não deixou uma marca ruidosa. Os silenciosos raramente a deixam, mas o lugar muda quando partem.",
+            "{name} fazia parte do ruído de fundo que faz um lugar parecer habitado. O silêncio que ficou foi preciso.",
+        ],
+        "arrival_arc_title": "{name}: uma chegada",
+        "arrival_intro": [
+            "{name} chegou {season_in}. {village} não estava à espera de ninguém.",
+            "{name} chegou a {village} {season_in}, sem história que alguém aqui conhecesse.",
+        ],
+        "arrival_settled": [
+            "Quando o registo fecha, {name} fazia parte de {village} como uma pedra faz parte de um muro — sem ruído, mas presente.",
+            "Chegou sem conhecer ninguém e acabou fazendo parte de {village}. É assim que as aldeias absorvem quem chega.",
+        ],
+        "arrival_cold": [
+            "Quando o registo fecha, {village} e {name} ainda não tinham chegado a entender-se de todo.",
+            "Ficou entre {name} e a aldeia uma distância que não chegou a fechar.",
+        ],
+        "arrival_died": [
+            "{name} não ficou tempo suficiente para ser plenamente conhecido. A aldeia anotou a perda como anota todas as coisas breves.",
+            "{name} chegou e não sobreviveu a estes anos. Há histórias que começam e acabam antes de o relato as encontrar.",
+        ],
         "village_section": "## A aldeia",
         "LEAN_SEASON": [
             "{village} atravessou {season} na fome. Mais de metade das casas tinham as despensas vazias, e ninguém fingia o contrário.",
@@ -590,11 +806,12 @@ TEXT = {
 
 
 class Narrator:
-    def __init__(self, world, lang: str = "en", seed: int = 0):
+    def __init__(self, world, lang: str = "en", seed: int = 0, narrator_seed: int | None = None):
         self.world = world
         self.lang = lang
         self.t = TEXT[lang]
-        self.rng = random.Random(seed ^ 0xFAB)
+        nseed = narrator_seed if narrator_seed is not None else (seed ^ 0xFAB)
+        self.rng = random.Random(nseed)
         self.village = self.rng.choice(VILLAGE_NAMES[lang])
         self._introduced: set = set()
 
@@ -667,6 +884,8 @@ class Narrator:
             score += 3.0  # love and loss: the oldest arc
         if "BIRTH" in kinds or "COMING_OF_AGE" in kinds:
             score += 1.5  # family arcs feel complete
+        if any(season_index(ev.tick) == 3 for ev in events):
+            score += 0.3  # winter gives weight to a story
         return score
 
     # ------------------------------------------------------------------
@@ -751,6 +970,9 @@ class Narrator:
             return self.t["years_later"].format(n=gap // 4, season=sname)
         if gap >= 4 and "year_later" in self.t:
             return self.t["year_later"].format(season=sname)
+        if gap >= 2 and season_index(ev.tick) == 3 and "winter_later" in self.t:
+            if ev.kind not in ("BIRTH", "COMING_OF_AGE"):
+                return self.rng.choice(self.t["winter_later"])
         if gap >= 2 and "seasons_later" in self.t:
             return self.pick("seasons_later", season=sname)
         text = self.pick("later_season", season=sname)
@@ -787,7 +1009,10 @@ class Narrator:
                 fields["seul"] = self._gform(a, "seul", "seule")
             elif self.lang == "pt":
                 fields["sozinho"] = self._gform(a, "sozinho", "sozinha")
-        text = self.pick(ev.kind, **fields)
+        if ev.kind == "QUARREL" and not ev.data.get("witnesses") and "QUARREL_private" in self.t:
+            text = self.pick("QUARREL_private", **fields)
+        else:
+            text = self.pick(ev.kind, **fields)
         if ev.kind == "OFFENSE":
             if ev.data.get("via") is not None:
                 text += self.t["carried_by"].format(c=self.name(ev.data["via"]))
@@ -857,6 +1082,111 @@ class Narrator:
 
     # ------------------------------------------------------------------
     # assembling the chronicle
+
+    def death_legacy(self, cid: int) -> str | None:
+        """One evocative sentence about how the village remembers a dead character."""
+        char = self.world.char(cid)
+        if char.alive:
+            return None
+        mediations = sum(1 for ev in self.world.events
+                         if ev.kind == "MEDIATION" and ev.data.get("mediator") == cid)
+        was_bonded = any(ev.kind == "BOND" and cid in ev.actors for ev in self.world.events)
+        fields: dict = {"name": char.name, "village": self.village}
+        if mediations >= 2 and "legacy_mediator" in self.t:
+            return self.rng.choice(self.t["legacy_mediator"]).format(**fields)
+        if char.generosity > 0.72 and "legacy_generous" in self.t:
+            return self.rng.choice(self.t["legacy_generous"]).format(**fields)
+        if char.pride > 0.72 and "legacy_proud" in self.t:
+            return self.rng.choice(self.t["legacy_proud"]).format(**fields)
+        if char.diligence > 0.72 and "legacy_diligent" in self.t:
+            return self.rng.choice(self.t["legacy_diligent"]).format(**fields)
+        if was_bonded and "legacy_bonded" in self.t:
+            bond_ev = next((ev for ev in self.world.events if ev.kind == "BOND" and cid in ev.actors), None)
+            if bond_ev:
+                partner_id = next(x for x in bond_ev.actors if x != cid)
+                fields["partner"] = self.name(partner_id)
+            return self.rng.choice(self.t["legacy_bonded"]).format(**fields)
+        if char.joined_at > 0 and "legacy_newcomer" in self.t:
+            return self.rng.choice(self.t["legacy_newcomer"]).format(**fields)
+        if "legacy_quiet" in self.t:
+            return self.rng.choice(self.t["legacy_quiet"]).format(**fields)
+        return None
+
+    def tell_dead(self) -> list[str]:
+        """Legacy notes for dead characters as a section."""
+        w = self.world
+        dead = [c for c in w.chars if not c.alive]
+        if not dead or "dead_section" not in self.t:
+            return []
+        legacies = [(c, self.death_legacy(c.id)) for c in dead]
+        legacies = [(c, leg) for c, leg in legacies if leg]
+        if not legacies:
+            return []
+        parts: list[str] = [self.t["dead_section"], ""]
+        for _, leg in legacies:
+            parts.append(leg)
+            parts.append("")
+        return parts
+
+    def arrival_arcs(self, pair_arcs: list) -> list:
+        """Return arrival arcs for newcomers with enough history outside the pair arcs."""
+        w = self.world
+        claimed_ids = {ev.data["id"] for _, evs in pair_arcs for ev in evs}
+        newcomers = [c for c in w.chars if c.joined_at > 0]
+        result = []
+        for c in newcomers:
+            if w.tick - c.joined_at < TICKS_PER_SEASON * 2:
+                continue
+            events = [ev for ev in w.events
+                      if ev.kind in ARC_KINDS and c.id in ev.actors[:2]
+                      and ev.tick > c.joined_at
+                      and ev.data["id"] not in claimed_ids]
+            if len(events) < 2:
+                continue
+            result.append((c.id, events))
+        result.sort(key=lambda x: -len(x[1]))
+        return result[:1]
+
+    def tell_arrival_arc(self, cid: int, events: list) -> str | None:
+        """A short arc about a newcomer's integration into the village."""
+        if "arrival_arc_title" not in self.t:
+            return None
+        char = self.world.char(cid)
+        title = self.t["arrival_arc_title"].format(name=char.name)
+        lines = ["## " + title, ""]
+        intro_sentence = self.introduce(char)
+        if intro_sentence:
+            lines.append(intro_sentence)
+            lines.append("")
+        arrival_ev = next(
+            (ev for ev in self.world.events if ev.kind == "ARRIVAL" and ev.actors[0] == cid), None)
+        ref_tick = arrival_ev.tick if arrival_ev else events[0].tick
+        sname = self.season_name(ref_tick)
+        seasons_in_list = self.t.get("seasons_in", self.t["seasons"])
+        sname_in = seasons_in_list[season_index(ref_tick)]
+        arrival_text = self.rng.choice(self.t["arrival_intro"]).format(
+            name=char.name, season=sname, season_in=sname_in, village=self.village)
+        body_events = sorted(events, key=lambda e: e.tick)[:3]
+        body, prev = [arrival_text], arrival_ev
+        for ev in body_events:
+            body.append(self.connector(prev, ev) + " " + self.beat(ev))
+            prev = ev
+        lines.append(" ".join(body))
+        lines.append("")
+        others = [c for c in self.world.living if c.id != cid]
+        avg_aff = sum(c.feel(cid) for c in others) / len(others) if others else 0.0
+        if not char.alive and "arrival_died" in self.t:
+            closing_key = "arrival_died"
+        elif avg_aff > 0.2 and "arrival_settled" in self.t:
+            closing_key = "arrival_settled"
+        elif "arrival_cold" in self.t:
+            closing_key = "arrival_cold"
+        else:
+            closing_key = None
+        if closing_key:
+            lines.append(self.rng.choice(self.t[closing_key]).format(
+                name=char.name, village=self.village))
+        return "\n".join(lines)
 
     def tell_village_moments(self) -> list[str]:
         """Village-wide lean or abundant seasons rendered as a section."""
@@ -1055,10 +1385,19 @@ class Narrator:
         village_moments = self.tell_village_moments()
         if village_moments:
             parts.extend(village_moments)
-        arcs = self.arcs()
-        for key, events in arcs:
+        pair_arcs = self.arcs()
+        arr_arcs = self.arrival_arcs(pair_arcs)
+        for cid, events in arr_arcs:
+            section = self.tell_arrival_arc(cid, events)
+            if section:
+                parts.append(section)
+                parts.append("")
+        for key, events in pair_arcs:
             parts.append(self.tell_arc(key, events))
             parts.append("")
+        dead_section = self.tell_dead()
+        if dead_section:
+            parts.extend(dead_section)
 
         best, worst = self.extremes()
         if best and worst:

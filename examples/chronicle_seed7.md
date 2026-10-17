@@ -18,7 +18,7 @@ The spring was generous. Most of Thornby had more than enough, and surplus food 
 
 Wulf was idle and reserved. Sable was talkative and tireless.
 
-It began in spring. When Wulf's stores ran low, Sable filled the basket without being asked. Some seasons passed. By the time winter came, the matter had not been resolved. The bread Sable once gave came back to Sable's own door, and it was Wulf who carried it. Some seasons passed. By the time summer came, the matter had not been resolved. Wulf and Sable chose each other before the season turned. The village knew before either of them said a word about it. The bread came 3 more times, without ceremony; that is what makes it bread.
+It began in spring. When Wulf's stores ran low, Sable filled the basket without being asked. Winter came back, and with it the old matter came back too. The bread Sable once gave came back to Sable's own door, and it was Wulf who carried it. Some seasons passed. By the time summer came, the matter had not been resolved. Wulf and Sable chose each other before the season turned. The village knew before either of them said a word about it. The bread came 3 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 
@@ -26,7 +26,7 @@ They were lucky in each other, and they knew it.
 
 Runa, idle and reserved, was known to everyone. Tilda was open-handed and talkative.
 
-It began in summer. When Runa's stores ran low, Tilda filled the basket without being asked. Some seasons passed. By the time winter came, the matter had not been resolved. The favor sat heavy on Runa. It is a hard thing to owe, and Runa took to avoiding Tilda's eye. When autumn came again, the story had not ended. It came to hard words between Runa and Tilda, in the open street. They fought again, as if the first time had been practice.
+It began in summer. When Runa's stores ran low, Tilda filled the basket without being asked. Winter came back, and with it the old matter came back too. The favor sat heavy on Runa. It is a hard thing to owe, and Runa took to avoiding Tilda's eye. When autumn came again, the story had not ended. It came to hard words between Runa and Tilda, in the open street. They fought again, as if the first time had been practice.
 
 No one mended it. By the end they passed each other without a word.
 

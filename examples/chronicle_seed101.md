@@ -18,7 +18,7 @@ The spring was generous. Most of Saltmere had more than enough, and surplus food
 
 Finn was idle and open-handed. Bertram was proud and reserved.
 
-The first anyone knew of it was in spring. When Finn's stores ran low, Bertram filled the basket without being asked. When winter came again, the story had not ended. The bread Bertram once gave came back to Bertram's own door, and it was Finn who carried it. Spring came. What had grown between Finn and Bertram became something declared. They shared bread and hearth after that. The bread came 6 more times, without ceremony; that is what makes it bread.
+The first anyone knew of it was in spring. When Finn's stores ran low, Bertram filled the basket without being asked. Another winter settled in. The cold version of everything returned. The bread Bertram once gave came back to Bertram's own door, and it was Finn who carried it. Spring came. What had grown between Finn and Bertram became something declared. They shared bread and hearth after that. The bread came 6 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 

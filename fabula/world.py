@@ -365,7 +365,10 @@ class World:
                     continue
                 if min(a.feel(b.id), b.feel(a.id)) < -0.5 and self.rng.random() < 0.12 * season_multiplier:
                     self._last_quarrel[pair] = self.tick
-                    ev = self.emit("QUARREL", (a.id, b.id), -0.8)
+                    witnesses = [w.id for w in living
+                                 if w.id not in (a.id, b.id)
+                                 and (w.feel(a.id) > 0.4 or w.feel(b.id) > 0.4)]
+                    ev = self.emit("QUARREL", (a.id, b.id), -0.8, witnesses=witnesses)
                     a.shift(b.id, -0.1)
                     b.shift(a.id, -0.1)
                     self.remember(a, ev)
@@ -579,6 +582,16 @@ class World:
         for other in self.chars:
             if c.id in other.debts:
                 del other.debts[c.id]
+        # Inherited echoes: living children absorb faint traces of the dead's unresolved enmities.
+        for child in self.chars:
+            if not child.alive or child.parent_ids is None:
+                continue
+            if c.id not in child.parent_ids:
+                continue
+            for enemy_id, val in c.affinity.items():
+                if val < -0.3 and enemy_id < len(self.chars) and enemy_id != child.id:
+                    if self.chars[enemy_id].alive:
+                        child.shift(enemy_id, val * 0.15)
 
     def _arrive(self):
         from .names import FIRST_NAMES

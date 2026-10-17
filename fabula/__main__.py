@@ -18,6 +18,9 @@ def main(argv=None):
                         help="souls in the village")
     parser.add_argument("--lang", choices=("en", "es", "fr", "pt"), default="en",
                         help="language of the chronicle")
+    parser.add_argument("--narrator-seed", type=int, default=None,
+                        help="seed for narrative choices (village name, template variants); "
+                             "same world, different voice")
     parser.add_argument("--json", action="store_true",
                         help="output raw event log as JSON instead of a narrative chronicle")
     parser.add_argument("-o", "--out", default=None,
@@ -30,7 +33,8 @@ def main(argv=None):
         import json as _json
         w = World(seed=seed, people=args.people)
         w.run(args.days)
-        narrator_rng = random.Random(seed ^ 0xFAB)
+        nseed = args.narrator_seed if args.narrator_seed is not None else (seed ^ 0xFAB)
+        narrator_rng = random.Random(nseed)
         village = narrator_rng.choice(VILLAGE_NAMES.get(args.lang, VILLAGE_NAMES["en"]))
         data = {
             "seed": seed,
@@ -70,7 +74,8 @@ def main(argv=None):
         }
         text = _json.dumps(data, indent=2, ensure_ascii=False)
     else:
-        text = chronicle(seed=seed, days=args.days, people=args.people, lang=args.lang)
+        text = chronicle(seed=seed, days=args.days, people=args.people, lang=args.lang,
+                         narrator_seed=args.narrator_seed)
 
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:

@@ -26,7 +26,7 @@ An uneasy peace held between them, thin as spring ice.
 
 Yse was proud and reserved. Linde was open-handed and tireless.
 
-It began in spring. Linde shared bread with Yse in a lean stretch, and it was not forgotten. When winter came again, the story had not ended. Yse had never returned what Linde once gave, and the owing curdled, the way gratitude does when it is carried too long. By then it was spring. Yse and Linde quarreled where everyone could hear, and the village pretended not to listen. They fought 4 more times. It never seemed to settle anything.
+It began in spring. Linde shared bread with Yse in a lean stretch, and it was not forgotten. Another winter settled in. The cold version of everything returned. Yse had never returned what Linde once gave, and the owing curdled, the way gratitude does when it is carried too long. By then it was spring. Yse and Linde quarreled where everyone could hear, and the village pretended not to listen. They fought 4 more times. It never seemed to settle anything.
 
 No one mended it. By the end they passed each other without a word.
 
@@ -34,7 +34,7 @@ No one mended it. By the end they passed each other without a word.
 
 Leif, idle and reserved, was known to everyone. Donat was humble and open-handed.
 
-The first anyone knew of it was in spring. Donat shared bread with Leif in a lean stretch, and it was not forgotten. Some seasons passed. By the time winter came, the matter had not been resolved. The bread Donat once gave came back to Donat's own door, and it was Leif who carried it. Soon afterwards. What had grown between Leif and Donat became something declared. They shared bread and hearth after that. The bread came 5 more times, without ceremony; that is what makes it bread.
+The first anyone knew of it was in spring. Donat shared bread with Leif in a lean stretch, and it was not forgotten. Winter came back, and with it the old matter came back too. The bread Donat once gave came back to Donat's own door, and it was Leif who carried it. Soon afterwards. What had grown between Leif and Donat became something declared. They shared bread and hearth after that. The bread came 5 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 

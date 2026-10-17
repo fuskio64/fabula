@@ -18,19 +18,27 @@ The winter was a hungry one. More than half the houses in Fenwick had lean pantr
 
 That summer, the village was well-fed and it showed — in longer evenings, in more visiting, in quarrels that did not quite start.
 
+## Asha: a stranger
+
+Asha was tireless and proud.
+
+Asha arrived in winter. Fenwick had not been expecting anyone. By then it was spring. When Dara's stores ran low, Asha filled the basket without being asked. Soon afterwards. Asha turned Cray away empty-handed, and the whole village felt colder for it. Soon afterwards. Asha shared bread with Hadwin in a lean stretch, and it was not forgotten.
+
+Asha had arrived knowing no one and left a member of Fenwick, in whatever way that word applies.
+
 ## Dara and Hadwin: a love
 
 Dara was humble and open-handed. Hadwin was humble and idle.
 
-The first anyone knew of it was in spring. When Hadwin's stores ran low, Dara filled the basket without being asked. When winter came again, the story had not ended. The bread Dara once gave came back to Dara's own door, and it was Hadwin who carried it. By then it was spring. What had grown between Dara and Hadwin became something declared. They shared bread and hearth after that. The bread came again, without a word about it.
+It began in spring. Dara shared bread with Hadwin in a lean stretch, and it was not forgotten. Winter came back, and with it the old matter came back too. The bread Dara once gave came back to Dara's own door, and it was Hadwin who carried it. Spring came. Dara and Hadwin chose each other before the season turned. The village knew before either of them said a word about it. The bread came again, without a word about it.
 
 They were lucky in each other, and they knew it.
 
 ## Cray and Tam: a friendship
 
-Cray, idle and humble, was known to everyone. Tam was tireless and talkative.
+Cray was idle and humble. Tam, tireless and talkative, was known to everyone.
 
-It began in spring. When Cray's stores ran low, Tam filled the basket without being asked. The bread came 6 more times, without ceremony; that is what makes it bread.
+The first anyone knew of it was in spring. When Cray's stores ran low, Tam filled the basket without being asked. The bread came 6 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 
@@ -38,12 +46,16 @@ They were lucky in each other, and they knew it.
 
 Donat, idle and tight-fisted, was known to everyone. Rafe was talkative and tight-fisted.
 
-The first anyone knew of it was in spring. Donat went hungry to Rafe's door and came back with nothing. Some seasons passed. By the time winter came, the matter had not been resolved. Rafe shared bread with Donat in a lean stretch, and it was not forgotten.
+The first anyone knew of it was in spring. Rafe turned Donat away empty-handed, and the whole village felt colder for it. Another winter settled in. The cold version of everything returned. When Donat's stores ran low, Rafe filled the basket without being asked. Generosity is not always a matter of character.
 
 Whatever had been broken, they mended it better than new.
 
 Donat did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.
 
-When the record ends, Dara and Tam were as close as two people get in Fenwick; Cray and Asha still were not speaking.
+## After
+
+Donat went with accounts settled. The proud do not like leaving debts behind.
+
+In the end, Dara and Tam were still finding reasons to cross each other's paths in Fenwick. Cray and Asha were still finding reasons not to.
 
 *(world seed 13 — run it again and the same things will happen, in the same order, to the same people)*

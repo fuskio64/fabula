@@ -18,7 +18,7 @@ Copse End came through that spring with full stores. Those who remember the lean
 
 Linde was proud and open-handed. Bertram, open-handed and idle, was known to everyone.
 
-The first anyone knew of it was in spring. When Bertram's stores ran low, Linde filled the basket without being asked. When winter came again, the story had not ended. Bertram had not forgotten the old kindness, and when want came to Linde's house, it was returned without a word about it. Soon afterwards. What had grown between Linde and Bertram became something declared. They shared bread and hearth after that. The bread came 2 more times, without ceremony; that is what makes it bread.
+The first anyone knew of it was in spring. When Bertram's stores ran low, Linde filled the basket without being asked. Another winter settled in. The cold version of everything returned. Bertram had not forgotten the old kindness, and when want came to Linde's house, it was returned without a word about it. Soon afterwards. What had grown between Linde and Bertram became something declared. They shared bread and hearth after that. The bread came 2 more times, without ceremony; that is what makes it bread.
 
 They were lucky in each other, and they knew it.
 
