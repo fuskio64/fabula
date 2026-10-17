@@ -8,7 +8,7 @@ line of the chronicle traces back to a recorded event.
 from .world import World
 from .narrator import Narrator
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 
 
 def chronicle(seed: int = 0, days: int = 192, people: int = 10, lang: str = "en") -> str:

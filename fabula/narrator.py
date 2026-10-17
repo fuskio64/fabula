@@ -58,6 +58,19 @@ TEXT = {
         "repeat_good_many": "And it happened {n} more times, without anyone making a fuss of it; kindness keeps a calendar too.",
         "repeat_endless": "And so it went on, season after season, until counting lost its point.",
         "repeat_good_endless": "And so it went on, season after season; some things do not need remarking to continue.",
+        "seasons_later": [
+            "Some seasons passed. By the time {season} came, the matter had not been resolved.",
+            "When {season} came again, the story had not ended.",
+        ],
+        "year_later": "A year went by. By {season} nothing had been resolved.",
+        "years_later": "{n} years had passed. By {season} the village was still carrying it.",
+        "repeat_quarrel_one": "They fought again, as if the first time had been practice.",
+        "repeat_quarrel_many": "They fought {n} more times. It never seemed to settle anything.",
+        "repeat_quarrel_endless": "And so the fighting went on, season after season; some things need a witness more than a resolution.",
+        "repeat_refusal_one": "The door stayed shut one more time.",
+        "repeat_refusal_many": "The door stayed shut {n} more times. The village counted each one.",
+        "repeat_gift_one": "The bread came again, without a word about it.",
+        "repeat_gift_many": "The bread came {n} more times, without ceremony; that is what makes it bread.",
         "close_relapse": "The peace that was made did not keep; some cracks want to stay open.",
         "close_broken": "No one mended it. By the end they passed each other without a word.",
         "close_uneasy": "An uneasy peace held between them, thin as spring ice.",
@@ -89,10 +102,24 @@ TEXT = {
         "famine_note": "Year {year} was a year of hunger in {village}.",
         "birth_intro": ["{name}, who grew up here, was {adjs}.",
                         "{name} had been raised in {village} and was {adjs}."],
+        "MEDIATION_elder": [
+            "It fell to {c} — who had seen enough winters to know how grudges end — to sit them at one table. Something mended.",
+            "{c}, who had been in the village long enough to remember the last time this had happened, made them speak. Something loosened.",
+        ],
         "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
         "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
+        "died_leaving": "They left behind {names}.",
         "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
                      "{c} and {d} still were not speaking."),
+        "BIRTH": [
+            "A child — {c} — came to them. There are things that arrive without ceremony and are felt for years.",
+            "{c} was born. The village received them the way it always receives what arrives without asking.",
+        ],
+        "COMING_OF_AGE": "{c} grew up. The village counted one more among its own.",
+        "elder_intro": [
+            "{name}, who had been here longest and remembered what others had forgotten, was {adjs}.",
+            "Everyone had come to {name} at least once. {name} was {adjs}.",
+        ],
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
     },
     "es": {
@@ -141,6 +168,19 @@ TEXT = {
         "repeat_good_many": "Y volvió a pasar {n} veces más, sin que nadie le diera importancia; también la bondad lleva su calendario.",
         "repeat_endless": "Y así siguió, estación tras estación, hasta que contar dejó de tener sentido.",
         "repeat_good_endless": "Y así siguió, estación tras estación; hay cosas que no necesitan que nadie las señale para continuar.",
+        "seasons_later": [
+            "Pasaron las estaciones. Para cuando llegó {season}, el asunto seguía abierto.",
+            "Volvió {season}, y nada se había cerrado.",
+        ],
+        "year_later": "Pasó un año. Cuando llegó {season}, el asunto volvía a estar ahí.",
+        "years_later": "{n} años después, al llegar {season}, la aldea lo seguía cargando.",
+        "repeat_quarrel_one": "Volvieron a pelearse, como si la primera vez hubiera sido un ensayo.",
+        "repeat_quarrel_many": "Volvieron a pelearse {n} veces. Nunca llegaba a arreglarse nada.",
+        "repeat_quarrel_endless": "Y así siguió la pelea, estación tras estación; hay cosas que necesitan un testigo más que una solución.",
+        "repeat_refusal_one": "La puerta volvió a quedarse cerrada.",
+        "repeat_refusal_many": "La puerta se quedó cerrada {n} veces más. La aldea las fue contando.",
+        "repeat_gift_one": "El pan volvió a llegar, sin decir nada.",
+        "repeat_gift_many": "El pan llegó {n} veces más, sin ceremonia; eso es lo que lo hace pan.",
         "close_relapse": "La paz que se hizo no se sostuvo; hay grietas que quieren seguir abiertas.",
         "close_broken": "Nadie lo arregló. Al final pasaban el uno junto al otro sin mediar palabra.",
         "close_uneasy": "Quedó entre ellos una paz incómoda, fina como el hielo de marzo.",
@@ -174,10 +214,28 @@ TEXT = {
                         "{name} se había criado en {village} y era {adjs}."],
         "birth_intro_m": ["{name}, nacido en {village}, era {adjs}.",
                           "{name} se había criado en {village} y era {adjs}."],
+        "MEDIATION_elder": [
+            "Fue {c}, {anciano} de la aldea, quien los hizo sentarse. Hay cosas que solo ceden a la paciencia de los años.",
+            "A {c}, que había visto lo suficiente como para saber cómo acaban los rencores, le tocó sentarlos. Algo se aflojó.",
+        ],
         "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
         "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
+        "died_leaving": "Dejó atrás a {names}.",
         "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
                      "{c} y {d} seguían sin hablarse."),
+        "BIRTH": [
+            "Llegó {c}. Hay cosas que llegan sin que nadie las pida y que la aldea guarda para siempre.",
+            "Nació {c}, y la aldea supo de inmediato que era de los suyos.",
+        ],
+        "COMING_OF_AGE": "{c} creció. La aldea tuvo así un adulto más, y más manos en las que confiar.",
+        "elder_intro": [
+            "A {name}, que llevaba aquí más tiempo que nadie y recordaba lo que otros habían olvidado, {lo} conocía todo el mundo. Era {adjs}.",
+            "{name}, {anciano} de la aldea, era {adjs}.",
+        ],
+        "elder_intro_m": [
+            "A {name}, que llevaba aquí más tiempo que nadie y recordaba lo que otros habían olvidado, lo conocía todo el mundo. Era {adjs}.",
+            "{name}, {anciano} de la aldea, era {adjs}.",
+        ],
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
     },
     "fr": {
@@ -224,6 +282,19 @@ TEXT = {
         "repeat_good_many": "Et cela se reproduisit {n} fois encore, sans que personne en fasse grand cas ; la bonté aussi tient son calendrier.",
         "repeat_endless": "Et ainsi de suite, saison après saison, jusqu'à ce que compter perde son sens.",
         "repeat_good_endless": "Et ainsi de suite, saison après saison ; certaines choses n'ont pas besoin d'être remarquées pour continuer.",
+        "seasons_later": [
+            "Plusieurs saisons s'écoulèrent. Quand {season} arriva, l'affaire n'était pas close.",
+            "Quand {season} revint, rien n'avait été réglé.",
+        ],
+        "year_later": "Un an s'écoula ; quand {season} arriva, l'affaire n'était pas close.",
+        "years_later": "{n} ans passèrent ; quand {season} arriva, le village portait encore cela.",
+        "repeat_quarrel_one": "Ils se battirent de nouveau, comme si la première fois avait été une répétition.",
+        "repeat_quarrel_many": "Ils se battirent {n} fois encore. Cela ne réglait jamais rien.",
+        "repeat_quarrel_endless": "Et la dispute continua, saison après saison ; certaines choses ont besoin d'un témoin plus que d'une résolution.",
+        "repeat_refusal_one": "La porte resta close une fois de plus.",
+        "repeat_refusal_many": "La porte resta close {n} fois encore. Le village compta chacune.",
+        "repeat_gift_one": "Le pain revint, sans un mot.",
+        "repeat_gift_many": "Le pain revint {n} fois encore, sans cérémonie ; c'est ce qui en fait du pain.",
         "close_relapse": "La paix qui fut faite ne tint pas ; certaines fissures veulent rester ouvertes.",
         "close_broken": "Personne ne raccommoda rien. À la fin, ils se croisaient sans un mot.",
         "close_uneasy": "Une paix précaire s'installa entre eux, mince comme la glace de mars.",
@@ -255,10 +326,24 @@ TEXT = {
         "famine_note": "L'an {year} fut une année de famine à {village}.",
         "birth_intro": ["{name}, {ne} à {village}, était {adjs}.",
                         "Tout le monde à {village} connaissait {name}, {adjs}, depuis l'enfance."],
+        "MEDIATION_elder": [
+            "Ce fut {c}, {ancien}, qui les fit s'asseoir à la même table. Il y a des choses qui ne cèdent qu'à la patience des années.",
+            "{c}, qui avait vu assez d'hivers pour savoir comment les rancœurs se terminent, les fit parler. Quelque chose se dénoua.",
+        ],
         "died_starvation": "{a} ne survécut pas à cette chronique. Un long hiver l'emporta avant la clôture du récit.",
         "died_misfortune": "{a} ne survécut pas à cette chronique ; un coup soudain, quand il ne restait plus rien pour l'absorber.",
+        "died_leaving": "{su} laissa {names} derrière {lu}.",
         "epilogue": ("Quand le récit se ferme, {a} et {b} étaient aussi proches que deux personnes peuvent l'être à {village} ; "
                      "{c} et {d} ne se parlaient toujours pas."),
+        "BIRTH": [
+            "Un enfant — {c} — arriva. Il y a des choses qui arrivent sans cérémonie et qui se font sentir pendant des années.",
+            "{c} naquit. Le village {lo} reçut comme il reçoit toujours ce qui arrive sans demander.",
+        ],
+        "COMING_OF_AGE": "{c} grandit. Le village compta un habitant de plus parmi les siens.",
+        "elder_intro": [
+            "{name}, qui était là depuis le plus longtemps et se souvenait de ce que d'autres avaient oublié, était {adjs}.",
+            "Tout le monde était venu trouver {name} au moins une fois. {name} était {adjs}.",
+        ],
         "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
     "pt": {
@@ -305,6 +390,19 @@ TEXT = {
         "repeat_good_many": "E voltou a acontecer {n} vezes, sem alarde; a bondade também tem o seu calendário.",
         "repeat_endless": "E assim continuou, estação após estação, até o contar perder sentido.",
         "repeat_good_endless": "E assim continuou, estação após estação; há coisas que não precisam de ser assinaladas para continuar.",
+        "seasons_later": [
+            "Várias estações passaram. Quando chegou {season}, o assunto não estava resolvido.",
+            "Quando {season} voltou, nada se resolvera.",
+        ],
+        "year_later": "Passou um ano; quando chegou {season}, o assunto voltou.",
+        "years_later": "{n} anos depois, quando {season} chegou, a aldeia ainda carregava isso.",
+        "repeat_quarrel_one": "Voltaram a lutar, como se a primeira vez tivesse sido um ensaio.",
+        "repeat_quarrel_many": "Voltaram a lutar {n} vezes. Nunca chegava a resolver-se nada.",
+        "repeat_quarrel_endless": "E assim continuou a luta, estação após estação; há coisas que precisam de uma testemunha mais do que de uma resolução.",
+        "repeat_refusal_one": "A porta voltou a fechar-se.",
+        "repeat_refusal_many": "A porta fechou-se {n} vezes mais. A aldeia contou cada uma.",
+        "repeat_gift_one": "O pão voltou a chegar, sem uma palavra.",
+        "repeat_gift_many": "O pão chegou {n} vezes mais, sem cerimónia; é isso que o faz pão.",
         "close_relapse": "A paz que se fez não durou; há fissuras que querem ficar abertas.",
         "close_broken": "Ninguém arranjou nada. No fim, cruzavam-se sem uma palavra.",
         "close_uneasy": "Ficou entre eles uma paz incómoda, fina como o gelo de março.",
@@ -336,10 +434,24 @@ TEXT = {
         "famine_note": "O ano {year} foi um ano de fome em {village}.",
         "birth_intro": ["{name}, {nascido} em {village}, era {adjs}.",
                         "{name} tinha crescido em {village} e era {adjs}."],
+        "MEDIATION_elder": [
+            "Foi {c}, que já tinha visto o suficiente para saber como os rancores acabam, quem os fez sentar à mesma mesa. Algo se desatou.",
+            "{c}, que havia vivido na aldeia tempo suficiente para recordar a última vez que isto acontecera, fê-los falar. Algo se desatou.",
+        ],
         "died_starvation": "{a} não sobreviveu a esta crónica. Um longo inverno levou-{lo} antes que o relato fechasse.",
         "died_misfortune": "{a} não sobreviveu a esta crónica; um golpe súbito, quando já não havia nada com que resistir.",
+        "died_leaving": "Deixou {names} para trás.",
         "epilogue": ("Quando o registo fecha, {a} e {b} eram tão próximos quanto duas pessoas podem ser em {village}; "
                      "{c} e {d} ainda não se falavam."),
+        "BIRTH": [
+            "Uma criança — {c} — chegou a eles. Há coisas que chegam sem cerimónia e que se fazem sentir por anos.",
+            "{c} nasceu. A aldeia recebeu-{lo} como recebe sempre o que chega sem pedir.",
+        ],
+        "COMING_OF_AGE": "{c} cresceu. A aldeia contou mais um dos seus.",
+        "elder_intro": [
+            "{name}, que estava aqui há mais tempo do que ninguém e se lembrava do que outros tinham esquecido, era {adjs}.",
+            "Toda a aldeia tinha ido ter com {name} pelo menos uma vez. {name} era {adjs}.",
+        ],
         "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
     },
 }
@@ -367,6 +479,22 @@ class Narrator:
             if ev.kind in ARC_KINDS:
                 key = frozenset(ev.actors[:2])
                 pairs.setdefault(key, []).append(ev)
+        # Attach birth and coming-of-age to bonded pairs so family arcs feel complete.
+        bond_pairs = {key for key, evs in pairs.items() if any(e.kind == "BOND" for e in evs)}
+        for ev in self.world.events:
+            if ev.kind == "BIRTH":
+                pair_key = frozenset(ev.actors[1:3])
+                if pair_key in bond_pairs:
+                    pairs[pair_key].append(ev)
+            elif ev.kind == "COMING_OF_AGE":
+                child = self.world.char(ev.actors[0])
+                if child.parent_ids:
+                    pair_key = frozenset(child.parent_ids)
+                    if pair_key in bond_pairs:
+                        pairs[pair_key].append(ev)
+        # Re-sort each arc by tick after adding family events.
+        for key in pairs:
+            pairs[key].sort(key=lambda e: e.tick)
         scored = []
         for key, events in pairs.items():
             if len(events) < 2:
@@ -405,6 +533,8 @@ class Narrator:
             score += 2.5  # a bond formed is inherently dramatic
         if "WIDOWING" in kinds:
             score += 3.0  # love and loss: the oldest arc
+        if "BIRTH" in kinds or "COMING_OF_AGE" in kinds:
+            score += 1.5  # family arcs feel complete
         return score
 
     # ------------------------------------------------------------------
@@ -444,6 +574,16 @@ class Narrator:
         if self.lang in ("es", "pt") and (adj2[:1] in ("e", "i") or adj2[:2] == "hi"):
             conj = "e"
         adjs = f"{adj1} {conj} {adj2}"
+        if char.elder and char.parent_ids is None and "elder_intro" in self.t:
+            fields: dict = {"name": char.name, "adjs": adjs}
+            if self.lang == "es":
+                fields["lo"] = self._gform(char.id, "lo", "la")
+                fields["anciano"] = self._gform(char.id, "anciano", "anciana")
+                key = ("elder_intro_m" if char.gender == "m" and "elder_intro_m" in self.t
+                       else "elder_intro")
+            else:
+                key = "elder_intro"
+            return self.rng.choice(self.t[key]).format(**fields)
         if char.parent_ids is not None and "birth_intro" in self.t:
             fields: dict = {"name": char.name, "adjs": adjs, "village": self.village}
             if self.lang == "es":
@@ -467,17 +607,46 @@ class Narrator:
         if prev is None:
             bare = self.t.get("seasons_in", self.t["seasons"])
             return self.pick("opening", season=bare[season_index(ev.tick)])
-        prev_season = (prev.tick // TICKS_PER_SEASON)
-        if ev.tick // TICKS_PER_SEASON != prev_season:
-            text = self.pick("later_season", season=self.season_name(ev.tick))
+        gap = ev.tick // TICKS_PER_SEASON - prev.tick // TICKS_PER_SEASON
+        if gap == 0:
+            return self.pick("soon_after")
+        sname = self.season_name(ev.tick)
+        # Family events don't carry conflict framing regardless of how much time passed.
+        if ev.kind in ("BIRTH", "COMING_OF_AGE"):
+            text = self.pick("later_season", season=sname)
             return text[0].upper() + text[1:]
-        return self.pick("soon_after")
+        if gap >= 8 and "years_later" in self.t:
+            return self.t["years_later"].format(n=gap // 4, season=sname)
+        if gap >= 4 and "year_later" in self.t:
+            return self.t["year_later"].format(season=sname)
+        if gap >= 2 and "seasons_later" in self.t:
+            return self.pick("seasons_later", season=sname)
+        text = self.pick("later_season", season=sname)
+        return text[0].upper() + text[1:]
 
     def beat(self, ev):
+        if ev.kind == "BIRTH":
+            child_id = ev.actors[0]
+            fields = {"c": self.name(child_id),
+                      "a": self.name(ev.actors[1]), "b": self.name(ev.actors[2])}
+            if self.lang in ("fr", "pt"):
+                fields["lo"] = self._gform(child_id, "le" if self.lang == "fr" else "o",
+                                           "la" if self.lang == "fr" else "a")
+            return self.rng.choice(self.t["BIRTH"]).format(**fields)
+        if ev.kind == "COMING_OF_AGE":
+            return self.t["COMING_OF_AGE"].format(c=self.name(ev.actors[0]))
         a, b = ev.actors[0], ev.actors[1]
         fields = {"a": self.name(a), "b": self.name(b)}
         if ev.kind == "MEDIATION":
-            fields["c"] = self.name(ev.data["mediator"])
+            mid = ev.data["mediator"]
+            mediator = self.world.char(mid)
+            fields["c"] = self.name(mid)
+            if mediator.elder and "MEDIATION_elder" in self.t:
+                if self.lang == "es":
+                    fields["anciano"] = self._gform(mid, "anciano", "anciana")
+                elif self.lang == "fr":
+                    fields["ancien"] = self._gform(mid, "l'ancien", "l'ancienne")
+                return self.rng.choice(self.t["MEDIATION_elder"]).format(**fields)
         if ev.kind == "WIDOWING":
             # gender-agreeing words for the survivor ({a})
             if self.lang == "es":
@@ -501,15 +670,50 @@ class Narrator:
                 return ev.data.get("cause", "starvation")
         return None
 
+    def _survivors_of(self, cid: int) -> dict | None:
+        """Return a {names: ...} dict for the survivors of the deceased, or None."""
+        survivor_id = None
+        for ev in self.world.events:
+            if ev.kind == "WIDOWING" and ev.actors[1] == cid:
+                survivor_id = ev.actors[0]
+                break
+        children = [ch for ch in self.world.chars
+                    if ch.parent_ids and cid in ch.parent_ids and ch.alive]
+        names = []
+        if survivor_id is not None and self.world.char(survivor_id).alive:
+            names.append(self.name(survivor_id))
+        names += [ch.name for ch in children]
+        if not names:
+            return None
+        conj = self.t["and"]
+        if len(names) == 1:
+            combined = names[0]
+        elif len(names) == 2:
+            combined = f"{names[0]} {conj} {names[1]}"
+        else:
+            combined = ", ".join(names[:-1]) + f" {conj} {names[-1]}"
+        return {"names": combined}
+
     def death_note(self, cid: int) -> str | None:
         """Render the death postscript for a character, or None if still living."""
         cause = self.death_cause(cid)
         if cause is None:
             return None
+        dead = self.world.char(cid)
         fields: dict = {"a": self.name(cid)}
         if self.lang == "pt":
             fields["lo"] = self._gform(cid, "o", "a")
-        return self.t[f"died_{cause}"].format(**fields)
+        note = self.t[f"died_{cause}"].format(**fields)
+        survivors = self._survivors_of(cid)
+        if survivors and "died_leaving" in self.t:
+            if self.lang == "fr":
+                leaving = {"su": "Il" if dead.gender == "m" else "Elle",
+                           "lu": "lui" if dead.gender == "m" else "elle",
+                           **survivors}
+            else:
+                leaving = survivors
+            note += " " + self.t["died_leaving"].format(**leaving)
+        return note
 
     # ------------------------------------------------------------------
     # assembling the chronicle
@@ -572,14 +776,20 @@ class Narrator:
             body.append(self.connector(prev, ev) + " " + self.beat(ev))
             prev = ev
         if skipped:
-            tone = "repeat_good" if sum(ev.valence for ev in skipped) > 0 else "repeat"
-            if len(skipped) == 1:
-                suffix = "_one"
-            elif len(skipped) <= 6:
-                suffix = "_many"
+            dominant_kind = max(
+                set(ev.kind for ev in skipped),
+                key=lambda k: sum(1 for e in skipped if e.kind == k))
+            suffix = "_one" if len(skipped) == 1 else ("_many" if len(skipped) <= 6 else "_endless")
+            n = len(skipped)
+            if dominant_kind == "QUARREL" and f"repeat_quarrel{suffix}" in self.t:
+                body.append(self.t[f"repeat_quarrel{suffix}"].format(n=n))
+            elif dominant_kind == "REFUSAL" and f"repeat_refusal{suffix}" in self.t:
+                body.append(self.t[f"repeat_refusal{suffix}"].format(n=n))
+            elif dominant_kind in ("GIFT", "REPAYMENT") and f"repeat_gift{suffix}" in self.t and suffix != "_endless":
+                body.append(self.t[f"repeat_gift{suffix}"].format(n=n))
             else:
-                suffix = "_endless"
-            body.append(self.t[tone + suffix].format(n=len(skipped)))
+                tone = "repeat_good" if sum(ev.valence for ev in skipped) > 0 else "repeat"
+                body.append(self.t[tone + suffix].format(n=n))
         lines.append(" ".join(body))
         lines.append("")
         lines.append(self.closing(final, kinds))

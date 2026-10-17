@@ -25,6 +25,9 @@ BOND_THRESHOLD = 0.62
 # Childhood: ticks from birth until a character comes of age (3 seasons).
 CHILDHOOD_TICKS = 72
 
+# Elder: ticks in the village before a character becomes the village's memory (11 seasons).
+ELDER_TICKS = 264
+
 
 class World:
     def __init__(self, seed: int = 0, people: int = 10):
@@ -348,6 +351,8 @@ class World:
                 listener.shift(wrongdoer, -0.1)  # quietly taking sides
 
     def sys_quarrel(self):
+        # winter brings people indoors and tempers fray; spring and summer are calmer
+        season_multiplier = (1.35, 0.8, 1.0, 1.5)[season_index(self.tick)]
         living = self.living
         for a in living:
             for b in living:
@@ -356,7 +361,7 @@ class World:
                 pair = (a.id, b.id)
                 if self.tick - self._last_quarrel.get(pair, -99) < 15:
                     continue
-                if min(a.feel(b.id), b.feel(a.id)) < -0.5 and self.rng.random() < 0.12:
+                if min(a.feel(b.id), b.feel(a.id)) < -0.5 and self.rng.random() < 0.12 * season_multiplier:
                     self._last_quarrel[pair] = self.tick
                     ev = self.emit("QUARREL", (a.id, b.id), -0.8)
                     a.shift(b.id, -0.1)
@@ -385,10 +390,13 @@ class World:
                                    and w.feel(a.id) > 0.3 and w.feel(b.id) > 0.3]
                     if not peacemakers:
                         continue
-                    w = self.rng.choice(peacemakers)
+                    # elders are preferred as mediators
+                    elder_makers = [w for w in peacemakers if w.elder]
+                    w = self.rng.choice(elder_makers if elder_makers else peacemakers)
                     ev = self.emit("MEDIATION", (a.id, b.id), 0.7, mediator=w.id)
-                    a.affinity[b.id] = -0.05
-                    b.affinity[a.id] = -0.05
+                    reset = 0.05 if w.elder else -0.05
+                    a.affinity[b.id] = reset
+                    b.affinity[a.id] = reset
                     a.shift(w.id, 0.15)
                     b.shift(w.id, 0.15)
                     self.remember(a, ev)
@@ -398,6 +406,8 @@ class World:
 
     def sys_bonds(self):
         """When two people have grown close enough, for long enough, they join households."""
+        # spring is when people declare things; winter is when they huddle in separately
+        season_multiplier = (1.6, 1.0, 0.9, 0.7)[season_index(self.tick)]
         living = self.living
         for a in living:
             for b in living:
@@ -406,7 +416,7 @@ class World:
                 if a.partner is not None or b.partner is not None:
                     continue
                 if (a.feel(b.id) >= BOND_THRESHOLD and b.feel(a.id) >= BOND_THRESHOLD
-                        and self.rng.random() < 0.02):
+                        and self.rng.random() < 0.02 * season_multiplier):
                     a.partner = b.id
                     b.partner = a.id
                     # debts between partners dissolve when they become one household
@@ -452,6 +462,12 @@ class World:
                         for pid in c.parent_ids:
                             if pid < len(self.chars) and self.chars[pid].alive:
                                 self.chars[pid].shift(c.id, 0.1)
+            elif not c.childhood and not c.elder:
+                if self.tick - c.joined_at >= ELDER_TICKS:
+                    c.elder = True
+                    for other in self.living:
+                        if other.id != c.id:
+                            other.shift(c.id, 0.04)  # elders earn quiet respect
 
     def sys_festival(self):
         living = self.living
@@ -482,9 +498,11 @@ class World:
         ev = self.emit("DEATH", (c.id,), -1.0, cause=cause)
         self.remember(c, ev)
         # Partner grief: the village closes around the bereaved.
+        prev_partner = None
         if c.partner is not None:
             survivor = self.chars[c.partner]
             if survivor.alive:
+                prev_partner = survivor
                 ev_w = self.emit("WIDOWING", (survivor.id, c.id), -0.85)
                 self.remember(survivor, ev_w)
                 self.snapshot(ev_w, survivor, c)
@@ -493,6 +511,18 @@ class World:
                         other.shift(survivor.id, 0.06)
             survivor.partner = None
         c.partner = None
+        # Food inheritance: what the dead had left feeds those they loved.
+        if c.food > 0.5:
+            household = []
+            if prev_partner is not None:
+                household.append(prev_partner)
+            household += [ch for ch in self.living
+                          if ch.childhood and ch.parent_ids and c.id in ch.parent_ids]
+            if household:
+                share = c.food / len(household)
+                for h in household:
+                    h.food = min(STORES_CAP, h.food + share)
+            c.food = 0.0
         # Debts die with the person on both sides.
         # A creditor who outlives their debtor feels a strange unresolved
         # lightness — the debt is gone, but by the wrong door.
@@ -520,7 +550,8 @@ class World:
             generosity=self.rng.random(),
             pride=self.rng.random(),
             openness=self.rng.random(),
-            food=3.0,   # arrives with modest supplies
+            food=3.0,
+            joined_at=self.tick,
         )
         for ch in self.living:
             newcomer.affinity[ch.id] = self.rng.uniform(-0.1, 0.2)
@@ -556,7 +587,11 @@ class World:
         child.affinity[b.id] = 0.8
         for ch in self.living:
             if ch.id not in (a.id, b.id):
-                child.affinity[ch.id] = self.rng.uniform(0.0, 0.2)
+                # a child grows up hearing their parents' stories:
+                # inherit a mild version of each parent's lean toward neighbors
+                parent_lean = (a.feel(ch.id) + b.feel(ch.id)) / 2 * 0.3
+                child.affinity[ch.id] = max(-0.25, min(0.25,
+                    parent_lean + self.rng.uniform(-0.1, 0.1)))
                 ch.affinity[new_id] = self.rng.uniform(0.0, 0.15)
         a.affinity[new_id] = 0.85
         b.affinity[new_id] = 0.85

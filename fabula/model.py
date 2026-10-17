@@ -64,6 +64,8 @@ class Character:
     parent_ids: tuple | None = None # (parent_a_id, parent_b_id) for born-in-world chars
     childhood: bool = False         # not yet come of age; different food dynamics
     born_at: int | None = None      # tick of birth, for the growing-up countdown
+    elder: bool = False             # has lived long enough to be the village's memory
+    joined_at: int = 0              # tick when this character joined (0 for founders)
     memories: list = field(default_factory=list)
     affinity: dict = field(default_factory=dict)  # other id -> -1..1
     debts: dict = field(default_factory=dict)     # creditor id -> Debt
