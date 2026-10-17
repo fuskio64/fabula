@@ -84,10 +84,22 @@ TEXT = {
         "title_love": "{a} and {b}: a love",
         "title_open": "{a} and {b}: an unfinished business",
         "title_debt": "{a} and {b}: a debt unpaid",
-        "chronicle_title": "The Chronicle of {village}",
-        "prologue": ("{village} held {n} souls at the opening of this record, "
-                     "and it covers {days} days of them. "
-                     "Nothing in it was invented; it was only watched, and told."),
+        "chronicle_title": ["The Chronicle of {village}",
+                            "A Record of {village}",
+                            "What Happened in {village}"],
+        "arrivals_note_1_named": "{name} came to {village} as someone the village did not know yet. The village is always uncertain what to make of someone with no history here.",
+        "prologue": [("{village} held {n} souls at the opening of this record, "
+                      "and it covers {days} days of them. "
+                      "Nothing in it was invented; it was only watched, and told."),
+                     ("This is the record of {village}, which held {n} people at its opening. "
+                      "It covers {days} of their days. "
+                      "None of it was made up."),
+                    ],
+        "epilogue": [("When the record ends, {a} and {b} were as close as two people get in {village}; "
+                      "{c} and {d} still were not speaking."),
+                     ("In the end, {a} and {b} were still finding reasons to cross each other's paths "
+                      "in {village}. {c} and {d} were still finding reasons not to."),
+                    ],
         "pride_note": "{count} times, someone in {village} went hungry rather than ask for help. Pride is its own kind of famine.",
         "debt_note": "When the record closes, {count} favors in {village} had still not been returned. The village kept those accounts in no book, which is why none of them were ever lost.",
         "deaths_note_1": "One soul in {village} did not live through these years. A village carries its dead quietly, which is how the dead end up carrying the village.",
@@ -102,6 +114,14 @@ TEXT = {
         "famine_note": "Year {year} was a year of hunger in {village}.",
         "birth_intro": ["{name}, who grew up here, was {adjs}.",
                         "{name} had been raised in {village} and was {adjs}."],
+        "refusal_pride": [
+            "Pride is its own kind of famine.",
+            "Some people would rather suffer than be seen to suffer.",
+        ],
+        "gift_unexpected": [
+            "Generosity is not always a matter of character.",
+            "Even tight fists open, sometimes.",
+        ],
         "MEDIATION_elder": [
             "It fell to {c} — who had seen enough winters to know how grudges end — to sit them at one table. Something mended.",
             "{c}, who had been in the village long enough to remember the last time this had happened, made them speak. Something loosened.",
@@ -109,8 +129,6 @@ TEXT = {
         "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
         "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
         "died_leaving": "They left behind {names}.",
-        "epilogue": ("When the record ends, {a} and {b} were as close as two people get in {village}; "
-                     "{c} and {d} still were not speaking."),
         "BIRTH": [
             "A child — {c} — came to them. There are things that arrive without ceremony and are felt for years.",
             "{c} was born. The village received them the way it always receives what arrives without asking.",
@@ -194,10 +212,22 @@ TEXT = {
         "title_love": "{a} y {b}: un amor",
         "title_open": "{a} y {b}: un asunto sin cerrar",
         "title_debt": "{a} y {b}: una deuda impagada",
-        "chronicle_title": "Crónica de {village}",
-        "prologue": ("En {village} vivían {n} almas al abrir este registro, "
-                     "y abarca {days} de sus días. "
-                     "Nada de lo que sigue es inventado; solo se miró, y se contó."),
+        "chronicle_title": ["Crónica de {village}",
+                            "Registro de {village}",
+                            "Lo que pasó en {village}"],
+        "arrivals_note_1_named": "{name} llegó a {village} sin historia que la aldea conociera. Nunca sabe bien qué hacer con eso.",
+        "prologue": [("En {village} vivían {n} almas al abrir este registro, "
+                      "y abarca {days} de sus días. "
+                      "Nada de lo que sigue es inventado; solo se miró, y se contó."),
+                     ("Este es el registro de {village}, que tenía {n} almas cuando se abrió. "
+                      "Cubre {days} de sus días. "
+                      "Nada está inventado."),
+                    ],
+        "epilogue": [("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
+                      "{c} y {d} seguían sin hablarse."),
+                     ("Al final, {a} y {b} seguían encontrando razones para cruzarse en {village}. "
+                      "{c} y {d} seguían encontrando razones para no hacerlo."),
+                    ],
         "pride_note": "{count} veces alguien en {village} pasó hambre antes que pedir ayuda. El orgullo es otra clase de hambruna.",
         "debt_note": "Al cerrarse el registro quedaban en {village} {count} favores sin devolver. Esas cuentas no las llevaba la aldea en libro alguno, y por eso no se perdió ninguna.",
         "deaths_note_1": "Una persona de {village} no sobrevivió a estos años. Una aldea lleva a sus muertos en silencio, que es la manera en que los muertos acaban cargando con la aldea.",
@@ -214,6 +244,14 @@ TEXT = {
                         "{name} se había criado en {village} y era {adjs}."],
         "birth_intro_m": ["{name}, nacido en {village}, era {adjs}.",
                           "{name} se había criado en {village} y era {adjs}."],
+        "refusal_pride": [
+            "El orgullo es su propio tipo de hambruna.",
+            "Hay gente que prefiere sufrir antes que ser vista sufriendo.",
+        ],
+        "gift_unexpected": [
+            "La generosidad no es siempre una cuestión de carácter.",
+            "Hasta las manos cerradas se abren a veces.",
+        ],
         "MEDIATION_elder": [
             "Fue {c}, {anciano} de la aldea, quien los hizo sentarse. Hay cosas que solo ceden a la paciencia de los años.",
             "A {c}, que había visto lo suficiente como para saber cómo acaban los rencores, le tocó sentarlos. Algo se aflojó.",
@@ -221,8 +259,6 @@ TEXT = {
         "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
         "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
         "died_leaving": "Dejó atrás a {names}.",
-        "epilogue": ("Cuando el registro se cierra, {a} y {b} eran lo más parecido a inseparables que hay en {village}; "
-                     "{c} y {d} seguían sin hablarse."),
         "BIRTH": [
             "Llegó {c}. Hay cosas que llegan sin que nadie las pida y que la aldea guarda para siempre.",
             "Nació {c}, y la aldea supo de inmediato que era de los suyos.",
@@ -308,10 +344,22 @@ TEXT = {
         "title_love": "{a} et {b} : une histoire",
         "title_open": "{a} et {b} : une affaire non réglée",
         "title_debt": "{a} et {b} : une dette impayée",
-        "chronicle_title": "Chronique de {village}",
-        "prologue": ("{village} comptait {n} âmes à l'ouverture de ce récit, "
-                     "et il couvre {days} jours de leur vie. "
-                     "Rien n'y est inventé ; on a seulement regardé, et raconté."),
+        "chronicle_title": ["Chronique de {village}",
+                            "Registre de {village}",
+                            "Ce qui s'est passé à {village}"],
+        "arrivals_note_1_named": "{name} arriva à {village} sans passé que le village connaisse. On ne sait jamais quoi faire de quelqu'un sans histoire.",
+        "prologue": [("{village} comptait {n} âmes à l'ouverture de ce récit, "
+                      "et il couvre {days} jours de leur vie. "
+                      "Rien n'y est inventé ; on a seulement regardé, et raconté."),
+                     ("Voici le registre de {village}, qui comptait {n} personnes à son ouverture. "
+                      "Il couvre {days} de leurs jours. "
+                      "Rien n'est inventé."),
+                    ],
+        "epilogue": [("Quand le récit se ferme, {a} et {b} étaient aussi proches que deux personnes peuvent l'être à {village} ; "
+                      "{c} et {d} ne se parlaient toujours pas."),
+                     ("À la fin, {a} et {b} trouvaient encore des raisons de se croiser à {village}. "
+                      "{c} et {d} trouvaient encore des raisons de ne pas le faire."),
+                    ],
         "pride_note": "{count} fois, quelqu'un à {village} préféra souffrir de la faim plutôt que de demander de l'aide. L'orgueil est une autre forme de famine.",
         "debt_note": "Quand le récit se ferme, {count} faveurs à {village} n'avaient pas encore été rendues. Le village ne les consignait dans aucun registre, c'est pourquoi aucune ne fut jamais perdue.",
         "deaths_note_1": "Une âme à {village} ne survécut pas à ces années. Un village porte ses morts en silence, c'est ainsi que les morts finissent par porter le village.",
@@ -326,6 +374,14 @@ TEXT = {
         "famine_note": "L'an {year} fut une année de famine à {village}.",
         "birth_intro": ["{name}, {ne} à {village}, était {adjs}.",
                         "Tout le monde à {village} connaissait {name}, {adjs}, depuis l'enfance."],
+        "refusal_pride": [
+            "L'orgueil est sa propre sorte de famine.",
+            "Certains préfèrent souffrir plutôt que d'être vus souffrir.",
+        ],
+        "gift_unexpected": [
+            "La générosité n'est pas toujours une question de caractère.",
+            "Même les poings fermés s'ouvrent parfois.",
+        ],
         "MEDIATION_elder": [
             "Ce fut {c}, {ancien}, qui les fit s'asseoir à la même table. Il y a des choses qui ne cèdent qu'à la patience des années.",
             "{c}, qui avait vu assez d'hivers pour savoir comment les rancœurs se terminent, les fit parler. Quelque chose se dénoua.",
@@ -333,8 +389,6 @@ TEXT = {
         "died_starvation": "{a} ne survécut pas à cette chronique. Un long hiver l'emporta avant la clôture du récit.",
         "died_misfortune": "{a} ne survécut pas à cette chronique ; un coup soudain, quand il ne restait plus rien pour l'absorber.",
         "died_leaving": "{su} laissa {names} derrière {lu}.",
-        "epilogue": ("Quand le récit se ferme, {a} et {b} étaient aussi proches que deux personnes peuvent l'être à {village} ; "
-                     "{c} et {d} ne se parlaient toujours pas."),
         "BIRTH": [
             "Un enfant — {c} — arriva. Il y a des choses qui arrivent sans cérémonie et qui se font sentir pendant des années.",
             "{c} naquit. Le village {lo} reçut comme il reçoit toujours ce qui arrive sans demander.",
@@ -416,10 +470,22 @@ TEXT = {
         "title_love": "{a} e {b}: um amor",
         "title_open": "{a} e {b}: um assunto por resolver",
         "title_debt": "{a} e {b}: uma dívida por saldar",
-        "chronicle_title": "Crónica de {village}",
-        "prologue": ("{village} tinha {n} almas quando este registo se abriu, "
-                     "e abrange {days} dos seus dias. "
-                     "Nada do que aqui está foi inventado; apenas se olhou, e contou."),
+        "chronicle_title": ["Crónica de {village}",
+                            "Registo de {village}",
+                            "O que aconteceu em {village}"],
+        "arrivals_note_1_named": "{name} chegou a {village} sem história que a aldeia conhecesse. A aldeia nunca sabe bem o que fazer com isso.",
+        "prologue": [("{village} tinha {n} almas quando este registo se abriu, "
+                      "e abrange {days} dos seus dias. "
+                      "Nada do que aqui está foi inventado; apenas se olhou, e contou."),
+                     ("Este é o registo de {village}, que tinha {n} pessoas quando se abriu. "
+                      "Abrange {days} dos seus dias. "
+                      "Nada foi inventado."),
+                    ],
+        "epilogue": [("Quando o registo fecha, {a} e {b} eram tão próximos quanto duas pessoas podem ser em {village}; "
+                      "{c} e {d} ainda não se falavam."),
+                     ("No fim, {a} e {b} ainda encontravam razões para se cruzar em {village}. "
+                      "{c} e {d} ainda encontravam razões para não o fazer."),
+                    ],
         "pride_note": "{count} vezes alguém em {village} passou fome antes de pedir ajuda. O orgulho é outra forma de fome.",
         "debt_note": "Quando o registo fecha, {count} favores em {village} ainda não tinham sido devolvidos. A aldeia não guardava essas contas em livro algum, por isso nenhuma se perdeu.",
         "deaths_note_1": "Uma alma em {village} não sobreviveu a estes anos. Uma aldeia carrega os seus mortos em silêncio, que é como os mortos acabam por carregar a aldeia.",
@@ -434,6 +500,14 @@ TEXT = {
         "famine_note": "O ano {year} foi um ano de fome em {village}.",
         "birth_intro": ["{name}, {nascido} em {village}, era {adjs}.",
                         "{name} tinha crescido em {village} e era {adjs}."],
+        "refusal_pride": [
+            "O orgulho tem a sua própria forma de fome.",
+            "Há quem prefira sofrer a ser visto a sofrer.",
+        ],
+        "gift_unexpected": [
+            "A generosidade nem sempre é uma questão de caráter.",
+            "Até os punhos fechados se abrem às vezes.",
+        ],
         "MEDIATION_elder": [
             "Foi {c}, que já tinha visto o suficiente para saber como os rancores acabam, quem os fez sentar à mesma mesa. Algo se desatou.",
             "{c}, que havia vivido na aldeia tempo suficiente para recordar a última vez que isto acontecera, fê-los falar. Algo se desatou.",
@@ -441,8 +515,6 @@ TEXT = {
         "died_starvation": "{a} não sobreviveu a esta crónica. Um longo inverno levou-{lo} antes que o relato fechasse.",
         "died_misfortune": "{a} não sobreviveu a esta crónica; um golpe súbito, quando já não havia nada com que resistir.",
         "died_leaving": "Deixou {names} para trás.",
-        "epilogue": ("Quando o registo fecha, {a} e {b} eram tão próximos quanto duas pessoas podem ser em {village}; "
-                     "{c} e {d} ainda não se falavam."),
         "BIRTH": [
             "Uma criança — {c} — chegou a eles. Há coisas que chegam sem cerimónia e que se fazem sentir por anos.",
             "{c} nasceu. A aldeia recebeu-{lo} como recebe sempre o que chega sem pedir.",
@@ -661,6 +733,14 @@ class Narrator:
                 text += self.t["carried_by"].format(c=self.name(ev.data["via"]))
             if ev.data.get("distorted"):
                 text += self.t["grown"]
+        elif ev.kind == "REFUSAL":
+            refuser = self.world.char(a)
+            if refuser.pride > 0.62 and self.rng.random() < 0.30 and "refusal_pride" in self.t:
+                text += " " + self.rng.choice(self.t["refusal_pride"])
+        elif ev.kind == "GIFT":
+            donor = self.world.char(a)
+            if donor.generosity < 0.35 and self.rng.random() < 0.25 and "gift_unexpected" in self.t:
+                text += " " + self.rng.choice(self.t["gift_unexpected"])
         return text
 
     def death_cause(self, cid: int) -> str | None:
@@ -755,6 +835,21 @@ class Narrator:
             return self.t["close_mended"]
         return self.t["close_warm"]
 
+    def _skipped_note(self, skipped: list) -> str:
+        dominant_kind = max(
+            set(ev.kind for ev in skipped),
+            key=lambda k: sum(1 for e in skipped if e.kind == k))
+        suffix = "_one" if len(skipped) == 1 else ("_many" if len(skipped) <= 6 else "_endless")
+        n = len(skipped)
+        if dominant_kind == "QUARREL" and f"repeat_quarrel{suffix}" in self.t:
+            return self.t[f"repeat_quarrel{suffix}"].format(n=n)
+        if dominant_kind == "REFUSAL" and f"repeat_refusal{suffix}" in self.t:
+            return self.t[f"repeat_refusal{suffix}"].format(n=n)
+        if dominant_kind in ("GIFT", "REPAYMENT") and f"repeat_gift{suffix}" in self.t and suffix != "_endless":
+            return self.t[f"repeat_gift{suffix}"].format(n=n)
+        tone = "repeat_good" if sum(ev.valence for ev in skipped) > 0 else "repeat"
+        return self.t[tone + suffix].format(n=n)
+
     def tell_arc(self, key, events):
         title, final, kinds = self.arc_title(key, events)
         lines = ["## " + title, ""]
@@ -773,23 +868,13 @@ class Narrator:
                 skipped.append(ev)
                 continue
             told_kinds[ev.kind] = True
+            if ev.kind == "WIDOWING" and skipped:
+                body.append(self._skipped_note(skipped))
+                skipped = []
             body.append(self.connector(prev, ev) + " " + self.beat(ev))
             prev = ev
         if skipped:
-            dominant_kind = max(
-                set(ev.kind for ev in skipped),
-                key=lambda k: sum(1 for e in skipped if e.kind == k))
-            suffix = "_one" if len(skipped) == 1 else ("_many" if len(skipped) <= 6 else "_endless")
-            n = len(skipped)
-            if dominant_kind == "QUARREL" and f"repeat_quarrel{suffix}" in self.t:
-                body.append(self.t[f"repeat_quarrel{suffix}"].format(n=n))
-            elif dominant_kind == "REFUSAL" and f"repeat_refusal{suffix}" in self.t:
-                body.append(self.t[f"repeat_refusal{suffix}"].format(n=n))
-            elif dominant_kind in ("GIFT", "REPAYMENT") and f"repeat_gift{suffix}" in self.t and suffix != "_endless":
-                body.append(self.t[f"repeat_gift{suffix}"].format(n=n))
-            else:
-                tone = "repeat_good" if sum(ev.valence for ev in skipped) > 0 else "repeat"
-                body.append(self.t[tone + suffix].format(n=n))
+            body.append(self._skipped_note(skipped))
         lines.append(" ".join(body))
         lines.append("")
         lines.append(self.closing(final, kinds))
@@ -803,9 +888,12 @@ class Narrator:
 
     def chronicle(self):
         w = self.world
-        parts = ["# " + self.t["chronicle_title"].format(village=self.village), ""]
-        parts.append(self.t["prologue"].format(
-            village=self.village, n=self.world.initial_people, days=w.tick))
+        title_tmpl = self.t["chronicle_title"]
+        title = (self.rng.choice(title_tmpl) if isinstance(title_tmpl, list) else title_tmpl)
+        parts = ["# " + title.format(village=self.village), ""]
+        prologue_tmpl = self.t["prologue"]
+        parts.append((self.rng.choice(prologue_tmpl) if isinstance(prologue_tmpl, list) else prologue_tmpl
+                       ).format(village=self.village, n=self.world.initial_people, days=w.tick))
 
         pride_count = sum(1 for ev in w.events
                           if ev.kind == "HARDSHIP" and ev.data.get("pride"))
@@ -824,11 +912,16 @@ class Narrator:
             key = "deaths_note_1" if death_count == 1 else "deaths_note_n"
             parts.append(self.t[key].format(count=death_count, village=self.village))
 
-        arrival_count = sum(1 for ev in w.events if ev.kind == "ARRIVAL")
-        if arrival_count >= 1:
+        arrival_evs = [ev for ev in w.events if ev.kind == "ARRIVAL"]
+        arrival_count = len(arrival_evs)
+        if arrival_count == 1 and "arrivals_note_1_named" in self.t:
+            newcomer = w.char(arrival_evs[0].actors[0])
             parts.append("")
-            key = "arrivals_note_1" if arrival_count == 1 else "arrivals_note_n"
-            parts.append(self.t[key].format(count=arrival_count, village=self.village))
+            parts.append(self.t["arrivals_note_1_named"].format(
+                name=newcomer.name, village=self.village))
+        elif arrival_count >= 2:
+            parts.append("")
+            parts.append(self.t["arrivals_note_n"].format(count=arrival_count, village=self.village))
 
         bond_count = sum(1 for ev in w.events if ev.kind == "BOND")
         if bond_count >= 1:
@@ -870,7 +963,9 @@ class Narrator:
 
         best, worst = self.extremes()
         if best and worst:
-            parts.append(self.t["epilogue"].format(
+            epilogue_tmpl = self.t["epilogue"]
+            epilogue = (self.rng.choice(epilogue_tmpl) if isinstance(epilogue_tmpl, list) else epilogue_tmpl)
+            parts.append(epilogue.format(
                 a=self.name(best[0]), b=self.name(best[1]),
                 c=self.name(worst[0]), d=self.name(worst[1]),
                 village=self.village))
