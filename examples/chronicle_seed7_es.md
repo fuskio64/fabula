@@ -12,6 +12,8 @@ Al cerrarse el registro quedaban en Riofrío 11 favores sin devolver. Esas cuent
 
 En el invierno hubo hambre en Riofrío. Más de la mitad de las casas tenían la despensa escasa, y nadie fingía lo contrario.
 
+No fue la única estación de escasez. Riofrío vivió 2 a lo largo de estos años — el hambre fue un visitante que volvió, no un único invierno difícil.
+
 En la primavera hubo abundancia en Riofrío. La mayor parte de las casas tenía más que suficiente, y el sobrante siempre encuentra la puerta.
 
 ## Wulf y Sable: un amor
@@ -37,6 +39,8 @@ A Orin, reservado y humilde, lo conocía todo el mundo.
 Todo empezó en invierno. Tilda compartió el pan con Orin en una mala racha, y no se olvidó. Poco después. El pan que Tilda dio un día volvió a su propia puerta, y fue Orin quien lo trajo. Para entonces ya era la primavera. Lo que había crecido entre Orin y Tilda se convirtió en algo declarado. Compartieron pan y lumbre a partir de entonces.
 
 Tuvieron suerte el uno con el otro, y lo sabían.
+
+Al cierre de este registro, Sable era la persona de quien los demás en Riofrío se mantenían más cerca — el centro de la aldea, en la medida en que las aldeas tienen un centro.
 
 Al final, Orin y Aldous seguían encontrando razones para cruzarse en Riofrío. Runa y Tilda seguían encontrando razones para no hacerlo.
 

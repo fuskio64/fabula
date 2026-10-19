@@ -11,18 +11,13 @@
 
 ## What Happened
 
-- *Winter, year 1:* quarreled with Sorel.
-- *Winter, year 1:* quarreled with Ilde.
-- *Winter, year 1:* quarreled with Casper.
-- *Winter, year 1:* quarreled with Wren.
-- *Winter, year 1:* quarreled with Gust.
-- *Winter, year 1:* quarreled with Luma.
+- *Winter, year 1:* quarreled with Sorel, Ilde, Casper, and 3 others.
 - *Spring, year 2:* quarreled with Eskel.
 
 ## How the Village Saw Them
 
 At the time Dara left, they were poorly regarded by most of the village.
-Most estranged from Casper.
+Most estranged from Wren.
 
 ## What the Village Lost
 

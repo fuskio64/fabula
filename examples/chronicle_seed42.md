@@ -18,6 +18,8 @@ By the close of this record, Cold Hollow counted more souls than it had at the o
 
 The winter was a hungry one. More than half the houses in Cold Hollow had lean pantries, and no one pretended otherwise.
 
+That was not the only lean season. Cold Hollow counted 5 in the course of these years — hunger was a recurring visitor, not a single hard winter.
+
 Cold Hollow came through that summer with full stores. Those who remember the lean years never quite take it for granted.
 
 ## Tam and Orin: a debt unpaid
@@ -55,6 +57,8 @@ They were lucky in each other, and they knew it.
 ## After
 
 Leif did not leave a loud mark. The quiet ones rarely do, but the place shifts when they go.
+
+At the close of this record, Bryn was the person most others in Cold Hollow kept near — the village's center, in whatever way villages have centers. Orin was present in Cold Hollow through all of this, but not truly woven into it. There, but at the village's edge.
 
 When the record ends, Tam and Hadwin were as close as two people get in Cold Hollow; Hadwin and Orin still were not speaking.
 

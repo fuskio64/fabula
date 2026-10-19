@@ -229,6 +229,11 @@ TEXT = {
         "departure_section": "## Those Who Left",
         "departures_note_1": "One person left {village} during this time, before the record closed.",
         "departures_note_n": "{count} people left {village} during this time, before the record closed.",
+        "lean_recurring": "That was not the only lean season. {village} counted {n} in the course of these years — hunger was a recurring visitor, not a single hard winter.",
+        "social_hub": "At the close of this record, {name} was the person most others in {village} kept near — the village's center, in whatever way villages have centers.",
+        "social_edge": "{name} was present in {village} through all of this, but not truly woven into it. There, but at the village's edge.",
+        "founders_gone": "Of the {original} who opened this record, only {remaining} were still in {village} at its close.",
+        "founders_all_gone": "None of the {original} who opened this record were still in {village} at its close. The village that remained was an entirely different one.",
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
     },
     "es": {
@@ -454,6 +459,11 @@ TEXT = {
         "departure_section": "## Los que se fueron",
         "departures_note_1": "Una persona dejó {village} en este tiempo, antes de que cerrara el registro.",
         "departures_note_n": "{count} personas dejaron {village} en este tiempo, antes de que cerrara el registro.",
+        "lean_recurring": "No fue la única estación de escasez. {village} vivió {n} a lo largo de estos años — el hambre fue un visitante que volvió, no un único invierno difícil.",
+        "social_hub": "Al cierre de este registro, {name} era la persona de quien los demás en {village} se mantenían más cerca — el centro de la aldea, en la medida en que las aldeas tienen un centro.",
+        "social_edge": "{name} estuvo presente en {village} durante todo esto, pero sin llegar a tejerse del todo en ella. Allí, pero en el margen.",
+        "founders_gone": "De los {original} que abrieron este registro, solo {remaining} seguían en {village} al cerrarse.",
+        "founders_all_gone": "Ninguno de los {original} que abrieron este registro seguía en {village} al cerrarse. La aldea que quedó era una completamente distinta.",
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
     },
     "fr": {
@@ -671,6 +681,11 @@ TEXT = {
         "departure_section": "## Ceux qui sont partis",
         "departures_note_1": "Une personne quitta {village} durant cette période, avant que le récit ne se ferme.",
         "departures_note_n": "{count} personnes quittèrent {village} durant cette période, avant que le récit ne se ferme.",
+        "lean_recurring": "Ce ne fut pas la seule saison de disette. {village} en connut {n} au fil de ces années — la faim fut une visiteuse régulière, non un seul hiver difficile.",
+        "social_hub": "À la clôture de ce récit, {name} était la personne dont les autres à {village} restaient le plus proches — le centre du village, dans la mesure où les villages en ont un.",
+        "social_edge": "{name} fut là pendant tout cela, à {village}, sans jamais vraiment y trouver de place. Là pendant toutes ces années, mais en retrait du reste.",
+        "founders_gone": "Au terme de ce récit, {remaining} seulement, sur les {original} qui l'avaient ouvert, étaient encore à {village}.",
+        "founders_all_gone": "Aucun des {original} qui ouvrirent ce récit n'était encore à {village} à sa clôture. Le village qui restait était entièrement différent.",
         "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
     "pt": {
@@ -888,6 +903,11 @@ TEXT = {
         "departure_section": "## Os que partiram",
         "departures_note_1": "Uma pessoa deixou {village} durante este tempo, antes de o registo fechar.",
         "departures_note_n": "{count} pessoas deixaram {village} durante este tempo, antes de o registo fechar.",
+        "lean_recurring": "Não foi a única estação de escassez. {village} conheceu {n} ao longo destes anos — a fome foi uma visita que se repetiu, não um único inverno difícil.",
+        "social_hub": "No encerramento deste registo, {name} era a pessoa de quem os outros em {village} mais se mantinham próximos — o centro da aldeia, na medida em que as aldeias têm um centro.",
+        "social_edge": "{name} esteve presente em {village} durante tudo isto, mas sem nunca se tecer de todo na aldeia. Ali, mas à margem.",
+        "founders_gone": "Dos {original} que abriram este registo, apenas {remaining} estavam ainda em {village} ao seu encerramento.",
+        "founders_all_gone": "Nenhum dos {original} que abriram este registo estava ainda em {village} ao seu encerramento. A aldeia que ficou era uma completamente diferente.",
         "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
     },
     "it": {
@@ -1105,6 +1125,11 @@ TEXT = {
         "departure_section": "## Chi se ne andò",
         "departures_note_1": "Una persona lasciò {village} durante questo periodo, prima che il registro si chiudesse.",
         "departures_note_n": "{count} persone lasciarono {village} durante questo periodo, prima che il registro si chiudesse.",
+        "lean_recurring": "Non fu la sola stagione di carestia. {village} ne contò {n} nel corso di questi anni — la fame fu una visitatrice ricorrente, non un singolo inverno difficile.",
+        "social_hub": "Alla chiusura del registro, {name} era la persona di cui gli altri a {village} si tenevano più vicini — il centro del villaggio, nella misura in cui i villaggi ne hanno uno.",
+        "social_edge": "{name} fu lì per tutto questo, a {village}, senza mai trovare davvero posto nel tessuto comune. Presente, ma ai margini.",
+        "founders_gone": "Dei {original} che aprirono questo registro, solo {remaining} erano ancora a {village} alla sua chiusura.",
+        "founders_all_gone": "Nessuno dei {original} che aprirono questo registro era ancora a {village} alla sua chiusura. Il villaggio che restò era completamente diverso.",
         "colophon": "*(seme del mondo: {seed} — eseguilo di nuovo e le stesse cose accadranno, nello stesso ordine, alle stesse persone)*",
     },
 }
@@ -1168,7 +1193,21 @@ class Narrator:
         return chosen
 
     def drama(self, events):
-        score = sum(abs(ev.valence) for ev in events)
+        tick = max(1, self.world.tick)
+        quarter = tick / 4
+
+        def w(ev):
+            # Gently favour recent events so long runs surface current stories.
+            # Range: 0.8x (very early) to 1.1x (most recent quarter).
+            if ev.tick < quarter:
+                return 0.8
+            elif ev.tick < 2 * quarter:
+                return 0.9
+            elif ev.tick < 3 * quarter:
+                return 1.0
+            return 1.1
+
+        score = sum(abs(ev.valence) * w(ev) for ev in events)
         means = [sum(ev.data["affinity"]) / 2 for ev in events if "affinity" in ev.data]
         poles = [1 if m > 0.1 else -1 for m in means if abs(m) > 0.1]
         flips = sum(1 for x, y in zip(poles, poles[1:]) if x != y)
@@ -1601,12 +1640,65 @@ class Narrator:
                     season=sname, season_in=sname_in, village=self.village)
                 if ev.data.get("had_solidarity") and "LEAN_SEASON_solidarity" in self.t:
                     para += self.rng.choice(self.t["LEAN_SEASON_solidarity"])
+                parts.append(para[0].upper() + para[1:] if para else para)
+                parts.append("")
+                if len(lean_events) > 1 and "lean_recurring" in self.t:
+                    parts.append(self.t["lean_recurring"].format(
+                        n=len(lean_events), village=self.village))
+                    parts.append("")
             else:
                 para = self.rng.choice(self.t["BOUNTY"]).format(
                     season=sname, season_in=sname_in, village=self.village)
-            parts.append(para[0].upper() + para[1:] if para else para)
-            parts.append("")
+                parts.append(para[0].upper() + para[1:] if para else para)
+                parts.append("")
         return parts
+
+    def tell_founding_persistence(self) -> str | None:
+        """Note when a significant fraction of the founding population is gone."""
+        if "founders_gone" not in self.t:
+            return None
+        w = self.world
+        founders = [c for c in w.chars if c.joined_at == 0 and c.parent_ids is None]
+        original = len(founders)
+        if original < 6:
+            return None
+        remaining = sum(1 for c in founders if c.alive)
+        if remaining >= original * 0.6:
+            return None
+        if remaining == 0 and "founders_all_gone" in self.t:
+            return self.t["founders_all_gone"].format(
+                original=original, village=self.village)
+        return self.t["founders_gone"].format(
+            original=original, remaining=remaining, village=self.village)
+
+    def tell_social_close(self) -> str | None:
+        """One or two sentences about the village's social hub and most isolated person."""
+        living = self.world.living
+        if len(living) < 4:
+            return None
+        if "social_hub" not in self.t:
+            return None
+
+        def mutual_avg(c):
+            others = [o for o in living if o.id != c.id]
+            if not others:
+                return 0.0
+            return sum((c.feel(o.id) + o.feel(c.id)) / 2 for o in others) / len(others)
+
+        scores = [(c, mutual_avg(c)) for c in living]
+        village_mean = sum(s for _, s in scores) / len(scores)
+        hub_char, hub_score = max(scores, key=lambda x: x[1])
+        edge_char, edge_score = min(scores, key=lambda x: x[1])
+
+        sentences = []
+        if hub_score >= 0.2 and hub_score >= village_mean + 0.1:
+            sentences.append(self.t["social_hub"].format(
+                name=hub_char.name, village=self.village))
+        if (edge_score <= -0.1 and edge_score <= village_mean - 0.1
+                and edge_char.id != hub_char.id):
+            sentences.append(self.t["social_edge"].format(
+                name=edge_char.name, village=self.village))
+        return " ".join(sentences) if sentences else None
 
     def arc_title(self, key, events):
         a_id, b_id = sorted(key)
@@ -1740,6 +1832,11 @@ class Narrator:
             dep_key = "departures_note_1" if departure_count == 1 else "departures_note_n"
             parts.append(self.t[dep_key].format(count=departure_count, village=self.village))
 
+        persistence_note = self.tell_founding_persistence()
+        if persistence_note:
+            parts.append("")
+            parts.append(persistence_note)
+
         arrival_evs = [ev for ev in w.events if ev.kind == "ARRIVAL"]
         arrival_count = len(arrival_evs)
         if arrival_count == 1 and "arrivals_note_1_named" in self.t:
@@ -1811,6 +1908,11 @@ class Narrator:
         departure_section = self.tell_departures(exclude=dep_arc_ids)
         if departure_section:
             parts.extend(departure_section)
+
+        social_note = self.tell_social_close()
+        if social_note:
+            parts.append(social_note)
+            parts.append("")
 
         best, worst = self.extremes()
         if best and worst:

@@ -99,6 +99,44 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     open_debts = [sum(len(c.debts) for c in w.chars) for w in worlds]
     b_debt = at_least_one(open_debts)
 
+    # social topology at close: hub (one person significantly more connected)
+    # and fracture (one person significantly more isolated)
+    def _mutual_avgs(w):
+        living = w.living
+        if len(living) < 4:
+            return []
+        def m_avg(c):
+            others = [o for o in living if o.id != c.id]
+            return sum((c.feel(o.id) + o.feel(c.id)) / 2 for o in others) / len(others)
+        return [m_avg(c) for c in living]
+
+    def has_hub(w):
+        scores = _mutual_avgs(w)
+        if not scores:
+            return False
+        mean = sum(scores) / len(scores)
+        return max(scores) >= 0.2 and max(scores) >= mean + 0.1
+
+    def has_fracture(w):
+        scores = _mutual_avgs(w)
+        if not scores:
+            return False
+        mean = sum(scores) / len(scores)
+        return min(scores) <= -0.1 and min(scores) <= mean - 0.1
+
+    b_hub = sum(1 for w in worlds if has_hub(w))
+    b_fracture = sum(1 for w in worlds if has_fracture(w))
+
+    # founding persistence: did most founders survive?
+    def founders_mostly_gone(w):
+        orig = [c for c in w.chars if c.joined_at == 0 and c.parent_ids is None]
+        if len(orig) < 6:
+            return False
+        rem = sum(1 for c in orig if c.alive)
+        return rem < len(orig) * 0.6
+
+    b_founders_gone = sum(1 for w in worlds if founders_mostly_gone(w))
+
     # population net change
     grew = sum(1 for w in worlds if len(w.living) > w.initial_people)
     shrank = sum(1 for w in worlds if len(w.living) < w.initial_people)
@@ -161,9 +199,13 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
         ("a stranger arrived", b_arrival),
         ("someone driven out by collective rejection", b_departure),
         ("open favors still unpaid at the close", b_debt),
+        ("a clear social hub at close — one person most others kept near", b_hub),
+        ("a socially isolated person at close — one person nobody kept near", b_fracture),
     ]
     if days >= 360:
         events_with_counts.append(("someone died of old age", b_old_age))
+    if days >= 480:
+        events_with_counts.append(("most of the founding generation gone by close", b_founders_gone))
 
     # Group by threshold
     always   = [(desc, k) for desc, k in events_with_counts if k == n]

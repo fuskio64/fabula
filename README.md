@@ -45,9 +45,13 @@ A longer run yields more: bonds formed, children born, a widowing noted after a 
 
 > *Before the record closed, Dara was gone — pushed out by a coldness the village never quite named.*
 
-> *## Those Who Left*
+The chronicle also notes patterns the arcs can't show: when hunger was not an isolated event but a recurring one, when the village ended up with a clear social center (and a clear edge), and — in very long runs — when the founding generation has been completely replaced:
+
+> *None of the 10 who opened this record were still in Alderford at its close. The village that remained was an entirely different one.*
 >
-> *Dara left Copse End before this record closed. The village had grown cold to Dara, or Dara to it — by the end, the order no longer mattered.*
+> *That was not the only lean season. Alderford counted 11 in the course of these years — hunger was a recurring visitor, not a single hard winter.*
+>
+> *At the close of this record, Miren was the person most others in Alderford kept near — the village's center, in whatever way villages have centers.*
 
 The `--multi N` flag asks the inverse question: across N different seeds, what does this kind of village always do?
 
@@ -55,13 +59,14 @@ The `--multi N` flag asks the inverse question: across N different seeds, what d
 >
 > - A bond formed — 20 of 20 runs (100%).
 > - A village-wide hungry season — 20 of 20 runs (100%).
-> - Open favors still unpaid at the close — 20 of 20 runs (100%).
+> - A clear social hub at close — 20 of 20 runs (100%).
 >
-> **What occasionally happened:**
+> **What sometimes happened:**
 >
+> - A socially isolated person at close — 7 of 20 runs (35%).
 > - Someone driven out by collective rejection — 1 of 20 runs (5%).
 
-See [examples/](examples/) for full output: chronicles in English and Spanish, a character portrait, a multi-seed analysis.
+See [examples/](examples/) for full output: chronicles in English and Spanish, a character portrait, a multi-seed analysis, and a long-run chronicle showing a village completely renewed.
 
 ## How it works
 
@@ -70,7 +75,7 @@ See [examples/](examples/) for full output: chronicles in English and Spanish, a
 - **Bonds and households.** Two people who have grown close enough, for long enough, join households. Their stores become shared. Children born to bonded pairs come of age after three seasons, inheriting something of both parents' natures. When a partner dies, the village closes around the bereaved.
 - **Deaths, arrivals, and departures.** Death is rare but when it comes it ends arcs mid-story. On long runs (400+ days), founders die of old age. When the village shrinks, strangers arrive — people with no history. And when a character is cold-shouldered by enough of the village, they leave: not dead, just gone. The chronicle records it differently from a death, and the portrait can be run on someone who departed.
 - **Gossip is the engine.** Characters retell their most vivid memories. A retelling can distort valence by ±30%, so a mild refusal can arrive as an outrage two mouths later. Most feuds in Fabula start with something that didn't happen the way everyone heard it.
-- **`narrator.py`** — the teller. It scores each pair's shared history for *tellability* (emotional intensity, reversals of affinity, variety of scenes), picks the top arcs, and renders them with handwritten templates in five languages. No text is ever invented: every sentence traces to a recorded event.
+- **`narrator.py`** — the teller. It scores each pair's shared history for *tellability* (emotional intensity, reversals of affinity, variety of scenes, recency), picks the top arcs, and renders them with handwritten templates in five languages. No text is ever invented: every sentence traces to a recorded event. Village-wide observations — recurring hunger, social topology, founding-generation turnover — are added as structural notes around the arcs.
 
 ## Modes
 
