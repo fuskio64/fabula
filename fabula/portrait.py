@@ -5,6 +5,8 @@ character — their traits, the significant moments they lived through, how the
 village saw them at the close of the record, and if they died, what was left.
 """
 
+from collections import defaultdict
+
 from .model import TICKS_PER_SEASON, season_index, year_of
 
 
@@ -124,14 +126,41 @@ def portrait(world, narrator, char_name: str) -> str:
         parts.append("## What Happened")
         parts.append("")
         seasons = ("spring", "summer", "autumn", "winter")
+
+        # Group same-kind events by (kind, season, year) for condensed rendering
+        season_kind_groups: dict = defaultdict(list)
         for ev in top_sorted:
-            when = f"{seasons[season_index(ev.tick)]}, year {year_of(ev.tick)}"
+            season_kind_groups[(ev.kind, season_index(ev.tick), year_of(ev.tick))].append(ev)
+
+        seen_sk: set = set()
+        for ev in top_sorted:
+            sk = (ev.kind, season_index(ev.tick), year_of(ev.tick))
+            if sk in seen_sk:
+                continue
+            seen_sk.add(sk)
+            group = season_kind_groups[sk]
+            when = f"{seasons[sk[1]]}, year {sk[2]}"
             fn = _EVENT_LINES.get(ev.kind)
             if fn is None:
                 continue
-            desc = fn(ev, char.id, world)
-            if desc:
+            if len(group) >= 3 and ev.kind == "QUARREL":
+                names = []
+                for ge in group:
+                    others = [a for a in ge.actors if a != char.id]
+                    if others:
+                        names.append(world.char(others[0]).name)
+                if len(names) > 4:
+                    shown = ", ".join(names[:3])
+                    desc = f"quarreled with {shown}, and {len(names) - 3} others"
+                elif len(names) > 1:
+                    desc = "quarreled with " + ", ".join(names[:-1]) + f", and {names[-1]}"
+                else:
+                    desc = f"quarreled with {names[0]}"
                 parts.append(f"- *{when.capitalize()}:* {desc}.")
+            else:
+                desc = fn(ev, char.id, world)
+                if desc:
+                    parts.append(f"- *{when.capitalize()}:* {desc}.")
         parts.append("")
 
     # --- How the village saw them ---
