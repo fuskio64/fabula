@@ -128,6 +128,10 @@ TEXT = {
         ],
         "died_starvation": "{a} did not outlive this chronicle. A long winter took them before the account closed.",
         "died_misfortune": "{a} did not outlive this chronicle; a sudden blow, when there was nothing left to absorb it.",
+        "died_old_age": [
+            "{a} did not outlive this chronicle. They had lived in {village} long enough to be part of its memory; then they became only that.",
+            "{a} lived a long life in {village} and the village changed around them several times over. A different kind of ending from the others.",
+        ],
         "died_leaving": "They left behind {names}.",
         "BIRTH": [
             "A child — {c} — came to them. There are things that arrive without ceremony and are felt for years.",
@@ -174,6 +178,10 @@ TEXT = {
         "legacy_quiet": [
             "{name} did not leave a loud mark. The quiet ones rarely do, but the place shifts when they go.",
             "{name} was part of the background that makes a place feel inhabited. The silence afterward was specific.",
+        ],
+        "legacy_long_life": [
+            "{name} had lived in {village} long enough to remember things no one else could. That kind of witness is not replaced; it is lost.",
+            "The years {name} spent in {village} outlasted several versions of the place. When they went, something the village had known about itself went too.",
         ],
         "arrival_arc_title": "{name}: a stranger",
         "arrival_intro": [
@@ -327,6 +335,10 @@ TEXT = {
         ],
         "died_starvation": "{a} no sobrevivió a esta crónica. Un invierno largo puso fin a sus días antes de que el relato cerrara.",
         "died_misfortune": "{a} no sobrevivió a esta crónica; un golpe repentino, cuando ya no quedaba nada con que resistirlo.",
+        "died_old_age": [
+            "{a} no sobrevivió a esta crónica. Había vivido en {village} el tiempo suficiente para ser parte de su memoria; después pasó a serlo solo.",
+            "{a} tuvo una vida larga en {village}, y la aldea cambió varias veces a su alrededor. Un final distinto al de los demás.",
+        ],
         "died_leaving": "Dejó atrás a {names}.",
         "BIRTH": [
             "Llegó {c}. Hay cosas que llegan sin que nadie las pida y que la aldea guarda para siempre.",
@@ -377,6 +389,10 @@ TEXT = {
         "legacy_quiet": [
             "{name} no dejó una huella ruidosa. Los silenciosos rara vez la dejan, pero el lugar cambia cuando se van.",
             "{name} era parte del ruido de fondo que hace que un lugar parezca habitado. El silencio que dejó fue preciso.",
+        ],
+        "legacy_long_life": [
+            "{name} había vivido en {village} el tiempo suficiente para recordar lo que nadie más podía. Ese tipo de testigo no se sustituye; se pierde.",
+            "Los años que {name} pasó en {village} sobrevivieron a varias versiones del lugar. Cuando se fue, se fue con él algo que la aldea sabía de sí misma.",
         ],
         "arrival_arc_title": "{name}: una llegada",
         "arrival_intro": [
@@ -526,6 +542,10 @@ TEXT = {
         ],
         "died_starvation": "{a} ne survécut pas à cette chronique. Un long hiver l'emporta avant la clôture du récit.",
         "died_misfortune": "{a} ne survécut pas à cette chronique ; un coup soudain, quand il ne restait plus rien pour l'absorber.",
+        "died_old_age": [
+            "{a} ne survécut pas à cette chronique. Assez d'années à {village} pour en faire partie de la mémoire ; pour n'en devenir que cela.",
+            "{a} avait mené une longue vie à {village}, et le village avait changé plusieurs fois autour d'elle. Une fin différente des autres.",
+        ],
         "died_leaving": "{su} laissa {names} derrière {lu}.",
         "BIRTH": [
             "Un enfant — {c} — arriva. Il y a des choses qui arrivent sans cérémonie et qui se font sentir pendant des années.",
@@ -572,6 +592,10 @@ TEXT = {
         "legacy_quiet": [
             "{name} ne laissa pas une empreinte bruyante. Les discrets le font rarement, mais le lieu change quand ils partent.",
             "{name} faisait partie du fond sonore qui rend un endroit habité. Le silence qui suivit fut précis.",
+        ],
+        "legacy_long_life": [
+            "{name} avait vécu à {village} assez longtemps pour se souvenir de ce que personne d'autre ne pouvait. Ce genre de témoin ne se remplace pas ; il se perd.",
+            "Les années que {name} passa à {village} survécurent à plusieurs versions du lieu. Quand {name} s'en alla, quelque chose que le village savait de lui-même s'en alla aussi.",
         ],
         "arrival_arc_title": "{name}: une arrivée",
         "arrival_intro": [
@@ -721,6 +745,10 @@ TEXT = {
         ],
         "died_starvation": "{a} não sobreviveu a esta crónica. Um longo inverno levou-{lo} antes que o relato fechasse.",
         "died_misfortune": "{a} não sobreviveu a esta crónica; um golpe súbito, quando já não havia nada com que resistir.",
+        "died_old_age": [
+            "{a} não sobreviveu a esta crónica. Tinha vivido em {village} tempo suficiente para fazer parte da sua memória; depois passou a ser apenas isso.",
+            "{a} teve uma vida longa em {village}, e a aldeia mudou várias vezes à sua volta. Um fim diferente dos outros.",
+        ],
         "died_leaving": "Deixou {names} para trás.",
         "BIRTH": [
             "Uma criança — {c} — chegou a eles. Há coisas que chegam sem cerimónia e que se fazem sentir por anos.",
@@ -768,6 +796,10 @@ TEXT = {
             "{name} não deixou uma marca ruidosa. Os silenciosos raramente a deixam, mas o lugar muda quando partem.",
             "{name} fazia parte do ruído de fundo que faz um lugar parecer habitado. O silêncio que ficou foi preciso.",
         ],
+        "legacy_long_life": [
+            "{name} tinha vivido em {village} tempo suficiente para lembrar o que mais ninguém podia. Esse tipo de testemunha não se substitui; perde-se.",
+            "Os anos que {name} passou em {village} sobreviviram a várias versões do lugar. Quando partiu, foi com ela algo que a aldeia sabia de si mesma.",
+        ],
         "arrival_arc_title": "{name}: uma chegada",
         "arrival_intro": [
             "{name} chegou {season_in}. {village} não estava à espera de ninguém.",
@@ -801,6 +833,209 @@ TEXT = {
             "{season_in}, a aldeia estava bem alimentada e notava-se — noites mais longas, mais visitas, brigas que não chegavam a começar.",
         ],
         "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
+    },
+    "it": {
+        "seasons": ("la primavera", "l'estate", "l'autunno", "l'inverno"),
+        "seasons_in": ("in primavera", "in estate", "in autunno", "in inverno"),
+        "traits": {
+            "diligence": (("instancabile", "instancabile"), ("pigro", "pigra")),
+            "generosity": (("generoso", "generosa"), ("avaro", "avara")),
+            "pride": (("orgoglioso", "orgogliosa"), ("umile", "umile")),
+            "openness": (("loquace", "loquace"), ("riservato", "riservata")),
+        },
+        "intro": ["{name} era {adjs}.",
+                  "Tutti conoscevano {name}, {adjs}."],
+        "and": "e",
+        "opening": ["Tutto iniziò {season}.",
+                    "I primi segni si videro {season}."],
+        "later_season": ["Arrivò {season}.", "Era già {season}."],
+        "soon_after": ["Non passarono molti giorni.", "Poco dopo."],
+        "GIFT": ["Quando le provviste di {b} si svuotarono, {a} riempì il cesto senza che nessuno glielo chiedesse.",
+                 "{a} condivise il pane con {b} in un momento difficile, e non fu dimenticato."],
+        "REFUSAL": ["{a} andò affamato alla porta di {b} e tornò a mani vuote.",
+                    "{b} mandò via {a} senza nulla, e tutto il villaggio ne sentì il freddo."],
+        "OFFENSE": ["La voce arrivò a {a} che {b} stava parlando della faccenda a porte chiuse.",
+                    "Qualcuno si incaricò di far sapere a {a} quello che {b} andava dicendo."],
+        "QUARREL": ["{a} e {b} litigarono dove tutti potevano sentirli, e il villaggio finse di non ascoltare.",
+                    "Tra {a} e {b} ci furono parole grosse, in piena strada."],
+        "MEDIATION": ["{c} li sedette allo stesso tavolo e non lasciò andare nessuno dei due in collera. Qualcosa si allentò.",
+                      "Ci volle {c}, di cui si fidavano entrambi, perché si parlassero di nuovo."],
+        "REPAYMENT": ["{a} non aveva dimenticato il vecchio favore, e quando il bisogno bussò a casa di {b}, lo restituì senza dire una parola.",
+                      "Il pane che {b} aveva dato tornò alla sua stessa porta, e fu {a} a portarlo."],
+        "INGRATITUDE": ["{a} aveva riempito il cesto di {b} una volta; quando il suo rimase vuoto, la porta di {b} non si aprì. Il villaggio tiene conti che nessun registro vede, e quello fu annotato in ogni testa.",
+                        "{b} doveva a {a} il tipo di debito che nessuno scrive, e lo pagò con la porta chiusa. Nessuno disse nulla. Tutti contarono."],
+        "RESENTMENT": ["Il favore pesava a {a}. È dura dover qualcosa, e {a} cominciò ad evitare lo sguardo di {b}.",
+                       "{a} non aveva mai restituito quel che {b} gli aveva dato un giorno, e il debito inasprì, come inasprisce la gratitudine quando si porta troppo a lungo."],
+        "BOND": ["{a} e {b} si scelsero prima che cambiasse la stagione. Il villaggio lo sapeva già prima che uno dei due dicesse una parola.",
+                 "Quello che era cresciuto tra {a} e {b} divenne qualcosa di dichiarato. Condivisero pane e focolare da allora in poi."],
+        "WIDOWING": ["{a} sopravvisse a {b}. Il villaggio non lasciò {a} {solo} con il dolore, che è il modo in cui si porta il lutto in un posto così.",
+                     "Quando {b} morì, {a} perse qualcosa che non si perde allo stesso modo del resto."],
+        "carried_by": " Fu {c} a portare la storia.",
+        "grown": " La storia si era ingrandita per strada.",
+        "repeat_one": "Accadde ancora una volta.",
+        "repeat_many": "Accadde ancora {n} volte, come se i rancori tenessero un loro calendario.",
+        "repeat_good_one": "E accadde di nuovo, in silenzio, quando ce n'era bisogno.",
+        "repeat_good_many": "E accadde ancora {n} volte, senza che nessuno ne facesse caso; anche la bontà ha il suo calendario.",
+        "repeat_endless": "E così continuò, stagione dopo stagione, finché contare perse di senso.",
+        "repeat_good_endless": "E così continuò, stagione dopo stagione; ci sono cose che non hanno bisogno di essere notate per andare avanti.",
+        "seasons_later": [
+            "Passarono alcune stagioni. Quando arrivò {season}, la faccenda era ancora aperta.",
+            "Tornò {season}, e nulla era stato risolto.",
+        ],
+        "year_later": "Passò un anno; quando arrivò {season}, la faccenda era ancora lì.",
+        "years_later": "{n} anni dopo, quando arrivò {season}, il villaggio la portava ancora.",
+        "repeat_quarrel_one": "Litigarono di nuovo, come se la prima volta fosse stata una prova.",
+        "repeat_quarrel_many": "Litigarono ancora {n} volte. Non si risolveva mai nulla.",
+        "repeat_quarrel_endless": "E così continuò la lite, stagione dopo stagione; ci sono cose che hanno bisogno di un testimone più che di una soluzione.",
+        "repeat_refusal_one": "La porta rimase chiusa ancora una volta.",
+        "repeat_refusal_many": "La porta rimase chiusa ancora {n} volte. Il villaggio le contò tutte.",
+        "repeat_gift_one": "Il pane arrivò di nuovo, senza dire nulla.",
+        "repeat_gift_many": "Il pane arrivò ancora {n} volte, senza cerimonie; è quello che lo fa essere pane.",
+        "close_relapse": "La pace che fu fatta non tenne; ci sono crepe che vogliono restare aperte.",
+        "close_broken": "Nessuno la rattoppò. Alla fine si incrociavano senza dire una parola.",
+        "close_uneasy": "Rimase tra loro una pace precaria, sottile come il ghiaccio di marzo.",
+        "close_mended": "Quello che si era rotto, lo rattopparono meglio di prima.",
+        "close_warm": "Furono fortunati l'uno con l'altro, e lo sapevano.",
+        "close_widowed": "Erano stati fortunati l'uno con l'altro. Il finale fu triste, ma era una tristezza che il villaggio riconosceva.",
+        "title_reconciliation": "{a} e {b}: una riconciliazione",
+        "title_estrangement": "{a} e {b}: un allontanamento",
+        "title_feud": "{a} e {b}: una rivalità",
+        "title_bond": "{a} e {b}: un'amicizia",
+        "title_love": "{a} e {b}: un amore",
+        "title_open": "{a} e {b}: una faccenda in sospeso",
+        "title_debt": "{a} e {b}: un debito non saldato",
+        "chronicle_title": ["Cronaca di {village}",
+                            "Registro di {village}",
+                            "Quel che accadde a {village}"],
+        "arrivals_note_1_named": "{name} arrivò a {village} senza una storia che il villaggio conoscesse. Non si sa mai bene cosa fare con qualcuno che non ha storia.",
+        "prologue": [("{village} contava {n} anime all'apertura di questo registro, "
+                      "e abbraccia {days} dei loro giorni. "
+                      "Nulla di ciò che segue è inventato; è stato solo osservato, e raccontato."),
+                     ("{village} aveva {n} persone quando questo registro fu aperto. "
+                      "Abbraccia {days} dei loro giorni. "
+                      "Nulla è inventato."),
+                    ],
+        "epilogue": [("Quando il registro si chiude, {a} e {b} erano quanto di più vicino ci sia a inseparabili a {village}; "
+                      "{c} e {d} ancora non si parlavano."),
+                     ("Alla fine, {a} e {b} trovavano ancora ragioni per incontrarsi a {village}. "
+                      "{c} e {d} trovavano ancora ragioni per non farlo."),
+                    ],
+        "pride_note": "{count} volte qualcuno a {village} patì la fame piuttosto che chiedere aiuto. L'orgoglio è la sua stessa forma di carestia.",
+        "debt_note": "Alla chiusura del registro, a {village} c'erano ancora {count} favori non restituiti. Il villaggio non li teneva in nessun libro, ed è per questo che nessuno andò perduto.",
+        "deaths_note_1": "Un'anima di {village} non sopravvisse a questi anni. Un villaggio porta i suoi morti in silenzio, ed è così che i morti finiscono per portare il villaggio.",
+        "deaths_note_n": "{count} anime di {village} non sopravvissero a questi anni. Un villaggio porta i suoi morti in silenzio, ed è così che i morti finiscono per portare il villaggio.",
+        "arrivals_note_1": "Uno straniero arrivò a {village} in questo tempo. Il villaggio non sa mai bene cosa fare con qualcuno che non ha storia.",
+        "arrivals_note_n": "{count} stranieri arrivarono a {village} in questo tempo. Il villaggio non sa mai bene cosa fare con qualcuno che non ha storia.",
+        "bonds_note_1": "Un legame si formò a {village} in questo tempo. La maggior parte delle cose durature inizia senza che nessuno segni il momento.",
+        "bonds_note_n": "{count} legami si formarono a {village} in questo tempo. La maggior parte delle cose durature inizia senza che nessuno segni il momento.",
+        "births_note_1": "Un bambino nacque a {village} in questo tempo.",
+        "births_note_n": "{count} bambini nacquero a {village} in questo tempo.",
+        "growth_note": "Alla chiusura del registro, {village} contava più anime di quante ne avesse all'apertura.",
+        "famine_note": "L'anno {year} fu un anno di fame a {village}.",
+        "birth_intro": ["{name}, {nato} a {village}, era {adjs}.",
+                        "Tutti a {village} conoscevano {name}, {adjs}, fin dall'infanzia."],
+        "refusal_pride": [
+            "L'orgoglio è la sua stessa forma di carestia.",
+            "C'è chi preferisce soffrire piuttosto che essere visto soffrire.",
+        ],
+        "gift_unexpected": [
+            "La generosità non è sempre una questione di carattere.",
+            "Anche i pugni chiusi si aprono, a volte.",
+        ],
+        "MEDIATION_elder": [
+            "Fu {c}, {anziano}, a farli sedere allo stesso tavolo. Ci sono cose che cedono solo alla pazienza degli anni.",
+            "{c}, che aveva visto abbastanza inverni da sapere come finiscono i rancori, li fece parlare. Qualcosa si allentò.",
+        ],
+        "died_starvation": "{a} non sopravvisse a questa cronaca. Un lungo inverno pose fine ai suoi giorni prima che il resoconto si chiudesse.",
+        "died_misfortune": "{a} non sopravvisse a questa cronaca; un colpo improvviso, quando non restava più nulla con cui resistere.",
+        "died_old_age": [
+            "{a} non sopravvisse a questa cronaca. Aveva vissuto a {village} abbastanza a lungo da essere parte della sua memoria; poi ne divenne soltanto questo.",
+            "{a} ebbe una vita lunga a {village}, e il villaggio cambiò più volte attorno a {a}. Un finale diverso dagli altri.",
+        ],
+        "died_leaving": "Lasciò {names} dietro di sé.",
+        "BIRTH": [
+            "Un bambino — {c} — arrivò a loro. Ci sono cose che arrivano senza cerimonie e si fanno sentire per anni.",
+            "Nacque {c}, e il villaggio {lo} accolse come accoglie sempre ciò che arriva senza chiedere.",
+        ],
+        "COMING_OF_AGE": "{c} crebbe. Il villaggio contò un adulto in più tra i propri.",
+        "elder_intro": [
+            "{name}, che era qui da più tempo di chiunque altro e ricordava quello che gli altri avevano dimenticato, era {adjs}.",
+            "Tutti erano andati da {name} almeno una volta. {name} era {adjs}.",
+        ],
+        "QUARREL_private": [
+            "{a} e {b} la risolsero senza testimoni. La mattina dopo il villaggio lo sapeva comunque.",
+            "Quel che passò tra {a} e {b} passò senza che nessuno lo vedesse. Le liti private tendono a durare di più.",
+        ],
+        "winter_later": [
+            "Tornò l'inverno, e con lui tornò la vecchia faccenda irrisolta.",
+            "Arrivò un altro inverno. La versione fredda di tutto il resto tornò con lui.",
+        ],
+        "dead_section": "## Dopo",
+        "legacy_generous": [
+            "{name} fu l'anima più generosa che {village} avesse conosciuto. Il villaggio sentì il freddo della sua assenza.",
+            "{name} non aveva mai rimandato nessuno a mani vuote. Quel tipo di persona non si sostituisce; si nota quando manca.",
+        ],
+        "legacy_proud": [
+            "{name} se ne andò con i conti in pareggio. C'è chi non sopporta di lasciare debiti.",
+            "{name} aveva tenuto tutto in equilibrio fino alla fine. Una perdita complicata.",
+        ],
+        "legacy_diligent": [
+            "{name} aveva lavorato più di chiunque altro. Quello che {name} teneva in piedi passava inosservato finché non si fermò.",
+            "I campi che {name} curava erano i meglio tenuti di {village}. Quel sapere non si scrive.",
+        ],
+        "legacy_mediator": [
+            "{name} aveva fatto sedere allo stesso tavolo più vicini in lite di chiunque altro. Il villaggio sentì la mancanza come si sente quella di chi sa fare tacere le liti.",
+            "La gente andava da {name} con cose che non poteva dire altrove. Poi non rimase nessuno così.",
+        ],
+        "legacy_bonded": [
+            "{name} aveva costruito una vita con {partner} a {village}. Quel legame divenne parte della storia del villaggio.",
+            "Quello che {name} aveva costruito qui — gli anni, il legame con {partner} — lo sopravvisse. Di solito è così.",
+        ],
+        "legacy_newcomer": [
+            "{name} arrivò a {village} senza una storia e se ne andò con una. È così che si vede l'appartenenza.",
+            "{name} venne da fuori e diventò parte del posto comunque. Il villaggio porta quel tipo di presenza in silenzio.",
+        ],
+        "legacy_quiet": [
+            "{name} non lasciò un'impronta rumorosa. I silenziosi raramente lo fanno, ma il posto cambia quando se ne vanno.",
+            "{name} faceva parte del rumore di fondo che rende un posto abitato. Il silenzio che rimase fu preciso.",
+        ],
+        "legacy_long_life": [
+            "{name} aveva vissuto a {village} abbastanza a lungo da ricordare quello che nessun altro poteva. Quel tipo di testimone non si sostituisce; si perde.",
+            "Gli anni che {name} trascorse a {village} sopravvissero a diverse versioni del posto. Quando {name} se ne andò, se ne andò qualcosa che il villaggio sapeva di sé.",
+        ],
+        "arrival_arc_title": "{name}: un arrivo",
+        "arrival_intro": [
+            "{name} arrivò {season_in}. {village} non aspettava nessuno.",
+            "{name} giunse a {village} {season_in}, senza una storia che qualcuno qui conoscesse.",
+        ],
+        "arrival_settled": [
+            "Alla chiusura del registro, {name} faceva parte di {village} come una pietra fa parte di un muro — senza rumore, ma presente.",
+            "{name} era arrivato senza conoscere nessuno e se ne andò come parte di {village}. I villaggi si fanno così.",
+        ],
+        "arrival_cold": [
+            "Alla chiusura del registro, {village} e {name} non si erano ancora capiti del tutto.",
+            "Rimase tra {name} e il villaggio una distanza che non si chiuse mai del tutto.",
+        ],
+        "arrival_died": [
+            "{name} non restò abbastanza a lungo per essere pienamente conosciuto. Il villaggio annotò la perdita come annota tutte le cose brevi.",
+            "{name} arrivò e non sopravvisse a questi anni. Ci sono storie che iniziano e finiscono prima che il racconto le trovi.",
+        ],
+        "village_section": "## Il villaggio",
+        "LEAN_SEASON": [
+            "{village} attraversò {season} nella fame. Più della metà delle case aveva le dispense vuote, e nessuno fingeva il contrario.",
+            "La scarsità colpì {village} {season_in} tutta in una volta — non una casa alla volta, ma tutte insieme. Quel tipo di fame è diverso.",
+            "{season_in}, la maggior parte di {village} contava le riserve giorno per giorno. I forni erano prudenti e i bambini ricevevano il meglio di quel che restava.",
+        ],
+        "LEAN_SEASON_solidarity": [
+            " Chi aveva ancora qualcosa da dare lo diede senza che nessuno lo chiedesse. Il villaggio nel suo meglio ha quell'aspetto.",
+            " Alcuni svuotarono parte dei propri scaffali in quelli dei vicini. Nessuno ne parlò dopo.",
+        ],
+        "BOUNTY": [
+            "{village} attraversò {season} nell'abbondanza. La maggior parte delle case aveva più del necessario, e il surplus trova sempre la porta.",
+            "{village} passò {season} con le dispense piene. Chi ricorda gli anni di fame non lo dà mai per scontato.",
+            "{season_in}, il villaggio era ben nutrito e si vedeva — serate più lunghe, più visite, liti che non iniziavano mai del tutto.",
+        ],
+        "colophon": "*(seme del mondo: {seed} — eseguilo di nuovo e le stesse cose accadranno, nello stesso ordine, alle stesse persone)*",
     },
 }
 
@@ -947,6 +1182,9 @@ class Narrator:
             elif self.lang == "pt":
                 fields["nascido"] = self._gform(char.id, "nascido", "nascida")
                 key = "birth_intro"
+            elif self.lang == "it":
+                fields["nato"] = self._gform(char.id, "nato", "nata")
+                key = "birth_intro"
             else:
                 key = "birth_intro"
             return self.rng.choice(self.t[key]).format(**fields)
@@ -983,9 +1221,10 @@ class Narrator:
             child_id = ev.actors[0]
             fields = {"c": self.name(child_id),
                       "a": self.name(ev.actors[1]), "b": self.name(ev.actors[2])}
-            if self.lang in ("fr", "pt"):
-                fields["lo"] = self._gform(child_id, "le" if self.lang == "fr" else "o",
-                                           "la" if self.lang == "fr" else "a")
+            if self.lang in ("fr", "pt", "it"):
+                _m = {"fr": "le", "pt": "o", "it": "lo"}
+                _f = {"fr": "la", "pt": "a", "it": "la"}
+                fields["lo"] = self._gform(child_id, _m[self.lang], _f[self.lang])
             return self.rng.choice(self.t["BIRTH"]).format(**fields)
         if ev.kind == "COMING_OF_AGE":
             return self.t["COMING_OF_AGE"].format(c=self.name(ev.actors[0]))
@@ -1000,6 +1239,8 @@ class Narrator:
                     fields["anciano"] = self._gform(mid, "anciano", "anciana")
                 elif self.lang == "fr":
                     fields["ancien"] = self._gform(mid, "l'ancien", "l'ancienne")
+                elif self.lang == "it":
+                    fields["anziano"] = self._gform(mid, "l'anziano", "l'anziana")
                 return self.rng.choice(self.t["MEDIATION_elder"]).format(**fields)
         if ev.kind == "WIDOWING":
             # gender-agreeing words for the survivor ({a})
@@ -1009,6 +1250,8 @@ class Narrator:
                 fields["seul"] = self._gform(a, "seul", "seule")
             elif self.lang == "pt":
                 fields["sozinho"] = self._gform(a, "sozinho", "sozinha")
+            elif self.lang == "it":
+                fields["solo"] = self._gform(a, "solo", "sola")
         if ev.kind == "QUARREL" and not ev.data.get("witnesses") and "QUARREL_private" in self.t:
             text = self.pick("QUARREL_private", **fields)
         else:
@@ -1065,10 +1308,11 @@ class Narrator:
         if cause is None:
             return None
         dead = self.world.char(cid)
-        fields: dict = {"a": self.name(cid)}
+        fields: dict = {"a": self.name(cid), "village": self.village}
         if self.lang == "pt":
             fields["lo"] = self._gform(cid, "o", "a")
-        note = self.t[f"died_{cause}"].format(**fields)
+        tmpl = self.t[f"died_{cause}"]
+        note = (self.rng.choice(tmpl) if isinstance(tmpl, list) else tmpl).format(**fields)
         survivors = self._survivors_of(cid)
         if survivors and "died_leaving" in self.t:
             if self.lang == "fr":
@@ -1108,6 +1352,8 @@ class Narrator:
             return self.rng.choice(self.t["legacy_bonded"]).format(**fields)
         if char.joined_at > 0 and "legacy_newcomer" in self.t:
             return self.rng.choice(self.t["legacy_newcomer"]).format(**fields)
+        if (self.death_cause(cid) == "old_age" and "legacy_long_life" in self.t):
+            return self.rng.choice(self.t["legacy_long_life"]).format(**fields)
         if "legacy_quiet" in self.t:
             return self.rng.choice(self.t["legacy_quiet"]).format(**fields)
         return None

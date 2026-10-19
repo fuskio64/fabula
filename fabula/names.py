@@ -36,4 +36,9 @@ VILLAGE_NAMES = {
         "Folgosinho", "Monsanto", "Alpedrinha", "Soutelo",
         "Vilar de Mouros", "Rio de Mouro", "Freixo", "Agualva",
     ],
+    "it": [
+        "Fontanella", "Pietraviva", "Malvagna", "Roccasicura",
+        "Castelvetro", "Acquafredda", "Bosconero", "Valfabbrica",
+        "Sassoferrato", "Pietramala", "Montechiarugolo", "Fiumedinisi",
+    ],
 }

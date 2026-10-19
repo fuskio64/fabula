@@ -28,6 +28,12 @@ CHILDHOOD_TICKS = 72
 # Elder: ticks in the village before a character becomes the village's memory (11 seasons).
 ELDER_TICKS = 264
 
+# Old age: past OLD_AGE_TICKS, dying of natural causes becomes possible.
+# The probability grows linearly with each tick of overage. On a default
+# 192-tick run no one reaches this; on a 400-tick run founders are at risk.
+OLD_AGE_TICKS = 360        # 15 seasons
+OLD_AGE_DEATH_RATE = 0.00012  # added probability per tick of overage
+
 
 class World:
     def __init__(self, seed: int = 0, people: int = 10):
@@ -99,6 +105,7 @@ class World:
         self.sys_misfortune()
         self.sys_need_and_gift()
         self.sys_deaths()
+        self.sys_aging()
         self.sys_debts()
         self.sys_gossip()
         self.sys_quarrel()
@@ -230,6 +237,16 @@ class World:
                 c.starvation_streak = 0
             if c.starvation_streak >= STARVATION_TICKS:
                 self._kill(c, "starvation")
+
+    def sys_aging(self):
+        for c in self.living:
+            age = self.tick - c.joined_at
+            overage = age - OLD_AGE_TICKS
+            if overage <= 0:
+                continue
+            p = min(0.018, overage * OLD_AGE_DEATH_RATE)
+            if self.rng.random() < p:
+                self._kill(c, "old_age")
 
     def sys_debts(self):
         """A favor carried too long starts to work on the one who owes it.
