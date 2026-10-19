@@ -225,6 +225,7 @@ TEXT = {
             "{a} left {village} before this record closed. The village had grown cold to {a}, or {a} to it — by the end, the order no longer mattered.",
             "{a} was gone before the end. Some people do not wait for a village to make up its mind about them.",
         ],
+        "departure_arc_title": "{name}: a departure",
         "departure_section": "## Those Who Left",
         "departures_note_1": "One person left {village} during this time, before the record closed.",
         "departures_note_n": "{count} people left {village} during this time, before the record closed.",
@@ -449,6 +450,7 @@ TEXT = {
             "{a} dejó {village} antes de que cerrara este registro. La aldea se había enfriado con {a}, o {a} con ella — al final, el orden ya no importaba.",
             "{a} se fue antes del final. Hay personas que no esperan a que una aldea decida qué piensa de ellas.",
         ],
+        "departure_arc_title": "{name}: una partida",
         "departure_section": "## Los que se fueron",
         "departures_note_1": "Una persona dejó {village} en este tiempo, antes de que cerrara el registro.",
         "departures_note_n": "{count} personas dejaron {village} en este tiempo, antes de que cerrara el registro.",
@@ -665,6 +667,7 @@ TEXT = {
             "{a} quitta {village} avant la fin de ce récit. Le village s'était refroidi à l'égard de {a}, ou l'inverse — à la fin, l'ordre n'avait plus d'importance.",
             "{a} était parti avant la fin. Certaines personnes n'attendent pas qu'un village se décide.",
         ],
+        "departure_arc_title": "{name} : un départ",
         "departure_section": "## Ceux qui sont partis",
         "departures_note_1": "Une personne quitta {village} durant cette période, avant que le récit ne se ferme.",
         "departures_note_n": "{count} personnes quittèrent {village} durant cette période, avant que le récit ne se ferme.",
@@ -881,6 +884,7 @@ TEXT = {
             "{a} deixou {village} antes de este registo fechar. A aldeia esfriara para com {a}, ou {a} para com ela — no fim, a ordem já não importava.",
             "{a} foi-se antes do final. Há pessoas que não esperam que uma aldeia decida o que pensa delas.",
         ],
+        "departure_arc_title": "{name}: uma partida",
         "departure_section": "## Os que partiram",
         "departures_note_1": "Uma pessoa deixou {village} durante este tempo, antes de o registo fechar.",
         "departures_note_n": "{count} pessoas deixaram {village} durante este tempo, antes de o registo fechar.",
@@ -1097,6 +1101,7 @@ TEXT = {
             "{a} lasciò {village} prima che questo registro si chiudesse. Il villaggio si era raffreddato verso {a}, o viceversa — alla fine, l'ordine non contava più.",
             "{a} se ne andò prima della fine. Alcune persone non aspettano che un villaggio decida cosa pensa di loro.",
         ],
+        "departure_arc_title": "{name}: una partenza",
         "departure_section": "## Chi se ne andò",
         "departures_note_1": "Una persona lasciò {village} durante questo periodo, prima che il registro si chiudesse.",
         "departures_note_n": "{count} persone lasciarono {village} durante questo periodo, prima che il registro si chiudesse.",
@@ -1450,10 +1455,50 @@ class Narrator:
             parts.append("")
         return parts
 
-    def tell_departures(self) -> list[str]:
-        """Short notes for characters who left the village."""
+    def departure_arcs(self, pair_arcs: list) -> list:
+        """Departed characters with enough unclaimed history for their own arc."""
         w = self.world
+        claimed_ids = {ev.data["id"] for _, evs in pair_arcs for ev in evs}
         departed = [c for c in w.chars if not c.alive and c.departed]
+        result = []
+        for c in departed:
+            events = [ev for ev in w.events
+                      if ev.kind in ARC_KINDS and c.id in ev.actors[:2]
+                      and ev.data["id"] not in claimed_ids]
+            if len(events) < 2:
+                continue
+            result.append((c.id, events))
+        return result
+
+    def tell_departure_arc(self, cid: int, events: list) -> str | None:
+        """An arc about how someone came to be pushed out of the village."""
+        if "departure_arc_title" not in self.t:
+            return None
+        char = self.world.char(cid)
+        title = self.t["departure_arc_title"].format(name=char.name)
+        lines = ["## " + title, ""]
+        intro = self.introduce(char)
+        if intro:
+            lines.append(intro)
+            lines.append("")
+        body_events = sorted(events, key=lambda e: e.tick)[:4]
+        body, prev = [], None
+        for ev in body_events:
+            body.append(self.connector(prev, ev) + " " + self.beat(ev))
+            prev = ev
+        if body:
+            lines.append(" ".join(body))
+            lines.append("")
+        note = self.departure_note(cid)
+        if note:
+            lines.append(note)
+        return "\n".join(lines)
+
+    def tell_departures(self, exclude: set | None = None) -> list[str]:
+        """Short notes for departed characters not covered by a departure arc."""
+        w = self.world
+        exclude = exclude or set()
+        departed = [c for c in w.chars if not c.alive and c.departed and c.id not in exclude]
         if not departed or "departed_note" not in self.t:
             return []
         parts: list[str] = []
@@ -1744,8 +1789,15 @@ class Narrator:
             parts.extend(village_moments)
         pair_arcs = self.arcs()
         arr_arcs = self.arrival_arcs(pair_arcs)
+        dep_arcs = self.departure_arcs(pair_arcs)
+        dep_arc_ids = {cid for cid, _ in dep_arcs}
         for cid, events in arr_arcs:
             section = self.tell_arrival_arc(cid, events)
+            if section:
+                parts.append(section)
+                parts.append("")
+        for cid, events in dep_arcs:
+            section = self.tell_departure_arc(cid, events)
             if section:
                 parts.append(section)
                 parts.append("")
@@ -1756,7 +1808,7 @@ class Narrator:
         if dead_section:
             parts.extend(dead_section)
 
-        departure_section = self.tell_departures()
+        departure_section = self.tell_departures(exclude=dep_arc_ids)
         if departure_section:
             parts.extend(departure_section)
 
