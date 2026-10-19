@@ -69,6 +69,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     lean     = count(worlds, "LEAN_SEASON")
     bounty   = count(worlds, "BOUNTY")
     arrivals = count(worlds, "ARRIVAL")
+    departures = count(worlds, "DEPARTURE")
     pride_hardships = count_if(
         worlds, "HARDSHIP", lambda ev: ev.data.get("pride", False)
     )
@@ -91,6 +92,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     b_bounty  = at_least_one(bounty)
     b_pride   = at_least_one(pride_hardships)
     b_arrival = at_least_one(arrivals)
+    b_departure = at_least_one(departures)
     b_old_age = at_least_one(old_age_deaths)
 
     # open debts at end of run
@@ -157,6 +159,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
         ("a season of abundance most of the village shared", b_bounty),
         ("someone went hungry rather than ask for help", b_pride),
         ("a stranger arrived", b_arrival),
+        ("someone driven out by collective rejection", b_departure),
         ("open favors still unpaid at the close", b_debt),
     ]
     if days >= 360:

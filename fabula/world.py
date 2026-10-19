@@ -118,6 +118,7 @@ class World:
             self.sys_lean_season()
             self.sys_bounty()
             self.sys_arrivals()
+            self.sys_exile()
         self.tick += 1
 
     # ------------------------------------------------------------------
@@ -551,6 +552,30 @@ class World:
         if len(self.living) < self.initial_people and self.rng.random() < 0.55:
             self._arrive()
 
+    def sys_exile(self):
+        """A person cold-shouldered by enough of the village may quietly leave.
+
+        Bonded characters have roots; strangers lose patience sooner than founders.
+        The village must have at least 4 souls — too small to exile anyone.
+        """
+        living = self.living
+        if len(living) < 4:
+            return
+        for c in living:
+            if c.childhood or c.partner is not None:
+                continue
+            if self.tick - c.joined_at < 48:   # too new — still finding their place
+                continue
+            others = [o for o in living if o.id != c.id]
+            avg_toward_c = sum(o.feel(c.id) for o in others) / len(others)
+            if avg_toward_c > -0.28:
+                continue
+            severity = max(0.0, -avg_toward_c - 0.28)
+            base_p = 0.015 if c.joined_at > 0 else 0.008   # strangers leave sooner
+            p = min(0.04, base_p * severity * 4)
+            if self.rng.random() < p:
+                self._depart(c)
+
     # ------------------------------------------------------------------
     # deaths, arrivals, births
 
@@ -609,6 +634,35 @@ class World:
                 if val < -0.3 and enemy_id < len(self.chars) and enemy_id != child.id:
                     if self.chars[enemy_id].alive:
                         child.shift(enemy_id, val * 0.15)
+
+    def _depart(self, c: Character):
+        """Character leaves the village — driven out by collective coldness, not dead."""
+        if not c.alive:
+            return
+        c.alive = False
+        c.departed = True
+        c.died_at = self.tick
+        ev = self.emit("DEPARTURE", (c.id,), -0.65)
+        self.remember(c, ev)
+        # Sever bond without WIDOWING — this is abandonment, not bereavement
+        if c.partner is not None:
+            survivor = self.chars[c.partner]
+            if survivor.alive:
+                survivor.affinity[c.id] = max(-1.0, survivor.feel(c.id) - 0.5)
+            survivor.partner = None
+        c.partner = None
+        # Creditors are stiffed; the village notes it
+        for debt in c.debts.values():
+            cred = self.chars[debt.creditor]
+            if cred.alive:
+                cred.shift(c.id, -0.12)
+        c.debts.clear()
+        for other in self.chars:
+            if c.id in other.debts:
+                del other.debts[c.id]
+        # The village registers the departure with a mild chill — they pushed, after all
+        for other in self.living:
+            other.shift(c.id, -0.03)
 
     def _arrive(self):
         from .names import FIRST_NAMES

@@ -77,6 +77,8 @@ TEXT = {
         "close_mended": "Whatever had been broken, they mended it better than new.",
         "close_warm": "They were lucky in each other, and they knew it.",
         "close_widowed": "They had been lucky in each other. The ending was a sad one, but it was a sadness the village recognized.",
+        "close_departed": "Before the record closed, {a} was gone — pushed out by a coldness the village never quite named.",
+        "close_departed_bonded": "What {a} and their partner built did not survive the village's coldness. {a} left; the bond did not outlast the leaving.",
         "title_reconciliation": "{a} and {b}: a reconciliation",
         "title_estrangement": "{a} and {b}: an estrangement",
         "title_feud": "{a} and {b}: a feud",
@@ -215,6 +217,17 @@ TEXT = {
             "{village} came through that {season} with full stores. Those who remember the lean years never quite take it for granted.",
             "That {season}, the village was well-fed and it showed — in longer evenings, in more visiting, in quarrels that did not quite start.",
         ],
+        "DEPARTURE": [
+            "{a} left {village}. No announcement, no formal goodbye — one morning the absence was simply there.",
+            "The news that {a} had left reached the village the way all news does: someone noticed an absence, and then someone told someone.",
+        ],
+        "departed_note": [
+            "{a} left {village} before this record closed. The village had grown cold to {a}, or {a} to it — by the end, the order no longer mattered.",
+            "{a} was gone before the end. Some people do not wait for a village to make up its mind about them.",
+        ],
+        "departure_section": "## Those Who Left",
+        "departures_note_1": "One person left {village} during this time, before the record closed.",
+        "departures_note_n": "{count} people left {village} during this time, before the record closed.",
         "colophon": "*(world seed {seed} — run it again and the same things will happen, in the same order, to the same people)*",
     },
     "es": {
@@ -282,6 +295,8 @@ TEXT = {
         "close_mended": "Lo que se había roto, lo remendaron mejor que nuevo.",
         "close_warm": "Tuvieron suerte el uno con el otro, y lo sabían.",
         "close_widowed": "Habían tenido suerte el uno con el otro. El final fue triste, pero era una tristeza que la aldea reconocía.",
+        "close_departed": "Antes de que cerrara el registro, {a} se había ido — empujado por un frío que la aldea nunca terminó de ponerle nombre.",
+        "close_departed_bonded": "Lo que {a} y su pareja habían construido no sobrevivió al frío de la aldea. {a} se fue; el vínculo no sobrevivió a la marcha.",
         "title_reconciliation": "{a} y {b}: una reconciliación",
         "title_estrangement": "{a} y {b}: un distanciamiento",
         "title_feud": "{a} y {b}: una enemistad",
@@ -426,6 +441,17 @@ TEXT = {
             "{village} llegó a {season} con las despensas llenas. Los que recuerdan los años de hambre nunca lo dan por seguro.",
             "Durante {season} la aldea estaba bien alimentada, y se notaba: noches más largas, más visitas, peleas que no llegaban a empezar.",
         ],
+        "DEPARTURE": [
+            "{a} se fue de {village}. Sin anuncio, sin despedida — una mañana la ausencia estaba simplemente ahí.",
+            "La noticia de que {a} había dejado {village} llegó como siempre llegan las noticias: alguien notó la falta, y alguien se lo contó a alguien.",
+        ],
+        "departed_note": [
+            "{a} dejó {village} antes de que cerrara este registro. La aldea se había enfriado con {a}, o {a} con ella — al final, el orden ya no importaba.",
+            "{a} se fue antes del final. Hay personas que no esperan a que una aldea decida qué piensa de ellas.",
+        ],
+        "departure_section": "## Los que se fueron",
+        "departures_note_1": "Una persona dejó {village} en este tiempo, antes de que cerrara el registro.",
+        "departures_note_n": "{count} personas dejaron {village} en este tiempo, antes de que cerrara el registro.",
         "colophon": "*(semilla del mundo: {seed} — vuelve a ejecutarla y pasarán las mismas cosas, en el mismo orden, a la misma gente)*",
     },
     "fr": {
@@ -491,6 +517,8 @@ TEXT = {
         "close_mended": "Ce qui s'était brisé, ils le recoussirent mieux qu'avant.",
         "close_warm": "Ils eurent de la chance l'un envers l'autre, et ils le savaient.",
         "close_widowed": "Ils avaient eu de la chance l'un envers l'autre. La fin fut triste, mais c'était une tristesse que le village reconnut.",
+        "close_departed": "Avant la fin du récit, {a} était parti — poussé dehors par une froideur que le village n'a jamais su nommer.",
+        "close_departed_bonded": "Ce que {a} et son partenaire avaient construit ne survécut pas à la froideur du village. {a} partit ; le lien ne survécut pas au départ.",
         "title_reconciliation": "{a} et {b} : une réconciliation",
         "title_estrangement": "{a} et {b} : un éloignement",
         "title_feud": "{a} et {b} : une inimitié",
@@ -629,6 +657,17 @@ TEXT = {
             "{village} passa {season} sans manquer de rien. Ceux qui se souviennent des années de disette ne s'y habituent jamais.",
             "{season_in}, le village était bien nourri et cela se voyait — des soirées plus longues, plus de visites, des querelles qui ne commençaient pas vraiment.",
         ],
+        "DEPARTURE": [
+            "{a} quitta {village}. Sans annoncer, sans vrai adieu — un matin l'absence était là, c'est tout.",
+            "La nouvelle que {a} avait quitté {village} se répandit comme toutes les nouvelles : quelqu'un nota l'absence, quelqu'un en parla.",
+        ],
+        "departed_note": [
+            "{a} quitta {village} avant la fin de ce récit. Le village s'était refroidi à l'égard de {a}, ou l'inverse — à la fin, l'ordre n'avait plus d'importance.",
+            "{a} était parti avant la fin. Certaines personnes n'attendent pas qu'un village se décide.",
+        ],
+        "departure_section": "## Ceux qui sont partis",
+        "departures_note_1": "Une personne quitta {village} durant cette période, avant que le récit ne se ferme.",
+        "departures_note_n": "{count} personnes quittèrent {village} durant cette période, avant que le récit ne se ferme.",
         "colophon": "*(graine du monde : {seed} — lancez-la de nouveau et les mêmes choses arriveront, dans le même ordre, aux mêmes gens)*",
     },
     "pt": {
@@ -694,6 +733,8 @@ TEXT = {
         "close_mended": "O que se quebrara, consertaram-no melhor do que era.",
         "close_warm": "Tiveram sorte um com o outro, e sabiam-no.",
         "close_widowed": "Tinham tido sorte um com o outro. O fim foi triste, mas era uma tristeza que a aldeia reconhecia.",
+        "close_departed": "Antes de fechar o registo, {a} tinha ido embora — empurrado por uma frieza que a aldeia nunca soube nomear.",
+        "close_departed_bonded": "O que {a} e o seu companheiro tinham construído não sobreviveu à frieza da aldeia. {a} partiu; o laço não sobreviveu à partida.",
         "title_reconciliation": "{a} e {b}: uma reconciliação",
         "title_estrangement": "{a} e {b}: um afastamento",
         "title_feud": "{a} e {b}: uma rivalidade",
@@ -832,6 +873,17 @@ TEXT = {
             "{village} passou {season} com as despensas cheias. Os que se lembram dos anos de fome nunca dão isso por garantido.",
             "{season_in}, a aldeia estava bem alimentada e notava-se — noites mais longas, mais visitas, brigas que não chegavam a começar.",
         ],
+        "DEPARTURE": [
+            "{a} foi-se embora de {village}. Sem anúncio, sem despedida formal — uma manhã a ausência estava simplesmente lá.",
+            "A notícia de que {a} tinha deixado {village} chegou como chegam sempre: alguém notou a falta, alguém o contou a alguém.",
+        ],
+        "departed_note": [
+            "{a} deixou {village} antes de este registo fechar. A aldeia esfriara para com {a}, ou {a} para com ela — no fim, a ordem já não importava.",
+            "{a} foi-se antes do final. Há pessoas que não esperam que uma aldeia decida o que pensa delas.",
+        ],
+        "departure_section": "## Os que partiram",
+        "departures_note_1": "Uma pessoa deixou {village} durante este tempo, antes de o registo fechar.",
+        "departures_note_n": "{count} pessoas deixaram {village} durante este tempo, antes de o registo fechar.",
         "colophon": "*(semente do mundo: {seed} — corre-a de novo e as mesmas coisas acontecerão, na mesma ordem, às mesmas pessoas)*",
     },
     "it": {
@@ -897,6 +949,8 @@ TEXT = {
         "close_mended": "Quello che si era rotto, lo rattopparono meglio di prima.",
         "close_warm": "Furono fortunati l'uno con l'altro, e lo sapevano.",
         "close_widowed": "Erano stati fortunati l'uno con l'altro. Il finale fu triste, ma era una tristezza che il villaggio riconosceva.",
+        "close_departed": "Prima che il registro si chiudesse, {a} era andato via — spinto da una freddezza che il villaggio non seppe mai nominare.",
+        "close_departed_bonded": "Ciò che {a} e il suo compagno avevano costruito non sopravvisse alla freddezza del villaggio. {a} partì; il legame non sopravvisse alla partenza.",
         "title_reconciliation": "{a} e {b}: una riconciliazione",
         "title_estrangement": "{a} e {b}: un allontanamento",
         "title_feud": "{a} e {b}: una rivalità",
@@ -1035,6 +1089,17 @@ TEXT = {
             "{village} passò {season} con le dispense piene. Chi ricorda gli anni di fame non lo dà mai per scontato.",
             "{season_in}, il villaggio era ben nutrito e si vedeva — serate più lunghe, più visite, liti che non iniziavano mai del tutto.",
         ],
+        "DEPARTURE": [
+            "{a} lasciò {village}. Senza annuncio, senza vero commiato — un mattino l'assenza era semplicemente lì.",
+            "La notizia che {a} aveva lasciato {village} si sparse come si spargono sempre: qualcuno notò l'assenza, qualcuno ne parlò.",
+        ],
+        "departed_note": [
+            "{a} lasciò {village} prima che questo registro si chiudesse. Il villaggio si era raffreddato verso {a}, o viceversa — alla fine, l'ordine non contava più.",
+            "{a} se ne andò prima della fine. Alcune persone non aspettano che un villaggio decida cosa pensa di loro.",
+        ],
+        "departure_section": "## Chi se ne andò",
+        "departures_note_1": "Una persona lasciò {village} durante questo periodo, prima che il registro si chiudesse.",
+        "departures_note_n": "{count} persone lasciarono {village} durante questo periodo, prima che il registro si chiudesse.",
         "colophon": "*(seme del mondo: {seed} — eseguilo di nuovo e le stesse cose accadranno, nello stesso ordine, alle stesse persone)*",
     },
 }
@@ -1324,6 +1389,17 @@ class Narrator:
             note += " " + self.t["died_leaving"].format(**leaving)
         return note
 
+    def departure_note(self, cid: int) -> str | None:
+        """Postscript for a character who left the village, or None if they stayed/died."""
+        char = self.world.char(cid)
+        if char.alive or not char.departed:
+            return None
+        if "departed_note" not in self.t:
+            return None
+        tmpl = self.t["departed_note"]
+        return (self.rng.choice(tmpl) if isinstance(tmpl, list) else tmpl).format(
+            a=self.name(cid), village=self.village)
+
     # ------------------------------------------------------------------
     # assembling the chronicle
 
@@ -1359,9 +1435,9 @@ class Narrator:
         return None
 
     def tell_dead(self) -> list[str]:
-        """Legacy notes for dead characters as a section."""
+        """Legacy notes for dead characters as a section (excludes those who departed)."""
         w = self.world
-        dead = [c for c in w.chars if not c.alive]
+        dead = [c for c in w.chars if not c.alive and not c.departed]
         if not dead or "dead_section" not in self.t:
             return []
         legacies = [(c, self.death_legacy(c.id)) for c in dead]
@@ -1372,6 +1448,23 @@ class Narrator:
         for _, leg in legacies:
             parts.append(leg)
             parts.append("")
+        return parts
+
+    def tell_departures(self) -> list[str]:
+        """Short notes for characters who left the village."""
+        w = self.world
+        departed = [c for c in w.chars if not c.alive and c.departed]
+        if not departed or "departed_note" not in self.t:
+            return []
+        parts: list[str] = []
+        if "departure_section" in self.t:
+            parts.append(self.t["departure_section"])
+            parts.append("")
+        for c in departed:
+            note = self.departure_note(c.id)
+            if note:
+                parts.append(note)
+                parts.append("")
         return parts
 
     def arrival_arcs(self, pair_arcs: list) -> list:
@@ -1492,11 +1585,19 @@ class Narrator:
             shape = "open"
         return self.t["title_" + shape].format(a=a.name, b=b.name), final, kinds
 
-    def closing(self, final, kinds):
+    def closing(self, final, kinds, departed_cid=None):
         if "BOND" in kinds and "WIDOWING" in kinds:
             return self.t["close_widowed"]
+        if "BOND" in kinds and departed_cid is not None:
+            name = self.name(departed_cid)
+            if "close_departed_bonded" in self.t:
+                return self.t["close_departed_bonded"].format(a=name, village=self.village)
+            return self.t["close_widowed"]   # structural parallel: bond ended
         if "BOND" in kinds:
             return self.t["close_warm"]
+        if departed_cid is not None and final < -0.2 and "close_departed" in self.t:
+            return self.t["close_departed"].format(
+                a=self.name(departed_cid), village=self.village)
         if final < -0.35:
             if "MEDIATION" in kinds:
                 return self.t["close_relapse"]
@@ -1549,8 +1650,12 @@ class Narrator:
             body.append(self._skipped_note(skipped))
         lines.append(" ".join(body))
         lines.append("")
-        lines.append(self.closing(final, kinds))
+        departed_in_arc = next(
+            (cid for cid in key if not self.world.char(cid).alive
+             and self.world.char(cid).departed), None)
+        lines.append(self.closing(final, kinds, departed_cid=departed_in_arc))
         # If one of the pair died, note it quietly after the closing.
+        # Departures are covered separately by tell_departures().
         for cid in sorted(key):
             note = self.death_note(cid)
             if note is not None:
@@ -1583,6 +1688,12 @@ class Narrator:
             parts.append("")
             key = "deaths_note_1" if death_count == 1 else "deaths_note_n"
             parts.append(self.t[key].format(count=death_count, village=self.village))
+
+        departure_count = sum(1 for ev in w.events if ev.kind == "DEPARTURE")
+        if departure_count >= 1 and "departures_note_1" in self.t:
+            parts.append("")
+            dep_key = "departures_note_1" if departure_count == 1 else "departures_note_n"
+            parts.append(self.t[dep_key].format(count=departure_count, village=self.village))
 
         arrival_evs = [ev for ev in w.events if ev.kind == "ARRIVAL"]
         arrival_count = len(arrival_evs)
@@ -1644,6 +1755,10 @@ class Narrator:
         dead_section = self.tell_dead()
         if dead_section:
             parts.extend(dead_section)
+
+        departure_section = self.tell_departures()
+        if departure_section:
+            parts.extend(departure_section)
 
         best, worst = self.extremes()
         if best and worst:

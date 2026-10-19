@@ -65,6 +65,7 @@ class Character:
     childhood: bool = False         # not yet come of age; different food dynamics
     born_at: int | None = None      # tick of birth, for the growing-up countdown
     elder: bool = False             # has lived long enough to be the village's memory
+    departed: bool = False          # left the village (not dead; driven out)
     joined_at: int = 0              # tick when this character joined (0 for founders)
     memories: list = field(default_factory=list)
     affinity: dict = field(default_factory=dict)  # other id -> -1..1

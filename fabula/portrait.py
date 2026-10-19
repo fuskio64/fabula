@@ -51,8 +51,11 @@ def portrait(world, narrator, char_name: str) -> str:
     adj_str = " and ".join(adjs)
 
     if not char.alive:
-        cause = narrator.death_cause(char.id)
-        status = f"died ({cause.replace('_', ' ')})" if cause else "dead"
+        if char.departed:
+            status = "left the village"
+        else:
+            cause = narrator.death_cause(char.id)
+            status = f"died ({cause.replace('_', ' ')})" if cause else "dead"
     elif char.elder:
         status = "living, elder"
     elif char.childhood:
@@ -100,12 +103,21 @@ def portrait(world, narrator, char_name: str) -> str:
 
     # --- Significant events ---
     _SKIP = {"RUMOR", "FESTIVAL", "HARVEST", "LEAN_SEASON", "BOUNTY",
-             "HARDSHIP", "MISFORTUNE", "ARRIVAL"}
+             "HARDSHIP", "MISFORTUNE", "ARRIVAL", "DEPARTURE"}
     involved = [
         ev for ev in world.events
         if char.id in ev.actors and ev.kind not in _SKIP
     ]
-    top = sorted(involved, key=lambda e: -abs(e.valence))[:7]
+    # Group by (kind, other_id) — keep the most valenced event per pair-interaction
+    # so "quarreled with X 5 times" collapses into one entry
+    groups: dict = {}
+    for ev in involved:
+        others = [a for a in ev.actors if a != char.id]
+        other_id = others[0] if others else -1
+        key = (ev.kind, other_id)
+        if key not in groups or abs(ev.valence) > abs(groups[key].valence):
+            groups[key] = ev
+    top = sorted(groups.values(), key=lambda e: -abs(e.valence))[:7]
     top_sorted = sorted(top, key=lambda e: e.tick)
 
     if top_sorted:
@@ -141,7 +153,10 @@ def portrait(world, narrator, char_name: str) -> str:
 
         parts.append("## How the Village Saw Them")
         parts.append("")
-        parts.append(f"At the close of this record, {char.name} was {regard}.")
+        if not char.alive and char.departed:
+            parts.append(f"At the time {char.name} left, they were {regard}.")
+        else:
+            parts.append(f"At the close of this record, {char.name} was {regard}.")
 
         # closest and most estranged
         def mutual(c):
@@ -203,11 +218,16 @@ def portrait(world, narrator, char_name: str) -> str:
     if debt_lines:
         parts += debt_lines + [""]
 
-    # --- Death legacy ---
+    # --- Death/departure legacy ---
     if not char.alive:
-        legacy = narrator.death_legacy(char.id)
-        if legacy:
-            parts += ["## What Was Left", "", legacy, ""]
+        if char.departed:
+            legacy = narrator.death_legacy(char.id)
+            if legacy:
+                parts += ["## What the Village Lost", "", legacy, ""]
+        else:
+            legacy = narrator.death_legacy(char.id)
+            if legacy:
+                parts += ["## What Was Left", "", legacy, ""]
 
     parts.append(f"*(world seed {world.seed} · {narrator.village})*")
     parts.append("")
