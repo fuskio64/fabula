@@ -25,6 +25,7 @@ _EVENT_LINES = {
                     if ev.actors[0] == cid
                     else f"was turned away by {w.char([a for a in ev.actors if a != cid][0]).name}, after having helped them"),
     "RESENTMENT":  (lambda ev, cid, w: f"came to resent {w.char([a for a in ev.actors if a != cid][0]).name} for a debt that curdled"),
+    "ESTRANGEMENT": (lambda ev, cid, w: f"became permanently estranged from {w.char([a for a in ev.actors if a != cid][0]).name} — the silence between them became official"),
     "REPAYMENT":   (lambda ev, cid, w: f"returned what was owed to {w.char([a for a in ev.actors if a != cid][0]).name}, without being asked"
                     if ev.actors[0] == cid
                     else f"received back what was owed by {w.char([a for a in ev.actors if a != cid][0]).name}"),

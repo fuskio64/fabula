@@ -12,7 +12,8 @@ from .model import TICKS_PER_SEASON, season_index, year_of
 from .names import VILLAGE_NAMES
 
 ARC_KINDS = {"GIFT", "REFUSAL", "OFFENSE", "QUARREL", "MEDIATION",
-             "REPAYMENT", "INGRATITUDE", "RESENTMENT", "BOND", "WIDOWING"}
+             "REPAYMENT", "INGRATITUDE", "RESENTMENT", "BOND", "WIDOWING",
+             "ESTRANGEMENT"}
 
 TEXT = {
     "en": {
@@ -46,6 +47,10 @@ TEXT = {
                         "{b} owed {a} the kind of debt nobody writes down, and paid it with a closed door. Nobody said anything. Everybody counted it."],
         "RESENTMENT": ["The favor sat heavy on {a}. It is a hard thing to owe, and {a} took to avoiding {b}'s eye.",
                        "{a} had never returned what {b} once gave, and the owing curdled, the way gratitude does when it is carried too long."],
+        "ESTRANGEMENT": [
+            "Whatever the original quarrel had been, what {a} and {b} had between them had passed from bitter into permanent.",
+            "By that season it was clear: neither {a} nor {b} expected it to change. The hostility had stopped being about any one thing.",
+        ],
         "BOND": ["{a} and {b} chose each other before the season turned. The village knew before either of them said a word about it.",
                  "What had grown between {a} and {b} became something declared. They shared bread and hearth after that."],
         "WIDOWING": ["{a} outlived {b}. The village did not leave {a} alone with it, which is how grief is carried in a place like that.",
@@ -270,6 +275,10 @@ TEXT = {
                         "{b} le debía a {a} una de esas deudas que nadie escribe, y la pagó con la puerta cerrada. Nadie dijo nada. Todos la contaron."],
         "RESENTMENT": ["El favor le pesaba a {a}. Deber es cosa dura, y {a} empezó a esquivarle la mirada a {b}.",
                        "{a} nunca devolvió lo que {b} le dio un día, y la deuda se agrió, como se agria la gratitud cuando se carga demasiado tiempo."],
+        "ESTRANGEMENT": [
+            "Fuera cual fuera la disputa original, lo que había entre {a} y {b} había pasado de amargo a permanente.",
+            "Para esa estación estaba claro: ni {a} ni {b} esperaban que cambiara. La hostilidad había dejado de ser por algo en concreto.",
+        ],
         "BOND": ["{a} y {b} se eligieron mutuamente antes de que cambiara la estación. La aldea lo supo antes de que ninguno de los dos dijera una palabra al respecto.",
                  "Lo que había crecido entre {a} y {b} se convirtió en algo declarado. Compartieron pan y lumbre a partir de entonces."],
         "WIDOWING": ["{a} sobrevivió a {b}. La aldea no dejó a {a} {solo} con ello, que es como se lleva el duelo en un lugar así.",
@@ -498,6 +507,10 @@ TEXT = {
                         "{b} devait à {a} le genre de dette que personne n'écrit, et la solda par une porte fermée. Personne ne dit rien. Tout le monde compta."],
         "RESENTMENT": ["La faveur pesait à {a}. C'est chose difficile que de devoir, et {a} se mit à éviter le regard de {b}.",
                        "{a} n'avait jamais rendu ce que {b} lui avait donné, et la dette s'aigrit, comme la gratitude s'aigrit quand on la porte trop longtemps."],
+        "ESTRANGEMENT": [
+            "Quelle qu'ait été la dispute d'origine, ce qui existait entre {a} et {b} avait passé de l'amer au définitif.",
+            "Cette saison-là, c'était clair : ni {a} ni {b} n'attendait que cela change. L'hostilité avait cessé d'être liée à quoi que ce soit de précis.",
+        ],
         "BOND": ["{a} et {b} se choisirent avant que la saison ne tourne. Le village le sut avant qu'ils en disent un mot.",
                  "Ce qui avait grandi entre {a} et {b} devint quelque chose d'assumé. Ils partagèrent pain et foyer après cela."],
         "WIDOWING": ["{a} survécut à {b}. Le village ne laissa pas {a} {seul} avec cela, c'est ainsi qu'on porte le deuil en pareil endroit.",
@@ -720,6 +733,10 @@ TEXT = {
                         "{b} devia a {a} o tipo de dívida que ninguém escreve, e saldou-a com uma porta fechada. Ninguém disse nada. Toda a gente contou."],
         "RESENTMENT": ["O favor pesava a {a}. É coisa difícil dever, e {a} começou a evitar o olhar de {b}.",
                        "{a} nunca tinha devolvido o que {b} lhe dera, e a dívida azedou, como a gratidão azeda quando se carrega demasiado tempo."],
+        "ESTRANGEMENT": [
+            "Qualquer que fosse a disputa original, o que havia entre {a} e {b} tinha passado de amargo a permanente.",
+            "Nessa estação ficou claro: nem {a} nem {b} esperavam que mudasse. A hostilidade tinha deixado de ser por algo específico.",
+        ],
         "BOND": ["{a} e {b} escolheram-se um ao outro antes que a estação mudasse. A aldeia soube antes de qualquer um deles dizer uma palavra.",
                  "O que crescera entre {a} e {b} tornou-se algo assumido. Partilharam pão e lar a partir daí."],
         "WIDOWING": ["{a} sobreviveu a {b}. A aldeia não deixou {a} {sozinho} com isso, que é assim que o luto se carrega num lugar como este.",
@@ -942,6 +959,10 @@ TEXT = {
                         "{b} doveva a {a} il tipo di debito che nessuno scrive, e lo pagò con la porta chiusa. Nessuno disse nulla. Tutti contarono."],
         "RESENTMENT": ["Il favore pesava a {a}. È dura dover qualcosa, e {a} cominciò ad evitare lo sguardo di {b}.",
                        "{a} non aveva mai restituito quel che {b} gli aveva dato un giorno, e il debito inasprì, come inasprisce la gratitudine quando si porta troppo a lungo."],
+        "ESTRANGEMENT": [
+            "Qualunque fosse stata la disputa originale, quello che c'era tra {a} e {b} era passato dall'amaro al definitivo.",
+            "Quella stagione era chiaro: né {a} né {b} si aspettava che cambiasse. L'ostilità aveva smesso di riguardare qualcosa di preciso.",
+        ],
         "BOND": ["{a} e {b} si scelsero prima che cambiasse la stagione. Il villaggio lo sapeva già prima che uno dei due dicesse una parola.",
                  "Quello che era cresciuto tra {a} e {b} divenne qualcosa di dichiarato. Condivisero pane e focolare da allora in poi."],
         "WIDOWING": ["{a} sopravvisse a {b}. Il villaggio non lasciò {a} {solo} con il dolore, che è il modo in cui si porta il lutto in un posto così.",
@@ -1220,6 +1241,8 @@ class Narrator:
             score += 1.0
         if "INGRATITUDE" in kinds:
             score += 1.5  # a kindness betrayed is the oldest story there is
+        if "ESTRANGEMENT" in kinds:
+            score += 1.2  # a silence that became permanent
         if "RESENTMENT" in kinds or "REPAYMENT" in kinds:
             score += 1.0  # what a debt does to people, either way it goes
         if "BOND" in kinds:

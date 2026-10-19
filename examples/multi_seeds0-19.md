@@ -4,28 +4,28 @@
 
 ---
 
-The bread moved. On average, 32 gifts were given per run — neighbors sharing surplus without being asked, or hungry ones knocking on doors. This world is not generous by nature; it is just small enough that hunger is visible.
+The bread moved. On average, 31 gifts were given per run — neighbors sharing surplus without being asked, or hungry ones knocking on doors. This world is not generous by nature; it is just small enough that hunger is visible.
 
 **What always happened:**
 
 - A village-wide hungry season — 20 of 20 runs (100%).
+- A season of abundance most of the village shared — 20 of 20 runs (100%).
 - Someone went hungry rather than ask for help — 20 of 20 runs (100%).
 - Open favors still unpaid at the close — 20 of 20 runs (100%).
 - A clear social hub at close — one person most others kept near — 20 of 20 runs (100%).
 
 **What usually happened:**
 
-- A bond formed — 19 of 20 runs (95%).
+- A bond formed — 18 of 20 runs (90%).
 - A quarrel — 13 of 20 runs (65%).
 - Resentment turned a debt sour — 15 of 20 runs (75%).
-- A season of abundance most of the village shared — 19 of 20 runs (95%).
 
 **What sometimes happened:**
 
 - At least one death — 6 of 20 runs (30%).
 - A child born — 5 of 20 runs (25%).
 - A stranger arrived — 6 of 20 runs (30%).
-- A socially isolated person at close — one person nobody kept near — 7 of 20 runs (35%).
+- A socially isolated person at close — one person nobody kept near — 6 of 20 runs (30%).
 
 **What occasionally happened:**
 
@@ -35,16 +35,17 @@ The bread moved. On average, 32 gifts were given per run — neighbors sharing s
 **What never happened:**
 
 - Someone driven out by collective rejection — 0 of 20 runs (0%).
+- A cold silence became permanent — estrangement — 0 of 20 runs (0%).
 
 ---
 
 **On average across these runs:**
 
-31.7 gifts given  ·  12.3 quarrels  ·  1.9 bonds formed  ·  0.5 deaths  ·  2.2 lean seasons
+31.2 gifts given  ·  11.8 quarrels  ·  1.9 bonds formed  ·  0.6 deaths  ·  2.2 lean seasons
 
 **Population at close:**
 
-Grew in 5 of 20 runs, Stayed the same in 13 of 20 runs, Shrank in 2 of 20 runs.
+Grew in 5 of 20 runs, Stayed the same in 14 of 20 runs, Shrank in 1 of 20 runs.
 
 ---
 

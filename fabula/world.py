@@ -119,6 +119,7 @@ class World:
             self.sys_bounty()
             self.sys_arrivals()
             self.sys_exile()
+            self.sys_estrangement()
         self.tick += 1
 
     # ------------------------------------------------------------------
@@ -575,6 +576,51 @@ class World:
             p = min(0.04, base_p * severity * 4)
             if self.rng.random() < p:
                 self._depart(c)
+
+    def sys_estrangement(self):
+        """When two people have been deeply cold to each other for seasons without
+        any bridge-building — no gifts, no repayments, no mediation — the hostility
+        can crystallize into something permanent.
+
+        ESTRANGEMENT is not about silence; it can follow years of quarreling. It is
+        about the absence of any warmth, any repair attempt, any positive act.
+        It fires at most once per pair.
+        """
+        living = self.living
+        # Only positive acts can prevent estrangement — quarrels don't
+        bridge_kinds = {"GIFT", "REPAYMENT", "MEDIATION"}
+        already_estranged = {
+            frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "ESTRANGEMENT"
+        }
+        # Pairs with a positive act in the last 3 seasons are not yet estranged
+        recent_threshold = self.tick - 72   # 3 seasons
+        bridged_pairs: set = set()
+        for ev in self.events:
+            if ev.tick <= recent_threshold:
+                continue
+            if ev.kind in bridge_kinds and len(ev.actors) >= 2:
+                bridged_pairs.add(frozenset(ev.actors[:2]))
+        for i, a in enumerate(living):
+            if a.childhood:
+                continue
+            for b in living[i + 1:]:
+                if b.childhood:
+                    continue
+                pair = frozenset({a.id, b.id})
+                if pair in already_estranged or pair in bridged_pairs:
+                    continue
+                if a.feel(b.id) > -0.45 or b.feel(a.id) > -0.45:
+                    continue
+                if self.rng.random() > 0.18:
+                    continue
+                # Deepen the coldness slightly — estrangement hardens what was already cold
+                a.shift(b.id, -0.05)
+                b.shift(a.id, -0.05)
+                avg = (a.feel(b.id) + b.feel(a.id)) / 2
+                ev = self.emit("ESTRANGEMENT", (a.id, b.id), avg)
+                self.remember(a, ev)
+                self.remember(b, ev)
+                already_estranged.add(pair)   # prevent double-firing this season
 
     # ------------------------------------------------------------------
     # deaths, arrivals, births

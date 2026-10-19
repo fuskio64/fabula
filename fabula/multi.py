@@ -70,6 +70,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     bounty   = count(worlds, "BOUNTY")
     arrivals = count(worlds, "ARRIVAL")
     departures = count(worlds, "DEPARTURE")
+    estrangements = count(worlds, "ESTRANGEMENT")
     pride_hardships = count_if(
         worlds, "HARDSHIP", lambda ev: ev.data.get("pride", False)
     )
@@ -93,6 +94,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     b_pride   = at_least_one(pride_hardships)
     b_arrival = at_least_one(arrivals)
     b_departure = at_least_one(departures)
+    b_estrangement = at_least_one(estrangements)
     b_old_age = at_least_one(old_age_deaths)
 
     # open debts at end of run
@@ -198,6 +200,7 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
         ("someone went hungry rather than ask for help", b_pride),
         ("a stranger arrived", b_arrival),
         ("someone driven out by collective rejection", b_departure),
+        ("a cold silence became permanent — estrangement", b_estrangement),
         ("open favors still unpaid at the close", b_debt),
         ("a clear social hub at close — one person most others kept near", b_hub),
         ("a socially isolated person at close — one person nobody kept near", b_fracture),
