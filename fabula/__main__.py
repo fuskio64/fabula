@@ -111,9 +111,27 @@ def main(argv=None):
                         help="run the simulation live with seasonal summaries, then output the chronicle")
     parser.add_argument("--graph", metavar="FILE", default=None,
                         help="write a relationship graph to this HTML file (use - for stdout)")
+    parser.add_argument("--portrait", metavar="NAME", default=None,
+                        help="write a portrait of a character by name and exit")
+    parser.add_argument("--multi", metavar="N", type=int, default=None,
+                        help="run N simulations (seeds 0..N-1) and report what is invariant")
     parser.add_argument("-o", "--out", default=None,
                         help="write the chronicle/JSON output to a file instead of stdout")
     args = parser.parse_args(argv)
+
+    # --multi: run N seeds independently and compare
+    if args.multi is not None:
+        from .multi import compare as _compare
+        seeds = list(range(args.multi))
+        text = _compare(seeds, days=args.days, people=args.people)
+        if args.out:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write(text)
+        else:
+            if hasattr(sys.stdout, "reconfigure"):
+                sys.stdout.reconfigure(encoding="utf-8")
+            sys.stdout.write(text)
+        return
 
     seed = args.seed if args.seed is not None else random.randrange(1_000_000)
 
@@ -124,6 +142,21 @@ def main(argv=None):
         _watch_run(world, args.days)
     else:
         world.run(args.days)
+
+    # --portrait: character study for one named person
+    if args.portrait is not None:
+        from .portrait import portrait as _portrait
+        lang = args.lang if not args.json else "en"
+        narrator = Narrator(world, lang=lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _portrait(world, narrator, args.portrait)
+        if args.out:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write(text)
+        else:
+            if hasattr(sys.stdout, "reconfigure"):
+                sys.stdout.reconfigure(encoding="utf-8")
+            sys.stdout.write(text)
+        return
 
     # --- produce text output ---
     if args.json:

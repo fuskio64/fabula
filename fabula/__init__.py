@@ -8,7 +8,7 @@ line of the chronicle traces back to a recorded event.
 from .world import World
 from .narrator import Narrator
 
-__version__ = "0.7.0"
+__version__ = "0.8.0"
 
 
 def chronicle(seed: int = 0, days: int = 192, people: int = 10, lang: str = "en",
@@ -37,3 +37,20 @@ def graph_html(seed: int = 0, days: int = 192, people: int = 10, lang: str = "en
     world.run(days)
     narrator = Narrator(world, lang=lang, seed=seed, narrator_seed=narrator_seed)
     return relationship_graph(world, narrator)
+
+
+def portrait(seed: int = 0, days: int = 192, people: int = 10,
+             char_name: str = "", lang: str = "en",
+             narrator_seed: int | None = None) -> str:
+    """Simulate a village and return a character portrait for the named person."""
+    from .portrait import portrait as _portrait
+    world = World(seed=seed, people=people)
+    world.run(days)
+    narrator = Narrator(world, lang=lang, seed=seed, narrator_seed=narrator_seed)
+    return _portrait(world, narrator, char_name)
+
+
+def multi_analysis(n: int = 20, days: int = 192, people: int = 10) -> str:
+    """Run n simulations (seeds 0..n-1) and return a comparative analysis."""
+    from .multi import compare
+    return compare(list(range(n)), days=days, people=people)
