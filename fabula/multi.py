@@ -7,7 +7,10 @@ What is rare?
 The chronicle tells one story. This tells you the shape of all stories.
 """
 
+from collections import defaultdict
+
 from .world import World
+from .model import TICKS_PER_SEASON
 
 
 def _pct(n: int, total: int) -> str:
@@ -71,6 +74,9 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     arrivals = count(worlds, "ARRIVAL")
     departures = count(worlds, "DEPARTURE")
     estrangements = count(worlds, "ESTRANGEMENT")
+    reconciliations = count(worlds, "RECONCILIATION")
+    blights = count(worlds, "BLIGHT")
+    tributes = count(worlds, "TRIBUTE")
     pride_hardships = count_if(
         worlds, "HARDSHIP", lambda ev: ev.data.get("pride", False)
     )
@@ -95,11 +101,75 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
     b_arrival = at_least_one(arrivals)
     b_departure = at_least_one(departures)
     b_estrangement = at_least_one(estrangements)
+    b_reconciliation = at_least_one(reconciliations)
+    b_blight = at_least_one(blights)
+    b_tribute = at_least_one(tributes)
     b_old_age = at_least_one(old_age_deaths)
 
     # open debts at end of run
     open_debts = [sum(len(c.debts) for c in w.chars) for w in worlds]
     b_debt = at_least_one(open_debts)
+
+    # children who came of age (inherited feelings)
+    def has_grown_child(w):
+        return any(
+            ev.kind == "COMING_OF_AGE" and ev.data.get("inherited")
+            for ev in w.events
+        )
+    b_inheritance = sum(1 for w in worlds if has_grown_child(w))
+
+    # crisis season: lean + 3 quarrels or lean + 2 quarrels + death in same season
+    def has_crisis_season(w):
+        by_season: dict = defaultdict(list)
+        for ev in w.events:
+            by_season[ev.tick // TICKS_PER_SEASON].append(ev)
+        for sn, evs in by_season.items():
+            kinds = {ev.kind for ev in evs}
+            if "LEAN_SEASON" not in kinds:
+                continue
+            qc = sum(1 for ev in evs if ev.kind == "QUARREL")
+            if qc >= 3 or (qc >= 2 and "DEATH" in kinds):
+                return True
+        return False
+    b_crisis_season = sum(1 for w in worlds if has_crisis_season(w))
+
+    # lingering debt: a debt older than first third of the run still open at close
+    def has_lingering_debt(w):
+        threshold = w.tick // 3
+        for c in w.chars:
+            if not c.alive:
+                continue
+            for creditor_id, debt in c.debts.items():
+                if debt.since < threshold:
+                    creditor = w.chars[creditor_id] if creditor_id < len(w.chars) else None
+                    if creditor and creditor.alive:
+                        return True
+        return False
+    b_lingering_debt = sum(1 for w in worlds if has_lingering_debt(w))
+
+    # notable rumor: story that traveled widely and changed significantly
+    _NOTABLE_KINDS = {"GIFT", "REFUSAL", "QUARREL", "INGRATITUDE", "RESENTMENT", "BOND"}
+
+    def has_notable_rumor(w):
+        ev_by_id = {ev.data.get("id", -1): ev for ev in w.events if ev.data.get("id", -1) >= 0}
+        ev_memories: dict = defaultdict(list)
+        for c in w.chars:
+            for m in c.memories:
+                if m.event_id >= 0:
+                    ev_memories[m.event_id].append(m)
+        for eid, mems in ev_memories.items():
+            ev = ev_by_id.get(eid)
+            if ev is None or ev.kind not in _NOTABLE_KINDS:
+                continue
+            fh = [m for m in mems if m.firsthand]
+            sh = [m for m in mems if not m.firsthand]
+            if not fh or len(sh) < 3:
+                continue
+            avg_drift = sum(abs(m.valence - fh[0].valence) for m in sh) / len(sh)
+            if len(sh) * avg_drift > 4.0:
+                return True
+        return False
+    b_notable_rumor = sum(1 for w in worlds if has_notable_rumor(w))
 
     # social topology at close: hub (one person significantly more connected)
     # and fracture (one person significantly more isolated)
@@ -201,10 +271,21 @@ def compare(seeds: list, days: int = 192, people: int = 10) -> str:
         ("a stranger arrived", b_arrival),
         ("someone driven out by collective rejection", b_departure),
         ("a cold silence became permanent — estrangement", b_estrangement),
+        ("a quarreled pair that found their way back to warmth", b_reconciliation),
+        ("a blight striking several households at once without warning", b_blight),
+        ("close friends bringing bread to the bereaved after a death", b_tribute),
         ("open favors still unpaid at the close", b_debt),
         ("a clear social hub at close — one person most others kept near", b_hub),
         ("a socially isolated person at close — one person nobody kept near", b_fracture),
+        ("a story that grew or shrank considerably in the telling", b_notable_rumor),
+        ("a debt from the first third of the record still unpaid at close", b_lingering_debt),
     ]
+    if days >= 96:
+        events_with_counts.append(
+            ("a lean season that coincided with many quarrels or death", b_crisis_season))
+    if days >= 192:
+        events_with_counts.append(
+            ("a child who came of age carrying parents' inherited feelings", b_inheritance))
     if days >= 360:
         events_with_counts.append(("someone died of old age", b_old_age))
     if days >= 480:

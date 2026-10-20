@@ -67,6 +67,9 @@ class Character:
     elder: bool = False             # has lived long enough to be the village's memory
     departed: bool = False          # left the village (not dead; driven out)
     joined_at: int = 0              # tick when this character joined (0 for founders)
+    grieving_until: int | None = None  # tick when grief ends after widowing
+    ill: bool = False                  # currently suffering illness
+    ill_since: int | None = None       # tick when illness began
     memories: list = field(default_factory=list)
     affinity: dict = field(default_factory=dict)  # other id -> -1..1
     debts: dict = field(default_factory=dict)     # creditor id -> Debt

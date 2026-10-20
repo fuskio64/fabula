@@ -34,6 +34,9 @@ ELDER_TICKS = 264
 OLD_AGE_TICKS = 360        # 15 seasons
 OLD_AGE_DEATH_RATE = 0.00012  # added probability per tick of overage
 
+GRIEF_TICKS = 48  # 2 seasons of social withdrawal after losing a partner
+ILLNESS_MAX_TICKS = 72  # 3 seasons — if ill this long, death probability spikes
+
 
 class World:
     def __init__(self, seed: int = 0, people: int = 10):
@@ -45,6 +48,13 @@ class World:
         self._told: set = set()   # (event_id, listener_id) already gossiped
         self._last_hardship: dict = {}  # char id -> tick of last recorded hardship
         self._last_quarrel: dict = {}   # pair -> tick; even feuds need to catch their breath
+        self._reconciled: set = set()   # frozenset pairs; no more side-taking for these
+        self._feuds: set = set()         # frozenset pairs; active feuds escalate quarrels
+        self._tribute_pending: list = []  # (deadline_tick, deceased_id, close_friends)
+        self._teaching_pending: list = []  # (deadline_tick, young_id)
+        self._last_memorial_tick: int = -TICKS_PER_SEASON  # throttle: one memorial per season
+        self._drought_until: int = -1    # tick when drought relief ends (-1 = no drought)
+        self._pacts: set = set()         # frozenset pairs with a declared close friendship
 
         from .names import FIRST_NAMES
         pool = list(FIRST_NAMES)
@@ -102,6 +112,7 @@ class World:
 
     def step(self):
         self.sys_harvest()
+        self.sys_tribute()
         self.sys_misfortune()
         self.sys_need_and_gift()
         self.sys_deaths()
@@ -112,14 +123,22 @@ class World:
         self.sys_mediation()
         self.sys_bonds()
         self.sys_births()
+        self.sys_adoption()
         self.sys_growing_up()
+        self.sys_teaching()
+        self.sys_illness()
         if (self.tick + 1) % TICKS_PER_SEASON == 0:
             self.sys_festival()
+            self.sys_pact()
+            self.sys_drought()
+            self.sys_blight()
             self.sys_lean_season()
             self.sys_bounty()
             self.sys_arrivals()
             self.sys_exile()
             self.sys_estrangement()
+            self.sys_feud()
+            self.sys_forgiveness()
         self.tick += 1
 
     # ------------------------------------------------------------------
@@ -127,6 +146,8 @@ class World:
 
     def sys_harvest(self):
         yield_now = SEASON_YIELD[season_index(self.tick)]
+        if self.tick < self._drought_until:
+            yield_now *= 0.5  # drought halves the harvest for its duration
         for c in self.living:
             if c.childhood:
                 # children contribute and eat less
@@ -217,6 +238,9 @@ class World:
                 self.snapshot(ev, donor, c)
             elif owed > 0:
                 # refusing one's own benefactor: the debt no one wrote down
+                # — but if they've reconciled, the village doesn't pile on
+                if frozenset({c.id, donor.id}) in self._reconciled:
+                    continue
                 ev = self.emit("INGRATITUDE", (c.id, donor.id), -0.9,
                                carried=self.tick - donor.debts[c.id].since)
                 donor.debts[c.id].weight += 0.5  # now owed twice over
@@ -355,6 +379,9 @@ class World:
             others = [x for x in m.actors if x != listener.id]
             if heard < -0.3 and others:
                 other = self.char(others[0])
+                # If this pair reconciled, old gossip no longer reopens wounds
+                if frozenset({listener.id, other.id}) in self._reconciled:
+                    return
                 listener.shift(other.id, -0.2)
                 listener.shift(speaker.id, -0.05)  # and they shoot the messenger a little
                 ev = self.emit("OFFENSE", (listener.id, other.id), heard,
@@ -366,6 +393,9 @@ class World:
             listener.shift(m.actors[0], 0.08)  # good deeds travel
         elif heard < -0.3 and len(m.actors) > 1:
             wronged, wrongdoer = m.actors[0], m.actors[1]
+            # When a pair has publicly reconciled, the village stops taking sides
+            if frozenset({wronged, wrongdoer}) in self._reconciled:
+                return
             if m.kind == "INGRATITUDE":
                 listener.shift(wrongdoer, -0.12)  # ingratitude has no partisans
             elif listener.feel(wronged) > 0.35:
@@ -382,7 +412,8 @@ class World:
                 pair = (a.id, b.id)
                 if self.tick - self._last_quarrel.get(pair, -99) < 15:
                     continue
-                if min(a.feel(b.id), b.feel(a.id)) < -0.5 and self.rng.random() < 0.12 * season_multiplier:
+                feud_mult = 1.8 if frozenset({a.id, b.id}) in self._feuds else 1.0
+                if min(a.feel(b.id), b.feel(a.id)) < -0.5 and self.rng.random() < 0.12 * season_multiplier * feud_mult:
                     self._last_quarrel[pair] = self.tick
                     witnesses = [w.id for w in living
                                  if w.id not in (a.id, b.id)
@@ -398,9 +429,13 @@ class World:
                             continue
                         lean = w.feel(a.id) - w.feel(b.id)
                         if lean > 0.5:
-                            w.shift(b.id, -0.08)
+                            # w likes a more — don't shift against b if w reconciled with b
+                            if frozenset({w.id, b.id}) not in self._reconciled:
+                                w.shift(b.id, -0.08)
                         elif lean < -0.5:
-                            w.shift(a.id, -0.08)
+                            # w likes b more — don't shift against a if w reconciled with a
+                            if frozenset({w.id, a.id}) not in self._reconciled:
+                                w.shift(a.id, -0.08)
 
     def sys_mediation(self):
         living = self.living
@@ -408,10 +443,10 @@ class World:
             for b in living:
                 if b.id <= a.id:
                     continue
-                if a.feel(b.id) < -0.4 and b.feel(a.id) < -0.4 and self.rng.random() < 0.12:
+                if a.feel(b.id) < -0.35 and b.feel(a.id) < -0.35 and self.rng.random() < 0.14:
                     peacemakers = [w for w in living
                                    if w.id not in (a.id, b.id)
-                                   and w.feel(a.id) > 0.3 and w.feel(b.id) > 0.3]
+                                   and w.feel(a.id) > 0.25 and w.feel(b.id) > 0.25]
                     if not peacemakers:
                         continue
                     # elders are preferred as mediators
@@ -439,6 +474,16 @@ class World:
                     continue
                 if a.partner is not None or b.partner is not None:
                     continue
+                # grieving characters do not form new bonds
+                if (a.grieving_until is not None and self.tick <= a.grieving_until):
+                    continue
+                if (b.grieving_until is not None and self.tick <= b.grieving_until):
+                    continue
+                # prevent parent-child and sibling bonds
+                if (a.parent_ids and b.id in a.parent_ids) or (b.parent_ids and a.id in b.parent_ids):
+                    continue
+                if (a.parent_ids and b.parent_ids and set(a.parent_ids) == set(b.parent_ids)):
+                    continue
                 if (a.feel(b.id) >= BOND_THRESHOLD and b.feel(a.id) >= BOND_THRESHOLD
                         and self.rng.random() < 0.02 * season_multiplier):
                     a.partner = b.id
@@ -454,6 +499,16 @@ class World:
                         if w.id not in (a.id, b.id):
                             w.shift(a.id, 0.04)
                             w.shift(b.id, 0.04)
+                    # Jealousy: anyone who had unrequited feelings for either partner
+                    for c in living:
+                        if c.id in (a.id, b.id) or c.childhood or c.partner is not None:
+                            continue
+                        for loved_one, rival in ((a, b), (b, a)):
+                            if c.feel(loved_one.id) > 0.70 and loved_one.feel(c.id) < 0.30:
+                                c.shift(rival.id, -self.rng.uniform(0.12, 0.22))
+                                ev_j = self.emit("JEALOUSY", (c.id, loved_one.id, rival.id), -0.55)
+                                self.remember(c, ev_j)
+                                break
 
     def sys_births(self):
         """A bonded pair, well-fed, may welcome a child into the village."""
@@ -465,12 +520,13 @@ class World:
                 continue
             if c.food < FOOD_SURPLUS or partner.food < FOOD_SURPLUS:
                 continue
-            has_child = any(
-                ch.alive and ch.parent_ids is not None
+            # block if there is still a living child in childhood — wait until they grow up
+            has_young_child = any(
+                ch.alive and ch.childhood and ch.parent_ids is not None
                 and set(ch.parent_ids) == {c.id, partner.id}
                 for ch in self.chars
             )
-            if has_child:
+            if has_young_child:
                 continue
             if self.rng.random() < 0.008:
                 self._birth(c, partner)
@@ -480,18 +536,124 @@ class World:
             if c.childhood and c.born_at is not None:
                 if self.tick - c.born_at >= CHILDHOOD_TICKS:
                     c.childhood = False
-                    ev = self.emit("COMING_OF_AGE", (c.id,), 0.5)
+                    # inherited affinities: seed feelings from living parents' strong opinions
+                    inherited = []
+                    if c.parent_ids:
+                        parents_alive = [self.chars[pid] for pid in c.parent_ids
+                                         if pid < len(self.chars) and self.chars[pid].alive]
+                        if parents_alive:
+                            for other in self.living:
+                                if other.id == c.id or other.id in c.parent_ids:
+                                    continue
+                                avg = sum(p.feel(other.id) for p in parents_alive) / len(parents_alive)
+                                if abs(avg) >= 0.20:
+                                    c.shift(other.id, avg * 0.45)
+                                    inherited.append((other.id, round(avg, 2)))
+                    ev = self.emit("COMING_OF_AGE", (c.id,), 0.5,
+                                   inherited=inherited if inherited else None)
                     self.remember(c, ev)
                     if c.parent_ids:
                         for pid in c.parent_ids:
                             if pid < len(self.chars) and self.chars[pid].alive:
                                 self.chars[pid].shift(c.id, 0.1)
+                    # schedule possible teaching within the next season
+                    self._teaching_pending.append((self.tick + TICKS_PER_SEASON, c.id))
             elif not c.childhood and not c.elder:
                 if self.tick - c.joined_at >= ELDER_TICKS:
                     c.elder = True
                     for other in self.living:
                         if other.id != c.id:
                             other.shift(c.id, 0.04)  # elders earn quiet respect
+
+    def sys_teaching(self):
+        """After a child comes of age, a willing elder may take them under their wing.
+
+        Fires within a season of COMING_OF_AGE. The elder must have affinity >= 0.45
+        toward the young person and not already have taught someone this run. Teaching
+        slightly improves the young person's diligence and deepens the bond between them.
+        """
+        if not self._teaching_pending:
+            return
+        remaining = []
+        already_teaching = {ev.actors[0] for ev in self.events if ev.kind == "TEACHING"}
+        for deadline, young_id in self._teaching_pending:
+            if self.tick > deadline:
+                continue
+            young = self.chars[young_id] if young_id < len(self.chars) else None
+            if young is None or not young.alive or young.childhood:
+                continue
+            # find willing elders
+            mentors = [
+                c for c in self.living
+                if c.elder and c.id != young_id
+                and c.id not in already_teaching
+                and c.feel(young_id) >= 0.45
+            ]
+            if not mentors:
+                remaining.append((deadline, young_id))
+                continue
+            if self.rng.random() > 0.55:
+                remaining.append((deadline, young_id))
+                continue
+            mentor = max(mentors, key=lambda c: c.feel(young_id))
+            # teaching effect: mild diligence boost + affinity deepening
+            young.diligence = min(1.0, young.diligence + self.rng.uniform(0.04, 0.09))
+            mentor.shift(young_id, 0.12)
+            young.shift(mentor.id, 0.18)
+            ev = self.emit("TEACHING", (mentor.id, young_id), 0.65)
+            self.remember(mentor, ev)
+            self.remember(young, ev)
+        self._teaching_pending = remaining
+
+    def sys_illness(self):
+        """Illness spreads through the village: a character can fall ill, struggle, and either
+        recover or die. Illness increases food consumption and death risk.
+        """
+        for c in self.living:
+            if c.childhood:
+                continue
+            if not c.ill:
+                # Chance of falling ill: higher in winter, lower in summer
+                base_rate = (0.0012, 0.0006, 0.0009, 0.0018)[season_index(self.tick)]
+                if self.rng.random() < base_rate:
+                    c.ill = True
+                    c.ill_since = self.tick
+                    ev = self.emit("ILLNESS", (c.id,), -0.6)
+                    self.remember(c, ev)
+            else:
+                # Illness drains food faster
+                c.food = max(0.0, c.food - 0.06)
+                # Check recovery: base 1.5% per tick
+                if self.rng.random() < 0.015:
+                    c.ill = False
+                    old_since = c.ill_since
+                    c.ill_since = None
+                    ev = self.emit("RECOVERY", (c.id,), 0.5)
+                    self.remember(c, ev)
+                    # Illness leaves a mark — diligence drops slightly
+                    c.diligence = max(0.0, c.diligence - self.rng.uniform(0.02, 0.05))
+                elif (c.ill_since is not None
+                      and self.tick - c.ill_since >= ILLNESS_MAX_TICKS
+                      and self.rng.random() < 0.04):
+                    # Prolonged illness kills
+                    self._kill(c, "misfortune")
+                elif (c.ill_since is not None
+                      and self.tick - c.ill_since == ILLNESS_MAX_TICKS // 2):
+                    # Halfway to the danger point — the village gathers
+                    vigil_mourners = [
+                        o for o in self.living
+                        if o.id != c.id and not o.childhood and o.feel(c.id) >= 0.50
+                    ]
+                    if len(vigil_mourners) >= 2:
+                        ev_v = self.emit("VIGIL", tuple([c.id] + [m.id for m in vigil_mourners]), -0.3)
+                        self.remember(c, ev_v)
+                        for m in vigil_mourners:
+                            self.remember(m, ev_v)
+                        for i, ma in enumerate(vigil_mourners):
+                            for mb in vigil_mourners[i + 1:]:
+                                boost = self.rng.uniform(0.02, 0.04)
+                                ma.shift(mb.id, boost)
+                                mb.shift(ma.id, boost)
 
     def sys_festival(self):
         living = self.living
@@ -553,6 +715,86 @@ class World:
         if len(self.living) < self.initial_people and self.rng.random() < 0.55:
             self._arrive()
 
+    def sys_adoption(self):
+        """A bonded couple may take in an orphaned child whose both parents are dead.
+
+        Fires at most once per orphan. The couple must have no living young children
+        of their own (biological or previously adopted). Adoption restructures the
+        child's parent_ids so the full family model applies — food sharing, inheritance,
+        sibling detection — without any special cases.
+        """
+        living = self.living
+        # already-adopted children: parent_ids changed since birth, tracked by ADOPTION events
+        already_adopted = {ev.actors[0] for ev in self.events if ev.kind == "ADOPTION"}
+
+        # find orphaned childhood chars
+        orphans = []
+        for c in living:
+            if not c.childhood or c.parent_ids is None or c.id in already_adopted:
+                continue
+            both_gone = all(
+                not self.chars[pid].alive
+                for pid in c.parent_ids
+                if pid < len(self.chars)
+            )
+            if both_gone:
+                orphans.append(c)
+
+        if not orphans:
+            return
+
+        # find willing bonded pairs (seen once, not both)
+        seen_pairs: set = set()
+        willing = []
+        for c in living:
+            if c.partner is None or c.childhood:
+                continue
+            pair = frozenset((c.id, c.partner))
+            if pair in seen_pairs:
+                continue
+            seen_pairs.add(pair)
+            partner = self.chars[c.partner]
+            if not partner.alive:
+                continue
+            # no living young children (bio or adopted) from this pair
+            has_young = any(
+                ch.alive and ch.childhood and ch.parent_ids is not None
+                and set(ch.parent_ids) == {c.id, c.partner}
+                for ch in self.chars
+            )
+            if not has_young:
+                willing.append((c, partner))
+
+        if not willing:
+            return
+
+        self.rng.shuffle(orphans)
+        self.rng.shuffle(willing)
+
+        for orphan in orphans:
+            # small per-tick probability — over 10 ticks it becomes near-certain
+            if self.rng.random() > 0.18:
+                continue
+            if not willing:
+                break
+            a, b = willing.pop()
+            # restructure family
+            orphan.parent_ids = (a.id, b.id)
+            # warm the bonds
+            a.affinity[orphan.id] = min(1.0, a.feel(orphan.id) + 0.55)
+            b.affinity[orphan.id] = min(1.0, b.feel(orphan.id) + 0.55)
+            orphan.affinity[a.id] = min(1.0, orphan.feel(a.id) + 0.45)
+            orphan.affinity[b.id] = min(1.0, orphan.feel(b.id) + 0.45)
+            # siblings from same new parents feel warmth toward the newcomer
+            for sib in living:
+                if sib.id != orphan.id and sib.parent_ids and set(sib.parent_ids) == {a.id, b.id}:
+                    sib.affinity[orphan.id] = self.rng.uniform(0.3, 0.6)
+                    orphan.affinity[sib.id] = self.rng.uniform(0.3, 0.6)
+            ev = self.emit("ADOPTION", (orphan.id, a.id, b.id), 0.75)
+            self.remember(orphan, ev)
+            self.remember(a, ev)
+            self.remember(b, ev)
+
     def sys_exile(self):
         """A person cold-shouldered by enough of the village may quietly leave.
 
@@ -609,6 +851,8 @@ class World:
                 pair = frozenset({a.id, b.id})
                 if pair in already_estranged or pair in bridged_pairs:
                     continue
+                if pair in self._pacts:
+                    continue  # pact partners cannot become estranged
                 if a.feel(b.id) > -0.45 or b.feel(a.id) > -0.45:
                     continue
                 if self.rng.random() > 0.18:
@@ -621,6 +865,296 @@ class World:
                 self.remember(a, ev)
                 self.remember(b, ev)
                 already_estranged.add(pair)   # prevent double-firing this season
+
+    def sys_feud(self):
+        """An estrangement can harden into a feud when bitterness has run deep and long.
+
+        FEUD fires once per pair, only if already ESTRANGED and both have affinity < -0.65.
+        The village is forced to take sides; feuding pairs have heightened quarrel probability.
+        """
+        living = self.living
+        estranged_pairs = {
+            frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "ESTRANGEMENT"
+        }
+        already_feuded = {
+            frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "FEUD"
+        }
+        for i, a in enumerate(living):
+            if a.childhood:
+                continue
+            for b in living[i + 1:]:
+                if b.childhood:
+                    continue
+                pair = frozenset({a.id, b.id})
+                if pair not in estranged_pairs or pair in already_feuded:
+                    continue
+                if a.feel(b.id) > -0.65 or b.feel(a.id) > -0.65:
+                    continue
+                # Count quarrels between this pair since estrangement
+                quarrel_count = sum(
+                    1 for ev in self.events
+                    if ev.kind == "QUARREL" and frozenset(ev.actors[:2]) == pair
+                )
+                if quarrel_count < 3:
+                    continue
+                if self.rng.random() > 0.35:
+                    continue
+                ev = self.emit("FEUD", (a.id, b.id), -0.95)
+                self.remember(a, ev)
+                self.remember(b, ev)
+                self._feuds.add(pair)
+                # Force the village to choose sides
+                for other in living:
+                    if other.id in (a.id, b.id):
+                        continue
+                    lean = other.feel(a.id) - other.feel(b.id)
+                    if lean > 0.25:
+                        other.shift(a.id, 0.05)
+                        other.shift(b.id, -0.05)
+                    elif lean < -0.25:
+                        other.shift(b.id, 0.05)
+                        other.shift(a.id, -0.05)
+                already_feuded.add(pair)
+
+    def sys_forgiveness(self):
+        """Time and quiet let old quarrels die.
+
+        Two paths to reconciliation:
+        1. Mediated: a pair sat down with a peacemaker, and 2 seasons have
+           passed without a new quarrel between them.
+        2. Organic: a quarreled pair (never estranged, never mediated) has
+           had 5 seasons of quiet — no quarrel, no estrangement —
+           and they simply drifted back toward neutral on their own.
+
+        In both cases, affinity is raised to match the actual peace.
+        Fires at most once per pair.
+        """
+        last_med: dict = {}
+        last_qrl: dict = {}
+        for ev in self.events:
+            pair = frozenset(ev.actors[:2])
+            if ev.kind == "MEDIATION":
+                last_med[pair] = max(last_med.get(pair, 0), ev.tick)
+            elif ev.kind == "QUARREL":
+                last_qrl[pair] = max(last_qrl.get(pair, 0), ev.tick)
+        if not last_qrl:
+            return
+        estranged = {
+            frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "ESTRANGEMENT"
+        }
+        already = {
+            frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "RECONCILIATION"
+        }
+        living = self.living
+        for i, a in enumerate(living):
+            if a.childhood:
+                continue
+            for b in living[i + 1:]:
+                if b.childhood:
+                    continue
+                pair = frozenset({a.id, b.id})
+                if pair in already or pair in estranged or pair not in last_qrl:
+                    continue
+                last_q = last_qrl[pair]
+                if pair in last_med:
+                    # Mediated path: 2 seasons quiet since last mediation
+                    med_tick = last_med[pair]
+                    if last_q > med_tick:
+                        continue  # quarreled again since mediation
+                    if self.tick - med_tick < 2 * TICKS_PER_SEASON:
+                        continue
+                    warm = 0.28
+                else:
+                    # Organic path: 5 seasons since last quarrel, not estranged
+                    if self.tick - last_q < 5 * TICKS_PER_SEASON:
+                        continue
+                    # Only heal if not still deeply hostile from gossip
+                    if a.feel(b.id) < -0.45 or b.feel(a.id) < -0.45:
+                        continue
+                    warm = 0.20
+                a.affinity[b.id] = max(a.feel(b.id), warm)
+                b.affinity[a.id] = max(b.feel(a.id), warm)
+                # Reconciliation clears lingering debts — forgiveness of the
+                # debt is part of making peace; the ledger closes with the grudge
+                if b.id in a.debts:
+                    del a.debts[b.id]
+                if a.id in b.debts:
+                    del b.debts[a.id]
+                self._reconciled.add(pair)
+                ev = self.emit("RECONCILIATION", (a.id, b.id), 0.6 if warm < 0.25 else 0.7)
+                self.remember(a, ev)
+                self.remember(b, ev)
+                self.snapshot(ev, a, b)
+
+    def sys_tribute(self):
+        """After a beloved person dies, their close friends give bread to the bereaved."""
+        if not self._tribute_pending:
+            return
+        remaining = []
+        for deadline, deceased_id, friend_ids in self._tribute_pending:
+            if self.tick > deadline:
+                continue  # expired without firing — no one had surplus
+            # Find bereaved: partner and adult children of the deceased
+            bereaved = []
+            deceased = self.chars[deceased_id] if deceased_id < len(self.chars) else None
+            if deceased and deceased.partner is not None:
+                p = self.chars[deceased.partner]
+                if p.alive:
+                    bereaved.append(p)
+            for ch in self.living:
+                if ch.parent_ids and deceased_id in ch.parent_ids and not ch.childhood:
+                    bereaved.append(ch)
+            if not bereaved:
+                continue  # no one to receive tribute
+            # One friend gives (50% chance per tick per eligible friend)
+            gave = False
+            for fid in friend_ids:
+                if fid >= len(self.chars):
+                    continue
+                friend = self.chars[fid]
+                if not friend.alive or friend.food <= FOOD_SURPLUS:
+                    continue
+                if self.rng.random() < 0.5:
+                    recipient = self.rng.choice(bereaved)
+                    amount = min(1.5, friend.food - FOOD_NEED)
+                    if amount > 0.3:
+                        friend.food -= amount
+                        recipient.food = min(STORES_CAP, recipient.food + amount)
+                        ev = self.emit("TRIBUTE", (friend.id, recipient.id), 0.7,
+                                       deceased=deceased_id)
+                        friend.shift(recipient.id, 0.08)
+                        recipient.shift(friend.id, 0.12)
+                        self.remember(friend, ev)
+                        self.remember(recipient, ev)
+                        gave = True
+                        break  # one tribute gift per death event per tick
+            if gave or self.tick >= deadline:
+                continue  # tribute fired or expired
+            remaining.append((deadline, deceased_id, friend_ids))
+        self._tribute_pending = remaining
+
+    def sys_blight(self):
+        """A rare crop failure that strikes several households at once.
+
+        Fires only in spring, summer, or autumn (5% chance). Reduces food
+        for 3-5 random living adults by roughly half, which will usually
+        trigger a LEAN_SEASON when sys_lean_season() runs next.
+        """
+        if season_index(self.tick) == 3:
+            return  # winter already harsh; blight belongs to growing seasons
+        if self.rng.random() > 0.05:
+            return
+        living = [c for c in self.living if not c.childhood]
+        if len(living) < 3:
+            return
+        n_hit = min(len(living), self.rng.randint(3, 5))
+        affected = self.rng.sample(living, k=n_hit)
+        for c in affected:
+            c.food = max(0.0, c.food * 0.45)
+        ev = self.emit("BLIGHT", tuple(c.id for c in affected), -0.8,
+                       affected_count=n_hit)
+        for c in self.living:
+            self.remember(c, ev)
+
+    def sys_pact(self):
+        """Two people who care deeply for each other but have not formed a household
+        may, after seasons of warmth, name what they have.
+
+        A pact is not a bond: it does not require romantic partnership and does not
+        change legal status. It protects against estrangement and is remembered by
+        both parties as one of the anchoring events of their time together.
+        """
+        if self._pacts:
+            return  # one pact per village run is enough
+        living = self.living
+        estranged_pairs = {frozenset(ev.actors[:2]) for ev in self.events if ev.kind == "ESTRANGEMENT"}
+        for i, a in enumerate(living):
+            if a.childhood:
+                continue
+            for b in living[i + 1:]:
+                if b.childhood:
+                    continue
+                pair = frozenset({a.id, b.id})
+                if a.partner == b.id or b.partner == a.id:
+                    continue
+                if pair in estranged_pairs or pair in self._feuds:
+                    continue
+                if a.feel(b.id) < 0.80 or b.feel(a.id) < 0.80:
+                    continue
+                together_since = max(a.joined_at, b.joined_at)
+                if self.tick - together_since < 96:
+                    continue
+                if self.rng.random() > 0.04:
+                    continue
+                self._pacts.add(pair)
+                boost = self.rng.uniform(0.02, 0.04)
+                a.diligence = min(1.0, a.diligence + boost)
+                b.diligence = min(1.0, b.diligence + boost)
+                ev = self.emit("PACT", (a.id, b.id), 0.65)
+                self.remember(a, ev)
+                self.remember(b, ev)
+                return  # one per village; stop after the first fires
+
+    def sys_celebration(self, newborn_id: int):
+        """A birth in a thriving village becomes a communal moment."""
+        from .model import year_of
+        living = self.living
+        adults = [c for c in living if not c.childhood]
+        if len(adults) < 3:
+            return
+        avg_food = sum(c.food for c in adults) / len(adults)
+        if avg_food < FOOD_NEED * 1.5:
+            return
+        if self.tick < self._drought_until:
+            return
+        year = year_of(self.tick)
+        if any(ev.kind == "CELEBRATION" and year_of(ev.tick) == year for ev in self.events):
+            return
+        if self.rng.random() > 0.70:
+            return
+        ev = self.emit("CELEBRATION", tuple(c.id for c in living), 0.45, newborn=newborn_id)
+        for c in living:
+            self.remember(c, ev)
+        for i, ca in enumerate(living):
+            for cb in living[i + 1:]:
+                boost = self.rng.uniform(0.02, 0.05)
+                ca.shift(cb.id, boost)
+                cb.shift(ca.id, boost)
+
+    def sys_drought(self):
+        """A season-long crop failure that halves yields for two full seasons.
+
+        Fires only in summer or autumn (5% chance per season check). Only one
+        drought per year. Effects are applied through sys_harvest() for the
+        duration. The collective hardship is recorded as a village-wide event.
+        """
+        # Drought end: fires in the first season where drought is no longer active.
+        # Must be checked before the summer/autumn guard since droughts end in winter or spring.
+        if 0 < self._drought_until <= self.tick:
+            living = self.living
+            if living:
+                ev = self.emit("DROUGHT_END", tuple(c.id for c in living), 0.20)
+                for c in living:
+                    self.remember(c, ev)
+            self._drought_until = -1
+
+        if season_index(self.tick) not in (1, 2):  # summer, autumn only
+            return
+        if self.tick < self._drought_until:
+            return  # already in a drought
+        from .model import year_of
+        year = year_of(self.tick)
+        if any(ev.kind == "DROUGHT" and year_of(ev.tick) == year for ev in self.events):
+            return  # one drought per year
+        if self.rng.random() > 0.05:
+            return
+        living = self.living
+        if len(living) < 2:
+            return
+        self._drought_until = self.tick + 2 * TICKS_PER_SEASON
+        ev = self.emit("DROUGHT", tuple(c.id for c in living), -0.85)
+        for c in living:
+            self.remember(c, ev)
 
     # ------------------------------------------------------------------
     # deaths, arrivals, births
@@ -641,6 +1175,7 @@ class World:
                 ev_w = self.emit("WIDOWING", (survivor.id, c.id), -0.85)
                 self.remember(survivor, ev_w)
                 self.snapshot(ev_w, survivor, c)
+                survivor.grieving_until = self.tick + GRIEF_TICKS
                 for other in self.living:
                     if other.id != survivor.id:
                         other.shift(survivor.id, 0.06)
@@ -658,12 +1193,22 @@ class World:
                 for h in household:
                     h.food = min(STORES_CAP, h.food + share)
             c.food = 0.0
-        # Debts die with the person on both sides.
-        # A creditor who outlives their debtor feels a strange unresolved
-        # lightness — the debt is gone, but by the wrong door.
+        # Debts die with the person on both sides — unless there is a child
+        # who can carry what the parent left unanswered.
+        adult_children = [ch for ch in self.living
+                          if ch.parent_ids and c.id in ch.parent_ids and not ch.childhood]
         for debt in c.debts.values():
             creditor = self.chars[debt.creditor]
-            if creditor.alive:
+            if not creditor.alive:
+                continue
+            if adult_children:
+                # One child takes on a half-weight version of the parent's debt
+                heir = self.rng.choice(adult_children)
+                heir.owe(creditor.id, self.tick, weight=debt.weight * 0.5)
+                # The obligation passing to a child creates mild positive affect
+                creditor.shift(heir.id, 0.05)
+            else:
+                # The debt dissolves; the creditor feels the unresolved absence
                 creditor.shift(c.id, -0.04)
         c.debts.clear()
         # Debtors of the dead lose their obligation but not the memory.
@@ -680,6 +1225,70 @@ class World:
                 if val < -0.3 and enemy_id < len(self.chars) and enemy_id != child.id:
                     if self.chars[enemy_id].alive:
                         child.shift(enemy_id, val * 0.15)
+        # Tribute: close friends of a well-connected or elder dead person may give
+        # bread to the bereaved in the days following — a social wave of grief-generosity.
+        close_friends = [
+            other for other in self.living
+            if other.feel(c.id) > 0.45 and other.food > FOOD_SURPLUS
+        ]
+        if len(close_friends) >= 2 and (c.elder or len(close_friends) >= 3):
+            # Schedule tribute gifts to fire within the next 6 ticks
+            deadline = self.tick + 6
+            self._tribute_pending.append((deadline, c.id, [f.id for f in close_friends]))
+        # Memorial: if the deceased was an elder or truly beloved, the village gathers.
+        # Threshold is high so it fires only for the most significant losses.
+        mourners = [
+            other for other in self.living
+            if other.feel(c.id) > 0.55
+        ]
+        if (len(mourners) >= 4 and (c.elder or len(mourners) >= 6)
+                and self.tick - self._last_memorial_tick >= TICKS_PER_SEASON):
+            self._last_memorial_tick = self.tick
+            top_mourners = sorted(mourners, key=lambda m: m.feel(c.id), reverse=True)[:5]
+            ev_m = self.emit("MEMORIAL", tuple([c.id] + [m.id for m in top_mourners]), 0.3)
+            for i, ma in enumerate(top_mourners):
+                self.remember(ma, ev_m)
+                for mb in top_mourners[i + 1:]:
+                    ma.shift(mb.id, 0.07)
+                    mb.shift(ma.id, 0.07)
+        # Shared grief can crack a feud: two enemies who both knew the deceased
+        # may find the hate too expensive to carry past the grave.
+        if self._feuds:
+            for ma in self.living:
+                if ma.feel(c.id) < 0.30:
+                    continue
+                for mb in self.living:
+                    if mb.id <= ma.id or mb.feel(c.id) < 0.30:
+                        continue
+                    pair = frozenset({ma.id, mb.id})
+                    if pair not in self._feuds:
+                        continue
+                    if self.rng.random() < 0.30:
+                        ma.shift(mb.id, 0.18)
+                        mb.shift(ma.id, 0.18)
+                        self._feuds.discard(pair)
+                        self._reconciled.add(pair)
+                        ev_r = self.emit("RECONCILIATION", (ma.id, mb.id), 0.55,
+                                         reason="shared_grief", deceased=c.id)
+                        self.remember(ma, ev_r)
+                        self.remember(mb, ev_r)
+        # Legacy: students carry forward something of a teacher's patience
+        teaching_evs = [
+            ev for ev in self.events
+            if ev.kind == "TEACHING" and len(ev.actors) >= 2 and ev.actors[0] == c.id
+        ]
+        if teaching_evs:
+            students = [
+                self.chars[ev.actors[1]] for ev in teaching_evs
+                if ev.actors[1] < len(self.chars) and self.chars[ev.actors[1]].alive
+            ]
+            if students:
+                boost = self.rng.uniform(0.03, 0.07)
+                for st in students:
+                    st.diligence = min(1.0, st.diligence + boost)
+                ev_l = self.emit("LEGACY", tuple([c.id] + [st.id for st in students]), 0.4)
+                for st in students:
+                    self.remember(st, ev_l)
 
     def _depart(self, c: Character):
         """Character leaves the village — driven out by collective coldness, not dead."""
@@ -755,18 +1364,24 @@ class World:
             food=1.5,
             childhood=True,
             born_at=self.tick,
+            joined_at=self.tick,
             parent_ids=(a.id, b.id),
         )
         child.affinity[a.id] = 0.8
         child.affinity[b.id] = 0.8
         for ch in self.living:
             if ch.id not in (a.id, b.id):
-                # a child grows up hearing their parents' stories:
-                # inherit a mild version of each parent's lean toward neighbors
                 parent_lean = (a.feel(ch.id) + b.feel(ch.id)) / 2 * 0.3
-                child.affinity[ch.id] = max(-0.25, min(0.25,
+                child_feel = max(-0.25, min(0.25,
                     parent_lean + self.rng.uniform(-0.1, 0.1)))
-                ch.affinity[new_id] = self.rng.uniform(0.0, 0.15)
+                # siblings start with stronger mutual warmth
+                if ch.parent_ids and set(ch.parent_ids) == {a.id, b.id}:
+                    sibling_bond = self.rng.uniform(0.35, 0.7)
+                    child.affinity[ch.id] = max(child_feel, sibling_bond)
+                    ch.affinity[new_id] = self.rng.uniform(0.35, 0.7)
+                else:
+                    child.affinity[ch.id] = child_feel
+                    ch.affinity[new_id] = self.rng.uniform(0.0, 0.15)
         a.affinity[new_id] = 0.85
         b.affinity[new_id] = 0.85
         self.chars.append(child)
@@ -774,3 +1389,4 @@ class World:
         self.remember(child, ev)
         self.remember(a, ev)
         self.remember(b, ev)
+        self.sys_celebration(new_id)

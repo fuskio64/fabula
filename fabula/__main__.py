@@ -15,13 +15,16 @@ def _ansi(code: str, text: str) -> str:
     return f"\033[{code}m{text}\033[0m"
 
 
-def _watch_run(world: World, days: int):
+def _watch_run(world: World, days: int, lang: str = "en"):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     """Run the simulation interactively, printing a seasonal summary each season."""
     from .model import TICKS_PER_SEASON, season_index, year_of
+    from .narrator import TEXT
 
-    seasons = ("Spring", "Summer", "Autumn", "Winter")
+    _t = TEXT.get(lang, TEXT["en"])
+    raw_seasons = _t["seasons"]
+    seasons = tuple(s[0].upper() + s[1:] for s in raw_seasons)
     season_events: list = []
 
     for tick in range(days):
@@ -103,8 +106,8 @@ def main(argv=None):
     parser.add_argument("--narrator-seed", type=int, default=None,
                         help="seed for narrative choices (village name, template variants); "
                              "same world, different voice")
-    parser.add_argument("--mode", choices=("chronicle", "fragments"), default="chronicle",
-                        help="output mode: chronicle (default) or fragments (gossip record, English only)")
+    parser.add_argument("--mode", choices=("chronicle", "fragments", "years", "cast", "timeline", "stats", "seeds"), default="chronicle",
+                        help="output mode: chronicle (default), fragments, years (logbook), cast (register), timeline (lifespan chart), stats (metrics dashboard), or seeds (story prompts)")
     parser.add_argument("--json", action="store_true",
                         help="output raw event log as JSON instead of a narrative chronicle")
     parser.add_argument("--watch", action="store_true",
@@ -139,7 +142,7 @@ def main(argv=None):
     world = World(seed=seed, people=args.people)
 
     if args.watch and not args.json:
-        _watch_run(world, args.days)
+        _watch_run(world, args.days, lang=args.lang)
     else:
         world.run(args.days)
 
@@ -204,8 +207,33 @@ def main(argv=None):
 
     elif args.mode == "fragments":
         from .fragments import fragments as _frag
-        narrator = Narrator(world, lang="en", seed=seed, narrator_seed=args.narrator_seed)
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
         text = _frag(world, narrator)
+
+    elif args.mode == "years":
+        from .yearly import yearly as _yearly
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _yearly(world, narrator)
+
+    elif args.mode == "cast":
+        from .cast import cast as _cast
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _cast(world, narrator)
+
+    elif args.mode == "timeline":
+        from .timeline import timeline as _timeline
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _timeline(world, narrator)
+
+    elif args.mode == "stats":
+        from .stats import stats as _stats
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _stats(world, narrator)
+
+    elif args.mode == "seeds":
+        from .seeds import story_seeds as _seeds
+        narrator = Narrator(world, lang=args.lang, seed=seed, narrator_seed=args.narrator_seed)
+        text = _seeds(world, narrator)
 
     else:
         lang = args.lang if args.lang in ("en", "es", "fr", "pt", "it") else "en"
